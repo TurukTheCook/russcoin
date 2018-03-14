@@ -1,0 +1,14 @@
+* {
+  box-sizing: border-box
+}
+
+.center {
+  width: 500px;
+  margin: 0 auto
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
