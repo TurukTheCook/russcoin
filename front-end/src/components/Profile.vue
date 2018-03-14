@@ -17,7 +17,7 @@ export default {
   },
   methods: {
       getMessages: function() {
-        this.$http.get('http://localhost:1407/messages/user')
+        this.$http.get('http://localhost:1407/messages')
             .then(
                 res => {
                     this.messages = res.data.content
