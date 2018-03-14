@@ -8,7 +8,7 @@ let messages = express.Router();
 
 // Route pour récuperer tous les messages
 // On utilise la méthode find() du modèle mongoose 'Message' qui renvoi ici tous les messages
-messagesUser.get('/', (req, res) => {
+messages.get('/', (req, res) => {
   let _userId = req.anas._id;
   // on verifie que req.params.id est bien de type ObjectId avant de passer à la recherche
   if (ObjectId.isValid(_userId)) {
