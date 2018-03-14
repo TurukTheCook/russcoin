@@ -11,7 +11,13 @@ let users = express.Router();
 users.get('/', (req, res) => {
   User.find({}, (err, users) => {
     if (err) res.status(500).json({success: false, message: err.message})
-    else res.status(200).json({success: true, message: 'Here is the list of users!', content: users});
+    else {
+      for(let i=0; i<users.length; i++) {
+        users[i].hash_password = undefined
+        users[i].__v = undefined
+      }
+      res.status(200).json({success: true, message: 'Here is the list of users!', content: users})
+    }
   })
 })
 

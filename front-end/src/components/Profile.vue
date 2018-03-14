@@ -1,7 +1,16 @@
 <template>
-    <div class="container center">
-        <div v-for="message in messages">
-          {{message.message}}
+    <div class="container">
+        <div class="center">
+            <h4>USERS</h4>
+            <div v-for="user in users">
+                {{user}}
+            <br/>
+            </div>
+            <h4>MESSAGES</h4>
+            <div v-for="message in messages">
+                {{message}}
+            <br/>
+            </div>
         </div>
     </div>
 </template>
@@ -12,7 +21,8 @@ export default {
   name: 'Register',
   data () {
     return {
-      messages: []
+      messages: [],
+      users: []
     }
   },
   methods: {
@@ -26,10 +36,22 @@ export default {
                     console.log(res.data)
                 }
             )
+      },
+      getUsers: function() {
+          this.$http.get('http://localhost:1407/users')
+            .then(
+                res => {
+                    this.users = res.data.content
+                },
+                res => {
+                    console.log(res.data)
+                }
+            )
       }
   },
   beforeMount(){
-    this.getMessages()
+    this.getMessages(),
+    this.getUsers()
   }
 }
 </script>
