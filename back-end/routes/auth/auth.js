@@ -13,11 +13,11 @@ let auth = express.Router()
 // La route pour se logger et recevoir un token
 auth.post('/login', (req, res) => {
   // On verifie que l'utilisateur a envoyé l'email et le password dans le req.body
-  if (req.body.email && req.body.password) {
+  if (req.body.username && req.body.password) {
     // On appelle le model USER defini dans mongoose et importé plus haut
     // avec la methode findOne qui cherche un objet avec la propriété 'email' correspondant à notre requete
     // cette methode renvoi le premier utilisateur trouvé ou rien
-    User.findOne({ email: req.body.email }, function (err, user) {
+    User.findOne({ username: req.body.username }, function (err, user) {
       if (err) res.status(500).json({success: false, message: err.message})
       if (!user) {
         res.status(401).json({success: false, message: 'Authentication failed. User not found..' })
@@ -31,7 +31,7 @@ auth.post('/login', (req, res) => {
           // puis il renvoi ce token dans le 'result' du callback
           // On recupere donc ce token et on l'envoi dans une reponse.
           // Ici, on a aussi sauvegardé le token dans la base via la methode save() sur le modele Token (grace à mongoose)
-          jwt.sign({ email: user.email, _id: user._id }, process.env.SECRETKEY, function (err, result) {
+          jwt.sign({ username: user.username, _id: user._id }, process.env.SECRETKEY, function (err, result) {
             let newToken = new Token({token: result});
             newToken.save(function (err, e) {
               if (err) {
@@ -45,15 +45,15 @@ auth.post('/login', (req, res) => {
       }
     })
   } else {
-    res.status(412).json({success: false, message: 'Email and/or password are mising..'})
+    res.status(412).json({success: false, message: 'Username and/or password are mising..'})
   }
 })
 
 // Route pour s'enregister
-auth.post('/register', (req, res) => {
-  if (req.body.email && req.body.password) {
+auth.post('/signup', (req, res) => {
+  if (req.body.username && req.body.password) {
     // On verifie que l'utilisateur existe avec findOne encore
-    User.findOne({ email: req.body.email}, function (err, result) {
+    User.findOne({ username: req.body.username}, function (err, result) {
       if (result === null) {
         // puis on en créé un si il n'existe pas
         let newUser = new User(req.body)
@@ -69,11 +69,11 @@ auth.post('/register', (req, res) => {
           }
         })
       } else {
-        res.status(412).json({success: false, message: 'Email already used..'})
+        res.status(412).json({success: false, message: 'Username already used..'})
       }
     })
   } else {
-    res.status(412).json({success: false, message: 'Email and/or password are mising..'})
+    res.status(412).json({success: false, message: 'Username and/or password are missing..'})
   }
 })
 

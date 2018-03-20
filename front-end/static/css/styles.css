@@ -1,14 +1,158 @@
 * {
-  box-sizing: border-box
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0
+}
+
+html, body, #app, #gradient {
+  height: 100%;
+}
+
+#gradient {
+background: linear-gradient(270deg, #3dd9b1, #aa54c3, #f0a146, #46f081);
+background-size: 800% 800%;
+
+-webkit-animation: AnimationName 24s ease infinite;
+-moz-animation: AnimationName 24s ease infinite;
+animation: AnimationName 24s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName { 
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+.blyat-chat {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.blyat-chat h1 {
+  padding: 15px;
+  height: 75px;
+  background-color: #fff;
+  margin-bottom: 0;
+}
+
+.blyat-chat img {
+  height: 75px;
+  width: 75px;
 }
 
 .center {
-  width: 500px;
-  margin: 0 auto
+  max-width: 1024px;
+  margin: 0 auto;
+  padding-top: 50px;
+  z-index: 50
 }
 
 .flex-center {
   display: flex;
   justify-content: center;
-  align-items: center
+  align-items: center;
+}
+
+.flex-column {
+  flex-direction: column
+}
+
+.padd-10 {
+  padding: 10px
+}
+
+.padd-20 {
+  padding: 20px
+}
+
+.z-depth-1 {
+  box-shadow: 0px 2px 9px rgba(0,0,0,.1)
+}
+
+.z-depth-2 {
+  box-shadow: 0px 4px 18px rgba(0,0,0,.2)
+}
+
+.flex-row-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.log-reg {
+  min-height: 320px;
+  height: auto;
+  min-width: 45px;
+  width: 450px;
+  background-color: #fff;
+  word-wrap: break-word
+}
+
+.doors {
+  margin-top: 30px;
+  height: 300px;
+  max-width: 100%;
+  z-index: 1000
+}
+
+.btn-teal {
+  background-color: #00B285;
+}
+
+a {
+  color: #00B285 !important;
+}
+
+h3 {
+  text-align: center;
+  padding: 10px 0;
+  background-color: #00B285
+}
+
+.user-card {
+  margin-bottom: 20px;
+  padding: 0 !important;
+  width: 45%
+}
+
+.user-card_header {
+  background-color: rgb(34, 34, 34);
+  color: #fff;
+  text-align: center;
+  cursor: pointer
+}
+
+.menu {
+  display: flex
+}
+
+.menu button {
+  width: 50%;
+  outline: 0;
+  border: 0;
+  background-color: #00B285;
+  padding: 10px 0;
+  cursor: pointer
+}
+
+.menu button.active {
+  background-color: #fff;
+  border: 0;
+  outline: 0;
+}
+
+a {
+  text-decoration: none !important;
 }

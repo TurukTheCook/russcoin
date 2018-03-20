@@ -1,14 +1,9 @@
 import mongoose from 'mongoose'
 
 let MessageSchema = new mongoose.Schema({
-  message: {
-    type: String,
-    required: true
-  },
-  userId: {
-    type: String,
-    required: true
-  }
+  title: { type: String, required: true },
+  content: { type : String, required: true },
+  userID: { type: String, required: true }
 });
 
 export default mongoose.model('Message', MessageSchema);

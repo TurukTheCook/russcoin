@@ -41,14 +41,14 @@ users.get('/:id', (req, res) => {
 
 // Route pour update un message, on trouve le message avec findById puis on l'edit&save
 users.put('/:id', (req, res) => {
-  let _email = req.body.email;
+  let _username = req.body.username;
   let _password = req.body.password;
   if (req.body && _email && _password) {
     if (ObjectId.isValid(req.params.id)) {
       User.findById(req.params.id, function (err, user) {
         if (err) res.status(500).json({success: false, message: err.message})
         else {
-          user.email = _email;
+          user.username = _username;
           user.hash_password = bcrypt.hashSync(_password, 10)
           user.save(function (err, updatedUser) {
             if (err) {
