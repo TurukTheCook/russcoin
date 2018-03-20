@@ -1,12 +1,12 @@
 <template>
 <div id="app">
   <div id="gradient" class="container-fluid">
-    <router-link :to="{'path': '/'}">
     <div class="blyat-chat flex-center">
       <img class="z-depth-2" src="../static/img/blyat.jpg"/>
-      <h1 class="text-center z-depth-2">BLYAT-CHAT</h1>
+      <router-link :to="{'path': '/'}">
+        <h1 class="text-center z-depth-2">BLYAT-CHAT</h1>
+      </router-link>
     </div>
-    </router-link>
     <div class="center container d-flex justify-content-center">
       <img class="doors" src="../static/img/hammer-left.png"/>
       <transition name="door" mode="out-in">

@@ -34,23 +34,23 @@ export default {
   methods: {
       send: function(e) {
           e.preventDefault();
-          this.$http.post('http://localhost:1407/messages', this.sendMessage)
-              .then(
-                  res => {
-                    //   console.log(res.data)
-                    //   this.$router.push({ path: '/' })
-                    this.success = res.data.success;
-                    this.message = res.data.message;
-                    this.$emit('increment');
-                    setTimeout(()=>{
-                        this.$router.push({ name: 'Home' })
-                    },500);
-                  },
-                  res => {
-                    this.success = res.data.success;
-                    this.message = res.data.message;
-                  }
-              )
+          this.$http.post('/messages', this.sendMessage)
+                .then(
+                    res => {
+                        this.success = res.data.success;
+                        this.message = res.data.message;
+                        // this.$emit('increment');
+                        setTimeout(()=>{
+                            this.$router.push({ name: 'Home' })
+                        },500);
+                    }
+                )
+                .catch(
+                    err => {
+                        this.success = err.response.data.success;
+                        this.message = err.response.data.message;
+                    }
+                )
       }
   }
 }

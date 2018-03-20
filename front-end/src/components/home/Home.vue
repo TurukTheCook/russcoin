@@ -80,26 +80,30 @@ export default {
   },
   methods: {
       getMessages() {
-        this.$http.get('http://localhost:1407/messages')
+        this.$http.get('/messages')
             .then(
                 res => {
                     this.messages = res.data.content;
-                },
-                res => {
-                    this.successMessages = res.data.success;
-                    this.messageMessages = res.data.message;
+                }
+            )
+            .catch(
+                err => {
+                    this.successMessages = err.response.data.success;
+                    this.messageMessages = err.response.data.message;
                 }
             )
       },
       getUsers() {
-          this.$http.get('http://localhost:1407/users')
+          this.$http.get('/users')
             .then(
                 res => {
                     this.users = res.data.content
-                },
-                res => {
-                    this.successUsers = res.data.success;
-                    this.messageUsers = res.data.message;
+                }
+            )
+            .catch(
+                err => {
+                    this.successUsers = err.response.data.success;
+                    this.messageUsers = err.response.data.message;
                 }
             )
       },

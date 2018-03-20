@@ -38,22 +38,24 @@ export default {
       register: function(e) {
         e.preventDefault();
         if (this.newUser.password == this.newUser.passwordVerif) {
-          this.$http.post('http://localhost:1407/auth/signup', this.newUser)
-              .then(
-                  res => {
-                    //   console.log(res.data)
-                    //   this.$router.push({ path: '/' })
-                    this.success = res.data.success;
-                    this.message = res.data.message;
-                    setTimeout(()=>{
-                        this.authSwitchClick();
-                    },500);
-                  },
-                  res => {
-                    this.success = res.data.success;
-                    this.message = res.data.message;
-                  }
-              )
+            this.$http.post('/auth/signup', this.newUser)
+                .then(
+                    res => {
+                        //   console.log(res.data)
+                        //   this.$router.push({ path: '/' })
+                        this.success = res.data.success;
+                        this.message = res.data.message;
+                        setTimeout(()=>{
+                            this.authSwitchClick();
+                        },500);
+                    }
+                )
+                .catch(
+                    err => {
+                        this.success = err.response.data.success;
+                        this.message = err.response.data.message;
+                    }
+                )
         } else {
           this.success = false;
           this.message = "Passwords don't match..";

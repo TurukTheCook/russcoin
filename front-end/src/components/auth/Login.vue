@@ -39,7 +39,7 @@ export default {
         e.preventDefault();
         // pour les requetes http avec vue-resource on doit mettre this.$http.METHOD( ... )
         // ici avec l'url et la data
-        this.$http.post('http://localhost:1407/auth/login', this.logUser)
+        this.$http.post('/auth/login', this.logUser)
             .then(
                 res => {
                     // en cas de success, on recupere le token depuis la reponse
@@ -50,10 +50,12 @@ export default {
                     setTimeout(()=>{
                         this.$router.push({ name: 'Home' })
                     },500);
-                },
-                res => {
-                    this.success = res.data.success;
-                    this.message = res.data.message;
+                }
+            )
+            .catch(
+                err => {
+                    this.success = err.response.data.success;
+                    this.message = err.response.data.message;
                 }
             )
       }
