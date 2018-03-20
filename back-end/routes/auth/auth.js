@@ -6,7 +6,6 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 // On importe ici les modeles (schemas) mongoose afin de les utiliser
 import User from './../../models/User'
-import Token from './../../models/Token'
 
 let auth = express.Router()
 
@@ -32,14 +31,11 @@ auth.post('/login', (req, res) => {
           // On recupere donc ce token et on l'envoi dans une reponse.
           // Ici, on a aussi sauvegardé le token dans la base via la methode save() sur le modele Token (grace à mongoose)
           jwt.sign({ username: user.username, _id: user._id }, process.env.SECRETKEY, function (err, result) {
-            let newToken = new Token({token: result});
-            newToken.save(function (err, e) {
-              if (err) {
-                res.status(500).json({success: false, message: err.message})
-              } else {
-                res.status(200).json({success: true, message: 'Enjoy your unlimited access!', content: {token: process.env.AUTHBEARER + ' ' + result, userId: user._id}})
-              }
-            })
+            if (err) {
+              res.status(500).json({success: false, message: err.message})
+            } else {
+              res.status(200).json({success: true, message: 'Enjoy your unlimited access!', content: {token: process.env.AUTHBEARER + ' ' + result}})
+            }
           })
         }
       }
@@ -62,7 +58,7 @@ auth.post('/signup', (req, res) => {
         // et enfin on sauvegarde l'utilisateur dans la base
         newUser.save(function (err, user) {
           if (err) {
-            res.status(400).json({success: false, message: err.message})
+            res.status(500).json({success: false, message: err.message})
           } else {
             user.hash_password = undefined
             res.status(200).json({success: true, message: 'New user registered successfuly!', content: user})

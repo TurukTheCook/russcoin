@@ -48,7 +48,7 @@ export default {
                     this.success = res.data.success;
                     this.message = res.data.message;
                     setTimeout(()=>{
-                        this.$router.push({ path: '/home' })
+                        this.$router.push({ name: 'Home' })
                     },500);
                 },
                 res => {

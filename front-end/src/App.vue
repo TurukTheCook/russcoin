@@ -1,13 +1,13 @@
 <template>
 <div id="app">
-  <div id="gradient">
+  <div id="gradient" class="container-fluid">
     <router-link :to="{'path': '/'}">
     <div class="blyat-chat flex-center">
       <img class="z-depth-2" src="../static/img/blyat.jpg"/>
       <h1 class="text-center z-depth-2">BLYAT-CHAT</h1>
     </div>
     </router-link>
-    <div class="center d-flex justify-content-center">
+    <div class="center container d-flex justify-content-center">
       <img class="doors" src="../static/img/hammer-left.png"/>
       <transition name="door" mode="out-in">
         <router-view/>
@@ -25,6 +25,7 @@ export default {
 </script>
 
 <style>
+/* Transition effect */ 
 .door-enter-active {
   animation: door-in 1.2s;
 }
@@ -60,23 +61,6 @@ export default {
     opacity: 1
   }
 }
-
-/* .door-enter,
-.door-leave-to {
-  opacity: 0;
-  width: 0px;
-}
-
-.door-leave,
-.door-enter-to {
-  opacity: 1;
-  width: 300px;
-}
-
-.door-enter-active,
-.door-leave-active {
-  transition: all 800ms ease-in-out
-} */
 
 </style>
 

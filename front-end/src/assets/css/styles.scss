@@ -1,16 +1,20 @@
+$main-color: #00B285;
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0
 }
 
-html, body, #app, #gradient {
-  height: 100%;
+html, body, #app {
+  height: 100%
 }
 
 #gradient {
+background-color: #000;
 background: linear-gradient(270deg, #3dd9b1, #aa54c3, #f0a146, #46f081);
 background-size: 800% 800%;
+min-height: 100vh;
 
 -webkit-animation: AnimationName 24s ease infinite;
 -moz-animation: AnimationName 24s ease infinite;
@@ -33,36 +37,37 @@ animation: AnimationName 24s ease infinite;
     100%{background-position:0% 50%}
 }
 
+/* REST OF CSS */
+
 .blyat-chat {
   display: flex;
   flex-direction: row;
   justify-content: center;
   padding-top: 50px;
-}
 
-.blyat-chat h1 {
-  padding: 15px;
-  height: 75px;
-  background-color: #fff;
-  margin-bottom: 0;
-}
+  h1 {
+    padding: 15px;
+    height: 75px;
+    background-color: #fff;
+    margin-bottom: 0
+  }
 
-.blyat-chat img {
-  height: 75px;
-  width: 75px;
+  img {
+    height: 75px;
+    width: 75px
+  }
 }
 
 .center {
   max-width: 1024px;
   margin: 0 auto;
-  padding-top: 50px;
-  z-index: 50
+  padding: 50px 0;
 }
 
 .flex-center {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center
 }
 
 .flex-column {
@@ -85,10 +90,13 @@ animation: AnimationName 24s ease infinite;
   box-shadow: 0px 4px 18px rgba(0,0,0,.2)
 }
 
+.border-1 {
+  border: 1px solid #ddd
+}
+
 .flex-row-wrap {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  flex-wrap: wrap
 }
 
 .log-reg {
@@ -108,51 +116,61 @@ animation: AnimationName 24s ease infinite;
 }
 
 .btn-teal {
-  background-color: #00B285;
+  background-color: $main-color
 }
 
 a {
   color: #00B285 !important;
+  text-decoration: none !important
 }
 
 h3 {
   text-align: center;
   padding: 10px 0;
-  background-color: #00B285
+  background-color: $main-color
 }
 
 .user-card {
   margin-bottom: 20px;
+  margin-right: 20px;
   padding: 0 !important;
-  width: 45%
+  width: 45%;
+  cursor: pointer
 }
 
-.user-card_header {
+.message-card {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 0 !important;
+}
+
+.user-card_header,
+.message-card_header {
   background-color: rgb(34, 34, 34);
   color: #fff;
-  text-align: center;
-  cursor: pointer
+  text-align: center
 }
 
 .menu {
-  display: flex
+  display: flex;
+
+  button {
+    width: 50%;
+    outline: 0;
+    border: 0;
+    background-color: $main-color;
+    padding: 10px 0;
+    cursor: pointer;
+
+    &.active {
+      background-color: #fff;
+      border: 0;
+      outline: 0
+    }
+  }
 }
 
-.menu button {
-  width: 50%;
-  outline: 0;
-  border: 0;
-  background-color: #00B285;
-  padding: 10px 0;
-  cursor: pointer
-}
-
-.menu button.active {
-  background-color: #fff;
-  border: 0;
-  outline: 0;
-}
-
-a {
-  text-decoration: none !important;
+.sender input::placeholder,
+.sender textarea::placeholder {
+  color: $main-color !important;
 }

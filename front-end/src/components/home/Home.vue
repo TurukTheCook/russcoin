@@ -4,25 +4,33 @@
             <button v-bind:class="{'active': menu.UserList}" v-on:click="menu.UserList = true; menu.MessageList = false">Users</button>
             <button v-bind:class="{'active': menu.MessageList}" v-on:click="menu.MessageList = true; menu.UserList = false">Messages</button>
         </div>
-        <div class="padd-20 flex-row-wrap">
-            <div v-if="menu.UserList" class="user-card z-depth-1" v-for="user in users">
-                <div class="user-card_header">
-                    <span style="color: #00B285; text-transform: uppercase">{{user.username}}</span>
-                </div>
-                <div class="padd-10">
-                    <span class="small" v-if:="user.firstName">First Name: </span><span style="color: #00B285">{{user.firstName}}</span><br/>
-                    <span class="small" v-if:="user.lastName">Last Name: </span><span style="color: #00B285">{{user.lastName}}</span>
+        <div class="padd-20">
+            <div v-if="menu.UserList" class="flex-row-wrap">
+                <span class="small text-center mb-2 w-75 mx-auto">Click a user to send him a message, if you click on his username it will send by username, else by id.</span>
+                <div class="user-card border-1 z-depth-1" v-for="user in users">
+                    <div class="user-card_header" v-on:click="sendMessage(user.username)">
+                        <span style="color: #00B285; text-transform: uppercase">{{user.username}}</span>
+                    </div>
+                    <div class="padd-10" v-on:click="sendMessage(user._id)">
+                        <span class="small">User ID: </span><span style="color: #00B285">{{user._id}}</span><br/><hr>
+                        <span class="small">First Name: </span><span style="color: #00B285">{{user.firstName}}</span><br/>
+                        <span class="small">Last Name: </span><span style="color: #00B285">{{user.lastName}}</span>
+                    </div>
                 </div>
             </div>
-            <div v-if="menu.MessageList" class="user-card z-depth-1" v-for="message in messages">
-                <!-- <div class="user-card_header">
-                    <span style="color: #00B285; text-transform: uppercase">{{user.username}}</span>
+            <div v-if="menu.MessageList" class="flex-row-wrap">
+                <div class="message-card border-1 z-depth-1" v-for="msg in messages">
+                    <div class="message-card_header padd-10">
+                        <span style="color: #00B285; text-transform: uppercase">SENDER: </span>{{msg.senderId}}
+                    </div>
+                    <div class="padd-10">
+                        <span class="small">Title: </span><span style="color: #00B285">{{msg.title}}</span><br/>
+                        <span class="small">Content: </span><span style="color: #00B285">{{msg.content}}</span><br/><hr>
+                        <span class="small">Read: </span><span style="color: #00B285">{{msg.read}}</span><br/>
+                        <span class="small">Send date: </span><span style="color: #00B285">{{msg.creationDate | moment}}</span><br/>
+                        <span class="small">Read Date: </span><span style="color: #00B285">{{msg.readDate | moment}}</span><br/>
+                    </div>
                 </div>
-                <div class="padd-10">
-                    <span class="small" v-if:="user.firstName">First Name: </span><span style="color: #00B285">{{user.firstName}}</span><br/>
-                    <span class="small" v-if:="user.lastName">Last Name: </span><span style="color: #00B285">{{user.lastName}}</span>
-                </div> -->
-                TEST
             </div>
             <div v-if="!menu.UserList && !menu.MessageList">
                 <h3>CLICK ABOVE</h3>
@@ -50,16 +58,18 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   name: 'Home',
   data () {
     return {
-      messages: [{}],
+      messages: [],
       users: [],
       menu: {
           UserList: false,
           MessageList: false
       },
+      counter: 0,
       success: null,
       message: 'An error has occured..',
       successMessages: true,
@@ -69,11 +79,11 @@ export default {
     }
   },
   methods: {
-      getMessages: function() {
+      getMessages() {
         this.$http.get('http://localhost:1407/messages')
             .then(
                 res => {
-                    // this.messages = res.data.content
+                    this.messages = res.data.content;
                 },
                 res => {
                     this.successMessages = res.data.success;
@@ -81,7 +91,7 @@ export default {
                 }
             )
       },
-      getUsers: function() {
+      getUsers() {
           this.$http.get('http://localhost:1407/users')
             .then(
                 res => {
@@ -92,6 +102,14 @@ export default {
                     this.messageUsers = res.data.message;
                 }
             )
+      },
+      sendMessage(arg) {
+          this.$router.push({ name: 'Send', params: { sendingTo: arg } })
+      }
+  },
+  filters: {
+      moment: function(date) {
+          return moment(date).format('MMMM Do YYYY, hh:mm:ss')
       }
   },
   beforeMount(){
@@ -102,6 +120,6 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
   
 </style>
