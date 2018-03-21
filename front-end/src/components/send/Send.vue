@@ -27,7 +27,7 @@ export default {
       success: null,
       message: 'An error has occured..',
       sendMessage: {
-          username: this.sendingTo
+          userID: this.sendingTo
       }
     }
   },

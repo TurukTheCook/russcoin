@@ -35,14 +35,14 @@ auth.post('/login', (req, res) => {
             if (err) {
               res.status(500).json({success: false, message: err.message})
             } else {
-              res.status(200).json({success: true, message: 'Enjoy your unlimited access!', content: {token: process.env.AUTHBEARER + ' ' + result}})
+              res.status(200).json({ success: true, message: 'Добро пожаловать! Welcome camarade!', content: {token: process.env.AUTHBEARER + ' ' + result}})
             }
           })
         }
       }
     })
   } else {
-    res.status(412).json({success: false, message: 'Username and/or password are mising..'})
+    res.status(412).json({ success: false, message: 'Имя пользователя и / или пароль отсутствуют. Username and/or password are missing..'})
   }
 })
 
@@ -62,15 +62,15 @@ auth.post('/signup', (req, res) => {
             res.status(500).json({success: false, message: err.message})
           } else {
             user.hash_password = undefined
-            res.status(200).json({success: true, message: 'New user registered successfuly!', content: user})
+            res.status(200).json({ success: true, message: 'Новый пользователь зарегистрирован! New user registered successfully!', content: user})
           }
         })
       } else {
-        res.status(412).json({success: false, message: 'Username already used..'})
+        res.status(412).json({ success: false, message: 'Имя пользователя уже используется.. Username already used..'})
       }
     })
   } else {
-    res.status(412).json({success: false, message: 'Username and/or password are missing..'})
+    res.status(412).json({ success: false, message: 'Имя пользователя и / или пароль отсутствуют. Username and/or password are missing..'})
   }
 })
 
