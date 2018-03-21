@@ -19,14 +19,14 @@
                 </div>
             </div>
             <div v-if="menu.MessageList" class="flex-row-wrap">
-                <div class="message-card border-1 z-depth-1" v-for="msg in messages" v-on:click="viewProfile(msg._id)">
+                <div class="message-card list border-1 z-depth-1" v-for="msg in messages" v-on:click="viewProfile(msg._id)">
                     <div class="message-card_header padd-10">
-                        <span class="small">SENDER: </span><span style="color: #00B285">{{msg.senderId}}</span>
+                        <span :class="{'small': msg.read}">SENDER: </span><span style="color: #00B285">{{msg.senderId}}</span>
                     </div>
-                    <div class="padd-10">
-                        <span class="small">Title: </span><span style="color: #00B285">{{msg.title}}</span><br/>
-                        <span class="small">Send date: </span><span style="color: #00B285">{{msg.creationDate | moment}}</span>
-                        <span class="small" v-if="msg.readDate">Read Date: </span><span style="color: #00B285">{{msg.readDate | moment}}</span><br/>
+                    <div class="padd-10" :class="[{'unread': !msg.read}, 'read']">
+                        <span :class="{'small': msg.read}">Title: </span><span style="color: #00B285">{{msg.title}}</span><br/>
+                        <span :class="{'small': msg.read}">Send date: </span><span style="color: #00B285">{{msg.creationDate | moment}}</span>
+                        <span :class="{'small': msg.read}" v-if="msg.read">Read Date: </span><span v-if="msg.read" style="color: #00B285">{{msg.readDate | moment}}</span><br/>
                     </div>
                 </div>
             </div>

@@ -148,6 +148,10 @@ h3 {
   width: 100%;
   margin-bottom: 20px;
   padding: 0 !important;
+  
+  &.list:hover {
+    cursor: pointer;
+  }
 }
 
 .user-card_header,
@@ -179,4 +183,13 @@ h3 {
 .sender input::placeholder,
 .sender textarea::placeholder {
   color: $main-color !important;
+}
+
+.read {
+  background-color: #eee
+}
+
+.unread {
+  font-weight: bold;
+  background-color: #fff
 }

@@ -2,7 +2,7 @@
     <form class="form-group log-reg z-depth-2">
         <h3>SEND A MESSAGE</h3>
         <div class="padd-10 sender">
-            <input v-model="sendMessage.username" class="form-control" type="text" placeholder="Username" required><br>
+            <input v-model="sendMessage.userID" class="form-control" type="text" placeholder="Username" required><br>
             <input v-model="sendMessage.title" class="form-control" type="text" placeholder="Title" required><br>
             <textarea v-model="sendMessage.content" class="form-control" rows="5" placeholder="Content" required></textarea><br>
             <button class="btn btn-teal btn-block" v-on:click="send">Accept</button><br>
