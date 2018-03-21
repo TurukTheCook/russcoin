@@ -19,11 +19,11 @@ auth.post('/login', (req, res) => {
     User.findOne({ username: req.body.username }, function (err, user) {
       if (err) res.status(500).json({success: false, message: err.message})
       if (!user) {
-        res.status(401).json({success: false, message: 'Authentication failed. User not found..' })
+        res.status(401).json({ success: false, message: 'Пользователь не найден. User not found..' })
       } else if (user) {
         // Si l'utilisateur existe, on compare les password avec la méthode comparePasswords (défini dans le modele utilisateur User)
         if (!user.comparePasswords(req.body.password)) {
-          res.status(401).json({success: false, message: 'Authentication failed. Wrong password..' })
+          res.status(401).json({ success: false, message: 'Неверный пароль. Wrong password..' })
         } else {
           // Avec JWT.SIGN(PAYLOAD, SECRETKEY, CALLBACK(err, result){...}) on créer un token
           // JWT utilise ce qu'on met dans le payload plus la secretkey pour creer ce token

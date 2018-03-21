@@ -49,7 +49,7 @@ messages.get('/', (req, res) => {
       }
     })
   } else {
-    res.status(404).json({success: false, message: 'User not found..'})
+    res.status(404).json({ success: false, message: 'Пользователь не найден.<br/>User not found..'})
   }
 })
 
