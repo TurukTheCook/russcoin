@@ -1,10 +1,24 @@
 
+// GENERAL
+Этот маршрут не существует.. This route does not exists..
+Отсутствуют данные. Data is missing..
+Неверный ID. Invalid ID
+
+// USERS
 Пользователь не найден. User not found..
+Вот список пользователей! Here is the list of users!
+Вот профиль пользователя! Here is the user profile!
+Пользователь обновлен! User updated!
+Пользователь удален! User deleted!
+
+// AUTH
 Неверный пароль. Wrong password..
 Добро пожаловать! Welcome camarade!
 Имя пользователя и / или пароль отсутствуют. Username and/or password are missing..
 Новый пользователь зарегистрирован! New user registered successfully!
 Имя пользователя уже используется.. Username already used..
-Вот профиль пользователя! Here is the user profile!
-Пользователь обновлен! User updated!
-Отсутствуют данные. Data is missing..
+
+// MESSAGES
+Вот ваши сообщения! Here is your messages!
+Сообщение успешно отправлено! Message sent successfuly!
+Сообщение не найдено.. Message not found..

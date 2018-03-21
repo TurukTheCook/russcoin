@@ -16,7 +16,7 @@ users.get('/', (req, res) => {
         users[i].hash_password = undefined
         users[i].__v = undefined
       }
-      res.status(200).json({success: true, message: 'Here is the list of users!', content: users})
+      res.status(200).json({ success: true, message: 'Вот список пользователей! Here is the list of users!', content: users})
     }
   })
 })
@@ -27,15 +27,19 @@ users.get('/:id', (req, res) => {
   // on verifie que req.params.id est bien de type ObjectId avant de passer à la recherche
   if (ObjectId.isValid(req.params.id)) {
     User.findById(req.params.id, function (err, user) {
-      if (err) res.status(500).json({success: false, message: err.message})
-      else {
-        user.hash_password = undefined
-        user.__v = undefined
-        res.status(200).json({ success: true, message: 'Вот профиль пользователя! Here is the user profile!', content: user })
+      if (!user) {
+        res.status(404).json({ success: false, message: 'Пользователь не найден. User not found..' })
+      } else {
+        if (err) res.status(500).json({success: false, message: err.message})
+        else {
+          user.hash_password = undefined
+          user.__v = undefined
+          res.status(200).json({ success: true, message: 'Вот профиль пользователя! Here is the user profile!', content: user })
+        }
       }
     })
   } else {
-    res.status(404).json({ success: false, message: 'Пользователь не найден. User not found..'})
+    res.status(404).json({ success: false, message: 'Неверный ID. Invalid ID'})
   }
 })
 
@@ -79,7 +83,7 @@ users.delete('/:id', (req, res) => {
         User.remove({ _id: req.params.id }, function (err) {
           if (err) res.status(500).json({success: false, message: err.message})
           else {
-            res.status(200).json({success: true, message: 'The user has been deleted!'})
+            res.status(200).json({ success: true, message: 'Пользователь удален! User deleted!'})
           }
         })
       }

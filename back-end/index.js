@@ -108,7 +108,7 @@ app.use('/messages', messages)
 
 // Fin des routes, on renvoi un 404 not found pour tout le reste
 app.use('/*', (req, res) => {
-  res.status(404).json({success: false, message: 'This route does not exists..'})
+  res.status(404).json({ success: false, message: 'Этот маршрут не существует.. This route does not exists..'})
 })
 
 // LAUNCHING SERVER TO THE MOON
