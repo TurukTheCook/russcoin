@@ -5,34 +5,34 @@
             <button v-bind:class="{'active': menu.MessageList}" v-on:click="menu.MessageList = true; menu.UserList = false">Messages</button>
         </div>
         <div class="padd-20">
-            <div v-if="menu.UserList" class="flex-row-wrap">
+            <div v-if="menu.UserList" class="d-flex flex-wrap justify-content-around">
                 <span class="small text-center mb-2 w-75 mx-auto">Click a user to send him a message, if you click on his username it will send by username, else by id.</span>
-                <div class="user-card border-1 z-depth-1" v-for="user in users">
+                <div class="user-card mb-3 border-1 z-depth-1" v-for="user in users">
                     <div class="user-card_header" v-on:click="sendMessage(user.username)">
-                        <span style="color: #00B285; text-transform: uppercase">{{user.username}}</span>
+                        <span style="color: #00B285">{{user.username}}</span>
                     </div>
                     <div class="padd-10" v-on:click="sendMessage(user._id)">
                         <span class="small">User ID: </span><span style="color: #00B285">{{user._id}}</span><br/><hr>
-                        <span class="small">First Name: </span><span style="color: #00B285">{{user.firstName}}</span><br/>
-                        <span class="small">Last Name: </span><span style="color: #00B285">{{user.lastName}}</span>
+                        <span class="small">First Name: </span><span style="color: #00B285">{{user.firstName || '--'}}</span><br/>
+                        <span class="small">Last Name: </span><span style="color: #00B285">{{user.lastName || '--'}}</span>
                     </div>
                 </div>
             </div>
-            <div v-if="menu.MessageList" class="flex-row-wrap">
-                <div class="message-card list border-1 z-depth-1" v-for="msg in messages" v-on:click="viewProfile(msg._id)">
+            <div v-if="menu.MessageList" class="d-flex flex-column flex-wrap">
+                <div class="message-card list mb-3 border-1 z-depth-1" v-for="msg in messages" v-on:click="viewProfile(msg._id)">
                     <div class="message-card_header padd-10">
-                        <span :class="{'small': msg.read}">SENDER: </span><span style="color: #00B285">{{msg.senderId}}</span>
+                        <span v-bind:class="{'small': msg.read}">SENDER: </span><span style="color: #00B285">{{msg.senderId}}</span>
                     </div>
                     <div class="padd-10" :class="[{'unread': !msg.read}, 'read']">
-                        <span :class="{'small': msg.read}">Title: </span><span style="color: #00B285">{{msg.title}}</span><br/>
-                        <span :class="{'small': msg.read}">Send date: </span><span style="color: #00B285">{{msg.creationDate | moment}}</span>
-                        <span :class="{'small': msg.read}" v-if="msg.read">Read Date: </span><span v-if="msg.read" style="color: #00B285">{{msg.readDate | moment}}</span><br/>
+                        <span v-bind:class="{'small': msg.read}">Title: </span><span style="color: #00B285">{{msg.title}}</span><br/>
+                        <span v-bind:class="{'small': msg.read}">Send date: </span><span style="color: #00B285">{{msg.creationDate | moment}} ({{msg.creationDate | momentFromNow}})<br/></span>
+                        <span v-bind:class="{'small': msg.read}" v-if="msg.read">Read Date: </span><span v-if="msg.read" style="color: #00B285">{{msg.readDate | moment}} ({{msg.creationDate | momentFromNow}})</span>
                     </div>
                 </div>
             </div>
-            <div v-if="!menu.UserList && !menu.MessageList">
-                <h3>CLICK ABOVE</h3>
-                <img class="img-fluid" src="../../../static/img/poutine.jpg"/>
+            <div class="d-flex flex-wrap" v-if="!menu.UserList && !menu.MessageList">
+                <span class="small text-center mb-2 w-75 mx-auto">Click above to get started.</span>
+                <img class="img-fluid" src="../../../static/img/poutine-here.jpg"/>
             </div>
 
             <!-- PRIMARY ALERTS -->
@@ -114,7 +114,10 @@ export default {
   },
   filters: {
       moment: function(date) {
-          return moment(date).format('MM/DD/YYYY, hh:mm:ss')
+          return moment(date).format('MMMM Do YYYY [at] HH:mm:ss')
+      },
+      momentFromNow: function(date) {
+          return moment(date).fromNow()
       }
   },
   beforeMount(){

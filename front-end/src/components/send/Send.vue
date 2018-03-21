@@ -1,5 +1,6 @@
 <template>
-    <form class="form-group log-reg z-depth-2">
+<div class="log-reg z-depth-2">
+    <form class="form-group ">
         <h3>SEND A MESSAGE</h3>
         <div class="padd-10 sender">
             <input v-model="sendMessage.userID" class="form-control" type="text" placeholder="Username" required><br>
@@ -14,6 +15,10 @@
             </div>
         </div>
     </form >
+    <div class="d-flex cursor-pointer m-2" v-on:click="goBack">
+        <img class="mr-2" src="../../../static/img/chevron_left.png"/>previous
+    </div>
+</div>
 </template>
 
 <script>
@@ -32,6 +37,9 @@ export default {
     }
   },
   methods: {
+      goBack() {
+          this.$router.go(-1)
+      },
       send: function(e) {
           e.preventDefault();
           this.$http.post('/messages', this.sendMessage)

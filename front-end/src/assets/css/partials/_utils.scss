@@ -1,0 +1,41 @@
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+
+.flex-column {
+  flex-direction: column
+}
+
+.flex-wrap {
+  flex-wrap: wrap
+}
+
+.padd-10 {
+  padding: 10px
+}
+
+.padd-20 {
+  padding: 20px
+}
+
+.z-depth-1 {
+  box-shadow: 0px 2px 9px rgba(0,0,0,.1)
+}
+
+.z-depth-2 {
+  box-shadow: 0px 4px 18px rgba(0,0,0,.2)
+}
+
+.border-1 {
+  border: 1px solid #ddd
+}
+
+.cursor-pointer {
+  cursor: pointer
+}
+
+.btn-teal {
+  background-color: $main-color
+}

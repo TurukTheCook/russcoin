@@ -37,15 +37,16 @@ messages.get('/', (req, res) => {
 
 // Route pour poster un message
 messages.post('/', (req, res) => {
-  let _userID = req.anas._id;
+  let _userID = req.anas.username;
   let _body = req.body;
   if (_body && _body.userID && _body.title && _body.content) {
     var sendMessage = function (err) {
       if (err) res.status(500).json({ success: false, message: err.message })
       else {
         let newMessage = new Message(req.body);
-        newMessage.senderId = _userID;
-        newMessage.receiverId = _body.userID;
+        newMessage.senderId = _userID
+        newMessage.receiverId = _body.userID
+        newMessage.creationDate = Date.now()
         newMessage.save(function (err, newMessage) {
           if (err) {
             res.status(500).json({ success: false, message: err.message })
@@ -77,7 +78,9 @@ messages.put('/:messageID', (req, res) => {
         res.status(404).json({ success: false, message: 'Сообщение не найдено.. Message not found..' })
       } else {
         if (err) res.status(500).json({ success: false, message: err.message })
-        else {
+        if (message.receiverId != req.anas._id && message.receiverId != req.anas.username) {
+          res.status(403).json({ success: false, message: 'CYKA BLYAT !' })
+        } else {
           if (!message.read) {
             message.read = true
             message.readDate = Date.now()

@@ -1,5 +1,7 @@
 $main-color: #00B285;
 
+@import './partials/_utils.scss';
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -70,41 +72,6 @@ html, body, #app {
   padding: 50px 0;
 }
 
-.flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center
-}
-
-.flex-column {
-  flex-direction: column
-}
-
-.padd-10 {
-  padding: 10px
-}
-
-.padd-20 {
-  padding: 20px
-}
-
-.z-depth-1 {
-  box-shadow: 0px 2px 9px rgba(0,0,0,.1)
-}
-
-.z-depth-2 {
-  box-shadow: 0px 4px 18px rgba(0,0,0,.2)
-}
-
-.border-1 {
-  border: 1px solid #ddd
-}
-
-.flex-row-wrap {
-  display: flex;
-  flex-wrap: wrap
-}
-
 .log-reg {
   min-height: 320px;
   height: auto;
@@ -121,10 +88,6 @@ html, body, #app {
   z-index: 1000
 }
 
-.btn-teal {
-  background-color: $main-color
-}
-
 a {
   color: #00B285 !important;
   text-decoration: none !important
@@ -137,8 +100,6 @@ h3 {
 }
 
 .user-card {
-  margin-bottom: 20px;
-  margin-right: 20px;
   padding: 0 !important;
   width: 45%;
   cursor: pointer
@@ -146,7 +107,6 @@ h3 {
 
 .message-card {
   width: 100%;
-  margin-bottom: 20px;
   padding: 0 !important;
   
   &.list:hover {
@@ -186,7 +146,7 @@ h3 {
 }
 
 .read {
-  background-color: #eee
+  background-color: #ddd
 }
 
 .unread {
