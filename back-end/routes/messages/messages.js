@@ -15,19 +15,23 @@ messages.get('/', (req, res) => {
   if (ObjectId.isValid(_userID)) {
     // Verif que l'utilisateur existe
     User.findById(_userID, function (err, user) {
-      if (err) res.status(500).json({success: false, message: err.message})
-      else {
-        // Trouver tout ses messages
-        Message.find({ $or: [{ receiverId: _userID }, { receiverId: _username}] }, (err, messages) => {
-          if (err) res.status(500).json({success: false, message: err.message})
-          else {
-            res.status(200).json({ success: true, message: 'Вот ваши сообщения! Here is your messages!', content: messages })
-          }
-        })
+      if (!user) {
+        res.status(404).json({ success: false, message: 'Пользователь не найден. User not found..' })
+      } else {
+        if (err) res.status(500).json({success: false, message: err.message})
+        else {
+          // Trouver tout ses messages
+          Message.find({ $or: [{ receiverId: _userID }, { receiverId: _username}] }, (err, messages) => {
+            if (err) res.status(500).json({success: false, message: err.message})
+            else {
+              res.status(200).json({ success: true, message: 'Вот ваши сообщения! Here is your messages!', content: messages })
+            }
+          })
+        }
       }
     })
   } else {
-    res.status(404).json({ success: false, message: 'Пользователь не найден. User not found..'})
+    res.status(404).json({ success: false, message: 'Неверный ID. Invalid ID' })
   }
 })
 
@@ -69,20 +73,24 @@ messages.post('/', (req, res) => {
 messages.put('/:messageID', (req, res) => {
   if (ObjectId.isValid(req.params.messageID)) {
     Message.findById(req.params.messageID, function (err, message) {
-      if (err) res.status(500).json({ success: false, message: err.message })
-      else {
-        if (!message.read) {
-          message.read = true
-          message.readDate = Date.now()
-          message.save(function (err, result) {
-            if (err) res.status(500).json({ success: false, message: err.message, content: message })
-            res.status(200).json({ success: true, message: 'Вот ваше сообщение! Here is your message!', content: message })
-          });
+      if (!message) {
+        res.status(404).json({ success: false, message: 'Сообщение не найдено.. Message not found..' })
+      } else {
+        if (err) res.status(500).json({ success: false, message: err.message })
+        else {
+          if (!message.read) {
+            message.read = true
+            message.readDate = Date.now()
+            message.save(function (err, result) {
+              if (err) res.status(500).json({ success: false, message: err.message, content: message })
+              res.status(200).json({ success: true, message: 'Вот ваше сообщение! Here is your message!', content: message })
+            });
+          }
         }
       }
     })
   } else {
-    res.status(404).json({ success: false, message: 'Сообщение не найдено.. Message not found..' })
+    res.status(404).json({ success: false, message: 'Неверный ID. Invalid ID' })
   }
 })
 

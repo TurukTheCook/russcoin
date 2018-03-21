@@ -50,21 +50,25 @@ users.put('/:id', (req, res) => {
   if (req.body && _email && _password) {
     if (ObjectId.isValid(req.params.id)) {
       User.findById(req.params.id, function (err, user) {
-        if (err) res.status(500).json({success: false, message: err.message})
-        else {
-          user.username = _username;
-          user.hash_password = bcrypt.hashSync(_password, 10)
-          user.save(function (err, updatedUser) {
-            if (err) {
-              res.status(500).json({success: false, message: err.message})
-            } else {
-              updatedUser.hash_password = undefined
-              res.status(200).json({ success: true, message: 'Пользователь обновлен! User updated!', content: updatedUser}) }
-          })
+        if (!user) {
+          res.status(404).json({ success: false, message: 'Пользователь не найден. User not found..' })
+        } else {
+          if (err) res.status(500).json({success: false, message: err.message})
+          else {
+            user.username = _username;
+            user.hash_password = bcrypt.hashSync(_password, 10)
+            user.save(function (err, updatedUser) {
+              if (err) {
+                res.status(500).json({success: false, message: err.message})
+              } else {
+                updatedUser.hash_password = undefined
+                res.status(200).json({ success: true, message: 'Пользователь обновлен! User updated!', content: updatedUser}) }
+            })
+          }
         }
       })
     } else {
-      res.status(404).json({ success: false, message: 'Пользователь не найден. User not found..'})
+      res.status(404).json({ success: false, message: 'Неверный ID. Invalid ID' })
     }
   } else {
     res.status(400).json({ success: false, message: 'Отсутствуют данные. Data is missing..'})
@@ -89,8 +93,11 @@ users.delete('/:id', (req, res) => {
       }
     })
   } else {
-    res.status(404).json({ success: false, message: 'Пользователь не найден. User not found..'})
+    res.status(404).json({ success: false, message: 'Неверный ID. Invalid ID' })
   }
 })
 
 export default users
+
+// ???
+// Gestion d'erreurs un peu different entre "users.get/put/delete" . A voir ce qui est le plus pertinent
