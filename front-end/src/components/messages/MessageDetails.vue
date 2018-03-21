@@ -1,14 +1,16 @@
 <template>
     <div class="log-reg z-depth-2">
         <div class="message-card">
-            <div class="message-card_header padd-10">
+            <div v-if="msg._id" class="message-card_header padd-10">
                 <span style="color: #00B285; text-transform: uppercase">SENDER: </span>{{msg.senderId}}
             </div>
             <div class="padd-10">
-                <span class="small">Title: </span><span style="color: #00B285">{{msg.title}}</span><br/><hr>
-                <span class="small">Content: </span><span style="color: #00B285">{{msg.content}}</span><br/><hr>
-                <span class="small">Send date: </span><span style="color: #00B285">{{msg.creationDate | moment}} ({{msg.creationDate | momentFromNow}})</span><br/>
-                <span class="small">Read Date: </span><span style="color: #00B285">{{msg.readDate | moment}} ({{msg.creationDate | momentFromNow}})</span>
+                <div v-if="msg._id">
+                    <span class="small">Title: </span><span style="color: #00B285">{{msg.title}}</span><br/><hr>
+                    <span class="small">Content: </span><span style="color: #00B285">{{msg.content}}</span><br/><hr>
+                    <span class="small">Send date: </span><span style="color: #00B285" v-if="msg.read">{{msg.creationDate | moment}} ({{msg.creationDate | momentFromNow}})</span><br/>
+                    <span class="small">Read Date: </span><span style="color: #00B285" v-if="msg.read">{{msg.readDate | moment}} ({{msg.creationDate | momentFromNow}})</span>
+                </div>
     
                 <div :class="{'alert alert-danger': !success}" v-if="success == false">
                     {{message}}

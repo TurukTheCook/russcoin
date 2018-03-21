@@ -4,7 +4,7 @@
     <div class="blyat-chat flex-center">
       <img @click="togglePlayback" class="z-depth-2" src="../static/img/blyat.jpg"/>
       <router-link :to="{'path': '/'}">
-        <h1 class="text-center z-depth-2">BLYAT-CHAT</h1>
+        <h1 class="text-center z-depth-2">BLYAT-MAILER</h1>
       </router-link>
     </div>
     <div class="center container d-flex justify-content-center">
