@@ -6,9 +6,6 @@ const ObjectId = mongoose.Types.ObjectId;
 
 let messages = express.Router();
 
-let exit = (res, messages) => {
-  res.status(200).json({ success: true, message: 'Here is your messages!', content: messages })
-};
 // Route pour récuperer tous les messages
 // Utilisation la méthode find() du modèle mongoose 'Message' qui renvoi ici tous les messages
 messages.get('/', (req, res) => {
@@ -24,26 +21,7 @@ messages.get('/', (req, res) => {
         Message.find({ $or: [{ receiverId: _userId }, { receiverId: _username}] }, (err, messages) => {
           if (err) res.status(500).json({success: false, message: err.message})
           else {
-            // res.status(200).json({ success: true, message: 'Here is your messages!', content: messages })
-            // Update les propriétés READ et READDATE
-            if (messages[0]) {
-              let done = 0;
-              for (let i = 0; i < messages.length; i++) {
-                messages[i].read = true
-                if (!messages[i].readDate) messages[i].readDate = Date.now()
-                messages[i].save(function (err, result) {
-                  if (err) res.status(500).json({ success: false, message: err.message })
-                  else {
-                    done++
-                    if (done === messages.length) {
-                      exit(res, messages)
-                    }
-                  }
-                });
-              }
-            } else {
-              res.status(200).json({ success: true, message: 'Here is your messages!', content: messages })
-            }
+            res.status(200).json({ success: true, message: 'Here is your messages!', content: messages })
           }
         })
       }
@@ -95,30 +73,32 @@ messages.post('/', (req, res) => {
   }
 })
 
-// Route pour update un message, on trouve le message avec findById puis on l'edit&save
-// messages.put('/:id', (req, res) => {
-//   if (req.body && req.body.message) {
-//     if (ObjectId.isValid(req.params.id)) {
-//       Message.findById(req.params.id, function (err, message) {
-//         if (err) res.status(500).json({ success: false, message: err.message })
-//         else {
-//           message.message = req.body.message;
-//           message.save(function (err, updatedMessage) {
-//             if (err) {
-//               res.status(500).json({ success: false, message: err.message })
-//             } else {
-//               res.status(200).json({ success: true, message: 'Message updated!', content: updatedMessage })
-//             }
-//           })
-//         }
-//       })
-//     } else {
-//       res.status(404).json({ success: false, message: 'Message not found..' })
-//     }
-//   } else {
-//     res.status(400).json({ success: false, message: 'Data is missing..' })
-//   }
-// })
+//Route pour update un message, on trouve le message avec findById puis on l'edit&save
+messages.put('/:id', (req, res) => {
+  if (req.body && req.body.message) {
+    if (ObjectId.isValid(req.params.id)) {
+      Message.findById(req.params.id, function (err, message) {
+        if (err) res.status(500).json({ success: false, message: err.message })
+        else {
+          // res.status(200).json({ success: true, message: 'Here is your messages!', content: messages })
+          // Update les propriétés READ et READDATE
+          messages[i].read = true
+          if (!messages[i].readDate) messages[i].readDate = Date.now()
+          messages[i].save(function (err, result) {
+            if (err) res.status(500).json({ success: false, message: err.message })
+            else {
+              res.status(200).json({ success: true, message: 'Here is your messages!', content: messages })
+            }
+          });
+        }
+      })
+    } else {
+      res.status(404).json({ success: false, message: 'Message not found..' })
+    }
+  } else {
+    res.status(400).json({ success: false, message: 'Data is missing..' })
+  }
+})
 
 // Route pour delete un message, on utilise la méthode remove() du modele mongoose ezpz
 // messages.delete('/:id', (req, res) => {

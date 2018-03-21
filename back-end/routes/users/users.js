@@ -35,7 +35,7 @@ users.get('/:id', (req, res) => {
       }
     })
   } else {
-    res.status(404).json({ success: false, message: 'Пользователь не найден.<br/>User not found..'})
+    res.status(404).json({ success: false, message: 'Пользователь не найден. User not found..'})
   }
 })
 
@@ -61,7 +61,7 @@ users.put('/:id', (req, res) => {
         }
       })
     } else {
-      res.status(404).json({ success: false, message: 'Пользователь не найден.<br/>User not found..'})
+      res.status(404).json({ success: false, message: 'Пользователь не найден. User not found..'})
     }
   } else {
     res.status(400).json({success: false, message: 'Data is missing..'})
@@ -86,7 +86,7 @@ users.delete('/:id', (req, res) => {
       }
     })
   } else {
-    res.status(404).json({ success: false, message: 'Пользователь не найден.<br/>User not found..'})
+    res.status(404).json({ success: false, message: 'Пользователь не найден. User not found..'})
   }
 })
 
