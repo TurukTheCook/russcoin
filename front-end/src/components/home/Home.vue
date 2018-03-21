@@ -19,16 +19,14 @@
                 </div>
             </div>
             <div v-if="menu.MessageList" class="flex-row-wrap">
-                <div class="message-card border-1 z-depth-1" v-for="msg in messages">
+                <div class="message-card border-1 z-depth-1" v-for="msg in messages" v-on:click="viewProfile(msg._id)">
                     <div class="message-card_header padd-10">
-                        <span style="color: #00B285; text-transform: uppercase">SENDER: </span>{{msg.senderId}}
+                        <span class="small">SENDER: </span><span style="color: #00B285">{{msg.senderId}}</span>
                     </div>
                     <div class="padd-10">
                         <span class="small">Title: </span><span style="color: #00B285">{{msg.title}}</span><br/>
-                        <span class="small">Content: </span><span style="color: #00B285">{{msg.content}}</span><br/><hr>
-                        <span class="small">Read: </span><span style="color: #00B285">{{msg.read}}</span><br/>
-                        <span class="small">Send date: </span><span style="color: #00B285">{{msg.creationDate | moment}}</span><br/>
-                        <span class="small">Read Date: </span><span style="color: #00B285">{{msg.readDate | moment}}</span><br/>
+                        <span class="small">Send date: </span><span style="color: #00B285">{{msg.creationDate | moment}}</span>
+                        <span class="small" v-if="msg.readDate">Read Date: </span><span style="color: #00B285">{{msg.readDate | moment}}</span><br/>
                     </div>
                 </div>
             </div>
@@ -109,11 +107,14 @@ export default {
       },
       sendMessage(arg) {
           this.$router.push({ name: 'Send', params: { sendingTo: arg } })
+      },
+      viewProfile(arg) {
+          this.$router.push({ name: 'MessageDetails', params: { msgId: arg } })
       }
   },
   filters: {
       moment: function(date) {
-          return moment(date).format('MMMM Do YYYY, hh:mm:ss')
+          return moment(date).format('MM/DD/YYYY, hh:mm:ss')
       }
   },
   beforeMount(){

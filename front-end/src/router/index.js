@@ -8,6 +8,7 @@ import VueAxios from 'vue-axios'
 import Auth from '@/components/auth/Auth'
 import Home from '@/components/home/Home'
 import Send from '@/components/send/Send'
+import MessageDetails from '@/components/messages/MessageDetails'
 
 // BOOTSTRAP AND STYLES
 import BootstrapVue from 'bootstrap-vue'
@@ -51,6 +52,12 @@ export default new Router({
       path: '/send',
       name: 'Send',
       component: Send,
+      props: true
+    },
+    {
+      path: '/message',
+      name: 'MessageDetails',
+      component: MessageDetails,
       props: true
     },
     {
