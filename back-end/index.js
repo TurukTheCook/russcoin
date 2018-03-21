@@ -11,6 +11,10 @@ import morgan from 'morgan'
 // on déclare des variables dedans puis on les utilise avec process.env.NOMDELAVARIABLE
 import dotEnv from 'dotenv'
 
+// For JWT verification
+import User from './models/User'
+const ObjectId = mongoose.Types.ObjectId;
+
 // Init .env
 // Il faut absolement declarer la config de dotenv immediatement
 // Pour que les process.env.VARIABLE soient utilisable depuis les imports (de routes)
@@ -87,7 +91,17 @@ let verifyToken = (req, res, next) => {
         // le req.anas est un rajout pour avoir acces au token décodé sur d'autres routes
         // une fois qu'on a passé cette étape de verification
         req.anas = decode;
-        next()
+        if (ObjectId.isValid(req.anas._id)) {
+          User.findById(req.anas._id, function (err, user) {
+            if (!user) {
+              res.status(403).json({ success: false, message: 'CYKA BLYAT !' })
+            } else {
+              next()
+            }
+          })
+        } else {
+          res.status(403).json({ success: false, message: 'CYKA BLYAT !' })
+        }
       }
     });
   } else {
