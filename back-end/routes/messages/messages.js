@@ -85,6 +85,8 @@ messages.put('/:messageID', (req, res) => {
               if (err) res.status(500).json({ success: false, message: err.message, content: message })
               res.status(200).json({ success: true, message: 'Вот ваше сообщение! Here is your message!', content: message })
             });
+          } else {
+            res.status(200).json({ success: true, message: 'Вот ваше сообщение! Here is your message!', content: message })
           }
         }
       }

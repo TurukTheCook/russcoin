@@ -5,15 +5,13 @@
                 <span style="color: #00B285; text-transform: uppercase">SENDER: </span>{{msg.senderId}}
             </div>
             <div class="padd-10">
-                <span class="small">Title: </span><span style="color: #00B285">{{msg.title}}</span><br/>
+                <span class="small">Title: </span><span style="color: #00B285">{{msg.title}}</span><br/><hr>
                 <span class="small">Content: </span><span style="color: #00B285">{{msg.content}}</span><br/><hr>
-                <span class="small">Read: </span><span style="color: #00B285">{{msg.read}}</span><br/>
                 <span class="small">Send date: </span><span style="color: #00B285">{{msg.creationDate | moment}}</span><br/>
+                <span class="small">Read: </span><span style="color: #00B285">{{msg.read}}</span><br/>
                 <span class="small">Read Date: </span><span style="color: #00B285">{{msg.readDate | moment}}</span><br/>
+    
                 <div :class="{'alert alert-danger': !success}" v-if="success == false">
-                    {{message}}
-                </div>
-                <div :class="{'alert alert-success': success}" v-if="success == true">
                     {{message}}
                 </div>
             </div>
@@ -29,7 +27,7 @@ export default {
   data() {
       return {
           msg: {},
-          success: null,
+          success: true,
           message: 'An error has occured..'
       }
   },
@@ -40,12 +38,10 @@ export default {
   },
   methods: {
       updateMessage() {
-          console.log(this.msgId)
         this.$http.put('/messages/' + this.msgId)
             .then(
                 res => {
                     this.msg = res.data.content;
-                    console.log(res.data.content);
                     this.success = res.data.success;
                     this.message = res.data.message;
                 }
