@@ -58,6 +58,21 @@ messages.post('/', (req, res) => {
   let _userId = req.anas._id;
   let _body = req.body;
   if (_body && _body.username && _body.title && _body.content) {
+    var sendMessage = function (err) {
+      if (err) res.status(500).json({ success: false, message: err.message })
+      else {
+        let newMessage = new Message(req.body);
+        newMessage.senderId = _userId;
+        newMessage.receiverId = _body.username;
+        newMessage.save(function (err, newMessage) {
+          if (err) {
+            res.status(500).json({ success: false, message: err.message })
+          } else {
+            res.status(200).json({ success: true, message: 'Message sent successfuly!' })
+          }
+        })
+      }
+    }
     // A RETEST PLUS TARD
     // if (_body['username'].length > 12) {
     //   var newObjectId = new ObjectId(_body.username);
@@ -68,35 +83,11 @@ messages.post('/', (req, res) => {
     // User.find({ $or: [{ _id: newObjectId }, { username: _body.username }] }
     if (ObjectId.isValid(_body.username)) {
       User.find({ _id: _body.username }, function (err, user) {
-        if (err) res.status(500).json({ success: false, message: err.message })
-        else {
-          let newMessage = new Message(req.body);
-          newMessage.senderId = _userId;
-          newMessage.receiverId = _body.username;
-          newMessage.save(function (err, newMessage) {
-            if (err) {
-              res.status(500).json({ success: false, message: err.message })
-            } else {
-              res.status(200).json({ success: true, message: 'Message sent successfuly!' })
-            }
-          })
-        }
+        sendMessage(err)
       })
     } else {
       User.find({ username: _body.username }, function (err, user) {
-        if (err) res.status(500).json({ success: false, message: err.message })
-        else {
-          let newMessage = new Message(req.body);
-          newMessage.senderId = _userId;
-          newMessage.receiverId = _body.username;
-          newMessage.save(function (err, newMessage) {
-            if (err) {
-              res.status(500).json({ success: false, message: err.message })
-            } else {
-              res.status(200).json({ success: true, message: 'Message sent successfuly!' })
-            }
-          })
-        }
+        sendMessage(err)
       })
     }
   } else {
