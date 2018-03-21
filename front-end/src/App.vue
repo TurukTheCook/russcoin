@@ -2,7 +2,7 @@
 <div id="app">
   <div id="gradient" class="container-fluid">
     <div class="blyat-chat flex-center">
-      <img class="z-depth-2" src="../static/img/blyat.jpg"/>
+      <audio-player :sources="audioSources" :loop="true" :autoplay="true"></audio-player>
       <router-link :to="{'path': '/'}">
         <h1 class="text-center z-depth-2">BLYAT-CHAT</h1>
       </router-link>
@@ -19,8 +19,19 @@
 </template>
 
 <script>
+import AudioPlayer from './components/audio/Audio.vue'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+      AudioPlayer
+  },
+  data () {
+      return {
+        audioSources: [
+          "../static/mp3/hymne-russia.mp3",
+        ]
+      }
+    }
 }
 </script>
 
@@ -51,13 +62,13 @@ export default {
     opacity: 0
   }
   70% {
-    min-width: 450px;
-    width: 450px;
+    min-width: 600px;
+    width: 600px;
     opacity: 1
   }
   100% {
-    min-width: 450px;
-    width: 450px;
+    min-width: 600px;
+    width: 600px;
     opacity: 1
   }
 }

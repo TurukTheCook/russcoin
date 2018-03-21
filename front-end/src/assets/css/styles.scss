@@ -10,31 +10,35 @@ html, body, #app {
   height: 100%
 }
 
-#gradient {
-background-color: #000;
-background: linear-gradient(270deg, #3dd9b1, #aa54c3, #f0a146, #46f081);
-background-size: 800% 800%;
-min-height: 100vh;
+#app {
+  background: url('../../../static/img/map-russia.png') no-repeat center;
+  background-size: 75% 75%;
+}
 
--webkit-animation: AnimationName 24s ease infinite;
--moz-animation: AnimationName 24s ease infinite;
-animation: AnimationName 24s ease infinite;
+#gradient {
+  background: linear-gradient(270deg, rgba(61, 217, 178, 0.7), rgba(169, 84, 195, 0.7), rgba(240, 161, 70, 0.7), rgba(70, 240, 130, 0.7));
+  background-size: 800% 800%;
+  min-height: 100vh;
+
+  -webkit-animation: AnimationName 24s ease infinite;
+  -moz-animation: AnimationName 24s ease infinite;
+  animation: AnimationName 24s ease infinite;
 }
 
 @-webkit-keyframes AnimationName {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 @-moz-keyframes AnimationName {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 @keyframes AnimationName { 
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 
 /* REST OF CSS */
@@ -43,7 +47,7 @@ animation: AnimationName 24s ease infinite;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding-top: 50px;
+  padding-top: 100px;
 
   h1 {
     padding: 15px;
@@ -54,13 +58,15 @@ animation: AnimationName 24s ease infinite;
 
   img {
     height: 75px;
-    width: 75px
+    width: 75px;
+
+    &:hover {
+      cursor: pointer
+    }
   }
 }
 
 .center {
-  max-width: 1024px;
-  margin: 0 auto;
   padding: 50px 0;
 }
 
@@ -102,8 +108,8 @@ animation: AnimationName 24s ease infinite;
 .log-reg {
   min-height: 320px;
   height: auto;
-  min-width: 45px;
-  width: 450px;
+  min-width: 600px;
+  width: 600px;
   background-color: #fff;
   word-wrap: break-word
 }
