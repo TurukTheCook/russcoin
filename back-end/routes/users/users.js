@@ -31,7 +31,7 @@ users.get('/:id', (req, res) => {
       else {
         user.hash_password = undefined
         user.__v = undefined
-        res.status(200).json({success: true, message: 'Here is the user profile!', content: user})
+        res.status(200).json({ success: true, message: 'Вот профиль пользователя! Here is the user profile!', content: user })
       }
     })
   } else {
@@ -55,8 +55,7 @@ users.put('/:id', (req, res) => {
               res.status(500).json({success: false, message: err.message})
             } else {
               updatedUser.hash_password = undefined
-              res.status(200).json({success: true, message: 'User updated!', content: updatedUser})
-            }
+              res.status(200).json({ success: true, message: 'Пользователь обновлен! User updated!', content: updatedUser}) }
           })
         }
       })
@@ -64,7 +63,7 @@ users.put('/:id', (req, res) => {
       res.status(404).json({ success: false, message: 'Пользователь не найден. User not found..'})
     }
   } else {
-    res.status(400).json({success: false, message: 'Data is missing..'})
+    res.status(400).json({ success: false, message: 'Отсутствуют данные. Data is missing..'})
   }
 })
 

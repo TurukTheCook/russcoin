@@ -2,7 +2,7 @@
 <div id="app">
   <div id="gradient" class="container-fluid">
     <div class="blyat-chat flex-center">
-      <audio-player :sources="audioSources" :loop="true" :autoplay="true"></audio-player>
+      <img @click="togglePlayback" class="z-depth-2" src="../static/img/blyat.jpg"/>
       <router-link :to="{'path': '/'}">
         <h1 class="text-center z-depth-2">BLYAT-CHAT</h1>
       </router-link>
@@ -19,19 +19,40 @@
 </template>
 
 <script>
-import AudioPlayer from './components/audio/Audio.vue'
+import {Howl, Howler} from 'howler'
+
 export default {
   name: 'App',
-  components: {
-      AudioPlayer
-  },
   data () {
-      return {
-        audioSources: [
-          "../static/mp3/hymne-russia.mp3",
-        ]
-      }
+    return {
+      player: null,
+      playing: false
     }
+  },
+  methods: {
+    togglePlayback() {
+      if (this.playing) {
+        this.player.pause()
+        this.playing = false
+      }
+      else {
+        this.player.play()
+        this.playing = true
+      }
+    },
+    initPlayer() {
+      this.player = new Howl({
+        src: ['../static/mp3/hymne-russia.mp3'],
+        autoplay: true,
+        loop: true,
+        volume: 0.5
+      });
+    }
+  },
+  beforeMount() {
+    this.initPlayer()
+    this.playing = true
+  }
 }
 </script>
 
