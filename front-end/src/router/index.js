@@ -6,6 +6,8 @@ import VueAxios from 'vue-axios'
 
 // COMPONENTS
 import Auth from '@/components/auth/Auth'
+import Login from '@/components/auth/Login'
+import Register from '@/components/auth/Register'
 import Home from '@/components/home/Home'
 import Send from '@/components/send/Send'
 import MessageDetails from '@/components/messages/MessageDetails'
@@ -41,7 +43,19 @@ export default new Router({
     {
       path: '/',
       name: 'Auth',
-      component: Auth
+      component: Auth,
+      children: [
+        {
+          path: '',
+          name: 'Login',
+          component: Login
+        },
+        {
+          path: '/register',
+          name: 'Register',
+          component: Register
+        }
+      ]
     },
     {
       path: '/home',
@@ -60,7 +74,7 @@ export default new Router({
     },
     {
       path: '*',
-      redirect: '/'
+      redirect: { name: 'Login' }
     }
   ]
 })

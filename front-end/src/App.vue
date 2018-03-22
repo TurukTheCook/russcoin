@@ -3,14 +3,14 @@
   <div id="gradient" class="container-fluid">
     <div class="blyat-chat flex-center">
       <img @click="togglePlayback" class="z-depth-2" src="../static/img/blyat.jpg"/>
-      <router-link :to="{'path': '/'}">
+      <router-link :to="{ name: 'Login' }">
         <h1 class="text-center z-depth-2">BLYAT-MAILER</h1>
       </router-link>
     </div>
     <div class="center container d-flex justify-content-center">
       <img class="doors" src="../static/img/hammer-left.png"/>
       <transition name="door" mode="out-in">
-        <router-view/>
+        <router-view class="log-reg z-depth-2"/>
       </transition>
       <img class="doors" src="../static/img/hammer-right.png"/>
     </div>

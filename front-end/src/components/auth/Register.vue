@@ -1,5 +1,5 @@
 <template>
-    <form class="form-group log-reg z-depth-2">
+    <form class="form-group">
         <h3>REGISTER</h3>
         <div class="padd-10">
             <input class="form-control" v-model="newUser.username" type="text" placeholder="Username" required><br>
@@ -9,7 +9,8 @@
             <input class="form-control" v-model="newUser.passwordVerif" type="password" placeholder="Confirm Password" required><br>
             <button class="btn btn-teal btn-block" v-on:click="register">Accept</button><br>
             <p id="param">Already have an account ? 
-            <a href="#" v-on:click="authSwitchClick">Sign in</a>
+            <!-- <a href="#" v-on:click="authSwitchClick">Sign in</a> -->
+            <router-link :to="{ name: 'Login' }">Sign in</router-link>
             </p>
             <div :class="{'alert alert-danger': !success}" v-if="success == false">
                 {{message}}

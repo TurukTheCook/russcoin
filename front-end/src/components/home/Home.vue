@@ -1,5 +1,5 @@
 <template>
-    <div class="log-reg z-depth-2">
+    <div>
         <div class="menu">
             <button v-bind:class="{'active': menu.UserList}" v-on:click="menu.UserList = true; menu.MessageList = false">Users</button>
             <button v-bind:class="{'active': menu.MessageList}" v-on:click="menu.MessageList = true; menu.UserList = false">Messages</button>

@@ -1,5 +1,5 @@
 <template>
-<div class="log-reg z-depth-2">
+<div>
     <form class="form-group ">
         <h3>SEND A MESSAGE</h3>
         <div class="padd-10 sender">

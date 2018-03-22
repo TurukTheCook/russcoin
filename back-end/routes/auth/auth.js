@@ -31,7 +31,6 @@ auth.post('/login', (req, res) => {
           // On recupere donc ce token et on l'envoi dans une reponse.
           // Ici, on a aussi sauvegardé le token dans la base via la methode save() sur le modele Token (grace à mongoose)
           jwt.sign({ username: user.username, _id: user._id }, process.env.SECRETKEY, function (err, result) {
-            console.log(process.env.AUTHBEARER + ' ' + result)
             if (err) {
               res.status(500).json({success: false, message: err.message})
             } else {

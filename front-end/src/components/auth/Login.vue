@@ -1,12 +1,13 @@
 <template>
-    <form class="form-group log-reg z-depth-2">
+    <form class="form-group">
         <h3>LOG IN</h3>
         <div class="padd-10">
             <input v-model="logUser.username" class="form-control" type="text" placeholder="Username" required><br>
             <input v-model="logUser.password" class="form-control" type="password" placeholder="Password" required><br>
             <button class="btn btn-teal btn-block" v-on:click="login">Accept</button><br>
             <p id="param">Don't have an account ? 
-            <a href="#" v-on:click="authSwitchClick">Sign up</a>
+            <!-- <a href="#" v-on:click="authSwitchClick">Sign up</a> -->
+            <router-link :to="{ name: 'Register' }">Sign up</router-link>
             </p>
             <div :class="{'alert alert-danger': !success}" v-if="success == false">
                 {{message}}
