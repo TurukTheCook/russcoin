@@ -46,7 +46,6 @@ messages.post('/', (req, res) => {
         let newMessage = new Message(req.body);
         newMessage.senderId = _userID
         newMessage.receiverId = _body.userID
-        newMessage.creationDate = Date.now()
         newMessage.save(function (err, newMessage) {
           if (err) {
             res.status(500).json({ success: false, message: err.message })

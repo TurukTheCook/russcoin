@@ -49,16 +49,14 @@ export default new Router({
       component: Home
     },
     {
-      path: '/send',
+      path: '/send/:sendingTo',
       name: 'Send',
-      component: Send,
-      props: true
+      component: Send
     },
     {
-      path: '/message',
+      path: '/message/:msgId',
       name: 'MessageDetails',
-      component: MessageDetails,
-      props: true
+      component: MessageDetails
     },
     {
       path: '*',

@@ -24,16 +24,11 @@
 <script>
 export default {
   name: 'Send',
-  props: [
-      'sendingTo'
-  ],
   data () {
     return {
       success: null,
       message: 'An error has occured..',
-      sendMessage: {
-          userID: this.sendingTo
-      }
+      sendMessage: {}
     }
   },
   methods: {
@@ -60,6 +55,9 @@ export default {
                     }
                 )
       }
+  },
+  beforeMount() {
+      this.sendMessage.userID = this.$route.params.sendingTo
   }
 }
 </script>

@@ -27,7 +27,6 @@
 import moment from 'moment'
 export default {
   name: 'MessageDetails',
-  props: ['msgId'],
   data() {
       return {
           msg: {},
@@ -48,7 +47,7 @@ export default {
           this.$router.go(-1)
       },
       updateMessage() {
-        this.$http.put('/messages/' + this.msgId)
+        this.$http.put('/messages/' + this.$route.params.msgId)
             .then(
                 res => {
                     this.msg = res.data.content;

@@ -26,7 +26,7 @@
                     <div class="padd-10" :class="[{'unread': !msg.read}, 'read']">
                         <span v-bind:class="{'small': msg.read}">Title: </span><span style="color: #00B285">{{msg.title}}</span><br/>
                         <span v-bind:class="{'small': msg.read}">Send date: </span><span style="color: #00B285">{{msg.creationDate | moment}} ({{msg.creationDate | momentFromNow}})<br/></span>
-                        <span v-bind:class="{'small': msg.read}" v-if="msg.read">Read Date: </span><span v-if="msg.read" style="color: #00B285">{{msg.readDate | moment}} ({{msg.creationDate | momentFromNow}})</span>
+                        <span v-bind:class="{'small': msg.read}" v-if="msg.read">Read Date: </span><span v-if="msg.read" style="color: #00B285">{{msg.readDate | moment}} ({{msg.readDate | momentFromNow}})</span>
                     </div>
                 </div>
             </div>

@@ -6,8 +6,8 @@ let UserSchema = new mongoose.Schema({
   firstName: { type: String },
   lastName: { type: String },
   hash_password: { type: String, required: true },
-  created: { type: Date, default: Date.now },
-  last_updated: { type: Date, default:Date.now }
+  creationDate: { type: Date, default: Date.now },
+  updatedDate: { type: Date, default:Date.now }
 });
 
 UserSchema.methods.comparePasswords = function(password) {
