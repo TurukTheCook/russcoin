@@ -1,7 +1,9 @@
 <template>
-<transition name="door" mode="out-in">
-  <router-view :key="$route.path"/>
-</transition>
+<div>
+  <transition name="door" mode="out-in">
+    <router-view class="log-reg z-depth-2"/>
+  </transition>
+</div>
 </template>
 
 <script>

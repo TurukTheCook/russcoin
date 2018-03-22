@@ -10,7 +10,7 @@
     <div class="center container d-flex justify-content-center">
       <img class="doors" src="../static/img/hammer-left.png"/>
       <transition name="door" mode="out-in">
-        <router-view class="log-reg z-depth-2"/>
+        <router-view/>
       </transition>
       <img class="doors" src="../static/img/hammer-right.png"/>
     </div>

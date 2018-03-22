@@ -1,5 +1,5 @@
 <template>
-    <form class="form-group">
+    <form class="form-group log-reg z-depth-2">
         <h3>REGISTER</h3>
         <div class="padd-10">
             <input class="form-control" v-model="newUser.username" type="text" placeholder="Username" required><br>
