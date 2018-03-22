@@ -43,6 +43,10 @@ html, body, #app {
   100%{background-position:0% 50%}
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 /* REST OF CSS */
 
 .blyat-chat {
