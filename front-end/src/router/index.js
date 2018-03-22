@@ -38,7 +38,7 @@ axios.interceptors.request.use(function (config) {
 });
 
 // ROUTES
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -78,3 +78,21 @@ export default new Router({
     }
   ]
 })
+
+// GLOBAL GUARD
+// On effectue des actions avant de d'afficher une route
+// Ici on verifie que l'utilisateur dispose d'un token valide
+router.beforeEach((to, from, next) => {
+  if (to.name == 'Login' || to.name == 'Register') next()
+  else {
+    if (localStorage.getItem('token')) {
+      next()
+    } else {
+      next({ name: 'Login' })
+    }
+  }
+})
+
+
+// EXPORT
+export default router

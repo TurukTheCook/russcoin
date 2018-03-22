@@ -32,8 +32,10 @@
             </div>
             <div class="d-flex flex-wrap justify-content-center" v-if="!menu.UserList && !menu.MessageList">
                 <span class="small text-center mb-2 w-75 mx-auto">Click above to get started.</span>
-                <img class="img-fluid" src="../../assets/img/poutine-here.jpg"/>
+                <img class="img-fluid mb-2" src="../../assets/img/poutine-here.jpg"/>
             </div>
+
+            <button class="btn btn-block w-50 mx-auto main-color-bg " v-on:click="logout">Logout</button>
 
             <!-- PRIMARY ALERTS -->
             <div :class="{'alert alert-danger': !success}" v-if="success == false">
@@ -77,6 +79,10 @@ export default {
     }
   },
   methods: {
+      logout() {
+          localStorage.removeItem('token')
+          this.$router.push({ name: 'Login' })
+      },
       getMessages() {
         this.$http.get('/messages')
             .then(
