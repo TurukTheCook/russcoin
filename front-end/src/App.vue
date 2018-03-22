@@ -1,25 +1,26 @@
 <template>
 <div id="app">
-  <div id="gradient" class="container-fluid">
-    <div class="blyat-chat flex-center">
-      <img @click="togglePlayback" class="z-depth-2" src="../static/img/blyat.jpg"/>
-      <router-link :to="{ name: 'Login' }">
-        <h1 class="text-center z-depth-2">BLYAT-MAILER</h1>
-      </router-link>
+    <div id="gradient" class="container-fluid">
+      <div class="blyat-chat flex-center">
+        <img @click="togglePlayback" class="z-depth-2" src="../static/img/blyat.jpg"/>
+        <router-link :to="{ name: 'Login' }">
+          <h1 class="text-center z-depth-2">BLYAT-MAILER</h1>
+        </router-link>
+      </div>
+      <div class="center container d-flex justify-content-center">
+        <img class="doors" src="../static/img/hammer-left.png"/>
+        <transition name="door" mode="out-in">
+          <router-view/>
+        </transition>
+        <img class="doors" src="../static/img/hammer-right.png"/>
+      </div>
     </div>
-    <div class="center container d-flex justify-content-center">
-      <img class="doors" src="../static/img/hammer-left.png"/>
-      <transition name="door" mode="out-in">
-        <router-view/>
-      </transition>
-      <img class="doors" src="../static/img/hammer-right.png"/>
-    </div>
-  </div>
 </div>
 </template>
 
 <script>
 import {Howl, Howler} from 'howler'
+
 
 export default {
   name: 'App',

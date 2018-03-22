@@ -47,7 +47,7 @@ export default {
                         this.success = res.data.success;
                         this.message = res.data.message;
                         setTimeout(()=>{
-                            this.authSwitchClick();
+                            this.$router.push({ name: 'Login' })
                         },500);
                     }
                 )
