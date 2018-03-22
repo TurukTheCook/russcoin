@@ -7,7 +7,7 @@
             <input class="form-control" v-model="newUser.lastName" type="text" placeholder="Last Name"><br>
             <input class="form-control" v-model="newUser.password" type="password" placeholder="Password" required><br>
             <input class="form-control" v-model="newUser.passwordVerif" type="password" placeholder="Confirm Password" required><br>
-            <button class="btn btn-teal btn-block" v-on:click="register">Accept</button><br>
+            <button class="btn main-color-bg btn-block" v-on:click="register">Accept</button><br>
             <p id="param">Already have an account ? 
             <!-- <a href="#" v-on:click="authSwitchClick">Sign in</a> -->
             <router-link :to="{ name: 'Login' }">Sign in</router-link>

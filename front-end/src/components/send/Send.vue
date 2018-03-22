@@ -6,7 +6,7 @@
             <input v-model="sendMessage.userID" class="form-control" type="text" placeholder="Username" required><br>
             <input v-model="sendMessage.title" class="form-control" type="text" placeholder="Title" required><br>
             <textarea v-model="sendMessage.content" class="form-control" rows="5" placeholder="Content" required></textarea><br>
-            <button class="btn btn-teal btn-block" v-on:click="send">Accept</button><br>
+            <button class="btn main-color-bg btn-block" v-on:click="send">Accept</button><br>
             <div :class="{'alert alert-danger': !success}" v-if="success == false">
                 {{message}}
             </div>

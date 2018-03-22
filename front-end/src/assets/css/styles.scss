@@ -1,4 +1,5 @@
-$main-color: #00B285;
+// $main-color: #00B285;
+$main-color: tomato;
 
 @import './partials/_utils.scss';
 
@@ -12,36 +13,43 @@ html, body, #app {
   height: 100%
 }
 
+#main-bg {
+  background: url('../img/propaganda.jpg') no-repeat fixed;
+  background-size: 100% 100%;
+}
+
 #app {
-  background: url('../../../static/img/russia.png') no-repeat center;
-  background-size: 75% 75%;
+  background: rgba(0,0,0,0.2) fixed;
+  background-size: 100% 100%;
 }
 
-#gradient {
-  background: linear-gradient(270deg, rgba(61, 217, 178, 0.7), rgba(169, 84, 195, 0.7), rgba(240, 161, 70, 0.7), rgba(70, 240, 130, 0.7));
-  background-size: 800% 800%;
+#inner {
+  background: url('../img/russia.png') no-repeat center fixed;
+  background-size: 80% 80%;
+  
   min-height: 100vh;
+}
+  // background: linear-gradient(270deg, rgba(61, 217, 178, 0.7), rgba(169, 84, 195, 0.7), rgba(240, 161, 70, 0.7), rgba(70, 240, 130, 0.7));
+  // background-size: 800% 800%;
+  // -webkit-animation: AnimationName 24s ease infinite;
+  // -moz-animation: AnimationName 24s ease infinite;
+  // animation: AnimationName 24s ease infinite;
 
-  -webkit-animation: AnimationName 24s ease infinite;
-  -moz-animation: AnimationName 24s ease infinite;
-  animation: AnimationName 24s ease infinite;
-}
-
-@-webkit-keyframes AnimationName {
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
-@-moz-keyframes AnimationName {
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
-@keyframes AnimationName { 
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
+// @-webkit-keyframes AnimationName {
+//   0%{background-position:0% 50%}
+//   50%{background-position:100% 50%}
+//   100%{background-position:0% 50%}
+// }
+// @-moz-keyframes AnimationName {
+//   0%{background-position:0% 50%}
+//   50%{background-position:100% 50%}
+//   100%{background-position:0% 50%}
+// }
+// @keyframes AnimationName { 
+//   0%{background-position:0% 50%}
+//   50%{background-position:100% 50%}
+//   100%{background-position:0% 50%}
+// }
 
 ::-webkit-scrollbar {
   display: none;
@@ -58,7 +66,6 @@ html, body, #app {
   h1 {
     padding: 15px;
     height: 75px;
-    background-color: #fff;
     margin-bottom: 0
   }
 
@@ -77,10 +84,7 @@ html, body, #app {
 }
 
 .log-reg {
-  min-height: 320px;
-  height: auto;
-  min-width: 600px;
-  width: 600px;
+  min-width: 500px;
   background-color: #fff;
   word-wrap: break-word
 }
@@ -93,7 +97,7 @@ html, body, #app {
 }
 
 a {
-  color: #00B285 !important;
+  color: $main-color !important;
   text-decoration: none !important
 }
 

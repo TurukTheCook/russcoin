@@ -9,30 +9,30 @@
                 <span class="small text-center mb-2 w-75 mx-auto">Click a user to send him a message, if you click on his username it will send by username, else by id.</span>
                 <div class="user-card mb-3 border-1 z-depth-1" v-for="user in users">
                     <div class="user-card_header" v-on:click="sendMessage(user.username)">
-                        <span style="color: #00B285">{{user.username}}</span>
+                        <span class="main-color">{{user.username}}</span>
                     </div>
                     <div class="padd-10" v-on:click="sendMessage(user._id)">
-                        <span class="small">User ID: </span><span style="color: #00B285">{{user._id}}</span><br/><hr>
-                        <span class="small">First Name: </span><span style="color: #00B285">{{user.firstName || '--'}}</span><br/>
-                        <span class="small">Last Name: </span><span style="color: #00B285">{{user.lastName || '--'}}</span>
+                        <span class="small">User ID: </span><span class="main-color">{{user._id}}</span><br/><hr>
+                        <span class="small">First Name: </span><span class="main-color">{{user.firstName || '--'}}</span><br/>
+                        <span class="small">Last Name: </span><span class="main-color">{{user.lastName || '--'}}</span>
                     </div>
                 </div>
             </div>
             <div v-if="menu.MessageList" class="d-flex flex-column flex-wrap">
                 <div class="message-card list mb-3 border-1 z-depth-1" v-for="msg in messages" v-on:click="viewProfile(msg._id)">
                     <div class="message-card_header padd-10">
-                        <span v-bind:class="{'small': msg.read}">SENDER: </span><span style="color: #00B285">{{msg.senderId}}</span>
+                        <span v-bind:class="{'small': msg.read}">SENDER: </span><span class="main-color">{{msg.senderId}}</span>
                     </div>
                     <div class="padd-10" :class="[{'unread': !msg.read}, 'read']">
-                        <span v-bind:class="{'small': msg.read}">Title: </span><span style="color: #00B285">{{msg.title}}</span><br/>
-                        <span v-bind:class="{'small': msg.read}">Send date: </span><span style="color: #00B285">{{msg.creationDate | moment}} ({{msg.creationDate | momentFromNow}})<br/></span>
-                        <span v-bind:class="{'small': msg.read}" v-if="msg.read">Read Date: </span><span v-if="msg.read" style="color: #00B285">{{msg.readDate | moment}} ({{msg.readDate | momentFromNow}})</span>
+                        <span v-bind:class="{'small': msg.read}">Title: </span><span class="main-color">{{msg.title}}</span><br/>
+                        <span v-bind:class="{'small': msg.read}">Send date: </span><span class="main-color">{{msg.creationDate | moment}} ({{msg.creationDate | momentFromNow}})</span>
+                        <span v-bind:class="{'small': msg.read}" v-if="msg.read">Read Date: </span><span v-if="msg.read" class="main-color">{{msg.readDate | moment}} ({{msg.readDate | momentFromNow}})</span>
                     </div>
                 </div>
             </div>
-            <div class="d-flex flex-wrap" v-if="!menu.UserList && !menu.MessageList">
+            <div class="d-flex flex-wrap justify-content-center" v-if="!menu.UserList && !menu.MessageList">
                 <span class="small text-center mb-2 w-75 mx-auto">Click above to get started.</span>
-                <img class="img-fluid" src="../../../static/img/poutine-here.jpg"/>
+                <img class="img-fluid" src="../../assets/img/poutine-here.jpg"/>
             </div>
 
             <!-- PRIMARY ALERTS -->
@@ -114,7 +114,7 @@ export default {
   },
   filters: {
       moment: function(date) {
-          return moment(date).format('MMMM Do YYYY [at] HH:mm:ss')
+          return moment(date).format('MM/DD/YYYY [at] HH:mm:ss')
       },
       momentFromNow: function(date) {
           return moment(date).fromNow()

@@ -1,20 +1,22 @@
 <template>
-<div id="app">
-    <div id="gradient" class="container-fluid">
-      <div class="blyat-chat flex-center">
-        <img @click="togglePlayback" class="z-depth-2" src="../static/img/blyat.jpg"/>
-        <router-link :to="{ name: 'Login' }">
-          <h1 class="text-center z-depth-2">BLYAT-MAILER</h1>
-        </router-link>
+<div id="main-bg">
+  <div id="app">
+      <div id="inner">
+        <div class="blyat-chat flex-center">
+          <img @click="togglePlayback" class="z-depth-2" src="./assets/img/blyat.png"/>
+          <router-link :to="{ name: 'Login' }">
+            <h1 class="text-center main-color">BLYAT-MAILER</h1>
+          </router-link>
+        </div>
+        <div class="center container d-flex justify-content-center">
+          <img class="doors" src="./assets/img/hammer-left.png"/>
+          <transition name="door" mode="out-in">
+            <router-view/>
+          </transition>
+          <img class="doors" src="./assets/img/hammer-right.png"/>
+        </div>
       </div>
-      <div class="center container d-flex justify-content-center">
-        <img class="doors" src="../static/img/hammer-left.png"/>
-        <transition name="door" mode="out-in">
-          <router-view/>
-        </transition>
-        <img class="doors" src="../static/img/hammer-right.png"/>
-      </div>
-    </div>
+  </div>
 </div>
 </template>
 
@@ -70,27 +72,23 @@ export default {
     min-width: 0px;
     width: 0px;
     opacity: 0;
-    padding: 0;
     /* height: 300px; */
   }
   30% {
     min-width: 0px;
     width: 0px;
     opacity: 0;
-    padding: 0;
     /* height: 300px; */
   }
   55% {
     opacity: 0
   }
   70% {
-    min-width: 600px;
-    width: 600px;
+    min-width: 500px;
     opacity: 1
   }
   100% {
-    min-width: 600px;
-    width: 600px;
+    min-width: 500px;
     opacity: 1
   }
 }
