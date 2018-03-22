@@ -1,15 +1,15 @@
 <template>
     <div class="log-reg z-depth-2">
         <div class="message-card">
-            <div v-if="msg._id" class="message-card_header padd-10">
+            <div v-if="msg._id" class="message-card_header padd-10 main-font">
                 <span class="main-color">SENDER: </span>{{msg.senderId}}
             </div>
             <div class="padd-10">
                 <div v-if="msg._id">
-                    <span class="small">Title: </span><span class="main-color">{{msg.title}}</span><br/><hr>
-                    <span class="small">Content: </span><span class="main-color">{{msg.content}}</span><br/><hr>
-                    <span class="small">Send date: </span><span class="main-color" v-if="msg.read">{{msg.creationDate | moment}} ({{msg.creationDate | momentFromNow}})</span><br/>
-                    <span class="small">Read Date: </span><span class="main-color" v-if="msg.read">{{msg.readDate | moment}} ({{msg.creationDate | momentFromNow}})</span>
+                    <span class="small main-color">Title: </span><span>{{msg.title}}</span><br/><hr>
+                    <span class="small main-color">Content: </span><span>{{msg.content}}</span><br/><hr>
+                    <span class="small main-color">Send date: </span><span v-if="msg.read">{{msg.creationDate | moment}} ({{msg.creationDate | momentFromNow}})</span><br/>
+                    <span class="small main-color">Read Date: </span><span v-if="msg.read">{{msg.readDate | moment}} ({{msg.creationDate | momentFromNow}})</span>
                 </div>
     
                 <div :class="{'alert alert-danger': !success}" v-if="success == false">

@@ -9,24 +9,24 @@
                 <span class="small text-center mb-2 w-75 mx-auto">Click a user to send him a message, if you click on his username it will send by username, else by id.</span>
                 <div class="user-card mb-3 border-1 z-depth-1" v-for="user in users">
                     <div class="user-card_header" v-on:click="sendMessage(user.username)">
-                        <span class="main-color">{{user.username}}</span>
+                        <span class="main-color main-font" style="font-size: 1.25rem">{{user.username}}</span>
                     </div>
                     <div class="padd-10" v-on:click="sendMessage(user._id)">
-                        <span class="small">User ID: </span><span class="main-color">{{user._id}}</span><br/><hr>
-                        <span class="small">First Name: </span><span class="main-color">{{user.firstName || '--'}}</span><br/>
-                        <span class="small">Last Name: </span><span class="main-color">{{user.lastName || '--'}}</span>
+                        <span class="small main-color">User ID: </span><span>{{user._id}}</span><br/><hr>
+                        <span class="small main-color">First Name: </span><span>{{user.firstName || '--'}}</span><br/>
+                        <span class="small main-color">Last Name: </span><span>{{user.lastName || '--'}}</span>
                     </div>
                 </div>
             </div>
             <div v-if="menu.MessageList" class="d-flex flex-column flex-wrap">
                 <div class="message-card list mb-3 border-1 z-depth-1" v-for="msg in messages" v-on:click="viewProfile(msg._id)">
                     <div class="message-card_header padd-10">
-                        <span v-bind:class="{'small': msg.read}">SENDER: </span><span class="main-color">{{msg.senderId}}</span>
+                        <span v-bind:class="{'small': msg.read}" class="main-font">SENDER: </span><span class="main-color main-font">{{msg.senderId}}</span>
                     </div>
                     <div class="padd-10" :class="[{'unread': !msg.read}, 'read']">
-                        <span v-bind:class="{'small': msg.read}">Title: </span><span class="main-color">{{msg.title}}</span><br/>
-                        <span v-bind:class="{'small': msg.read}">Send date: </span><span class="main-color">{{msg.creationDate | moment}} ({{msg.creationDate | momentFromNow}})</span>
-                        <span v-bind:class="{'small': msg.read}" v-if="msg.read">Read Date: </span><span v-if="msg.read" class="main-color">{{msg.readDate | moment}} ({{msg.readDate | momentFromNow}})</span>
+                        <span v-bind:class="{'small': msg.read}" class="main-color">Title: </span><span >{{msg.title}}</span><br/>
+                        <span v-bind:class="{'small': msg.read}" class="main-color">Send date: </span><span>{{msg.creationDate | moment}} ({{msg.creationDate | momentFromNow}})</span>
+                        <span v-bind:class="{'small': msg.read}" class="main-color" v-if="msg.read">Read Date: </span><span v-if="msg.read">{{msg.readDate | moment}} ({{msg.readDate | momentFromNow}})</span>
                     </div>
                 </div>
             </div>

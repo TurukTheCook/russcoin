@@ -66,7 +66,8 @@ html, body, #app {
   h1 {
     padding: 15px;
     height: 75px;
-    margin-bottom: 0
+    margin-bottom: 0;
+    font-family: 'Russo One', sans-serif;
   }
 
   img {
@@ -104,7 +105,8 @@ a {
 h3 {
   text-align: center;
   padding: 10px 0;
-  background-color: $main-color
+  background-color: $main-color;
+  font-family: 'Russo One', sans-serif;
 }
 
 .user-card {
@@ -146,6 +148,10 @@ h3 {
       outline: 0
     }
   }
+}
+
+button {
+  font-family: 'Russo One', sans-serif;
 }
 
 .sender input::placeholder,
