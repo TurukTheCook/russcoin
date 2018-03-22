@@ -16,7 +16,7 @@
         </div>
     </form >
     <div class="d-flex cursor-pointer m-2" v-on:click="goBack">
-        <img class="mr-2" src="../../../static/img/chevron_left.png"/>previous
+        <img class="mr-2" src="../../assets/img/chevron_left.png"/>previous
     </div>
 </div>
 </template>
