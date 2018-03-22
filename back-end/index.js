@@ -11,19 +11,17 @@ import morgan from 'morgan'
 // on déclare des variables dedans puis on les utilise avec process.env.NOMDELAVARIABLE
 import dotEnv from 'dotenv'
 
-// For JWT verification
-import User from './models/User'
-const ObjectId = mongoose.Types.ObjectId;
-
 // Init .env
 // Il faut absolement declarer la config de dotenv immediatement
 // Pour que les process.env.VARIABLE soient utilisable depuis les imports (de routes)
 dotEnv.config()
 
-//  Routes imports
+//  Routes Imports
 import auth from './routes/auth/auth'
 import users from './routes/users/users'
 import messages from './routes/messages/messages'
+// Middleware Imports
+import verifyToken from './middlewares/verifyToken'
 
 // APP INIT
 let app = express();
@@ -75,42 +73,8 @@ mongoose.connect(process.env.MONGOURL, {}, function (err) {
 app.use('/auth', auth)
 
 // AUTH PROTECTION STARTS HERE...
-// auth middleware definition
-// Ici on défini le middleware qui va servir plus bas afin de vérifier que le token est valide
-// On regarde donc si le header AUTHORIZATION existe, puis on separe en deux sa valeur
-// la premiere partie est égale à un mot defini dans la config, et la seconde est égale au token.
-// On utilise JWT.VERIFY(TOKEN, SECRETKEY, CALLBACK(err, result){...})
-// JWT va donc verifier le token avec le secretkey et renvoyer via le callback une erreur ou un resultat
-// Ce dernier correspond au token décodé, on retrouve le payload (ex: email utilisateur, id etc..)
-// on appelle next(); pour dire que tout s'est bien passé et qu'on peut passer à la suite (circulez svp!)
-let verifyToken = (req, res, next) => {
-  if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === process.env.AUTHBEARER) {
-    jwt.verify(req.headers.authorization.split(' ')[1], process.env.SECRETKEY, function (err, decode) {
-      if (err) res.status(500).json({success: false, message: err})
-      else {
-        // le req.anas est un rajout pour avoir acces au token décodé sur d'autres routes
-        // une fois qu'on a passé cette étape de verification
-        req.anas = decode;
-        if (ObjectId.isValid(req.anas._id)) {
-          User.findById(req.anas._id, function (err, user) {
-            if (!user) {
-              res.status(403).json({ success: false, message: 'CYKA BLYAT !' })
-            } else {
-              next()
-            }
-          })
-        } else {
-          res.status(403).json({ success: false, message: 'CYKA BLYAT !' })
-        }
-      }
-    });
-  } else {
-    res.status(403).json({success: false, message: 'CYKA BLYAT !'})
-  }
-};
-
 // Use of auth middleware from there
-// A partir d'ici on appelle donc pour toutes les routes qui suivent le middleware verifyToken créé plus haut
+// A partir d'ici on appelle donc pour toutes les routes qui suivent le middleware verifyToken
 // Il verifiera à chaque fois si le token est valide avant d'authoriser l'acces à la suite sinon l'aventure s'arrête ici.
 app.use(verifyToken)
 
