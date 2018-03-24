@@ -1,11 +1,17 @@
-Login System with JWT and NodeJS
+# Login System with JWT and NodeJS
 
-Make sure that you mongodb is running in your system
-(systemctl start mongod.service)
+```bash
+# start mongodb
+systemctl start mongod.service
 
-'npm install'
-'cp env-example .env'
+# install dependencies
+npm install
 
-You have to use Postman as a Front end
+# init dotEnv configuration file
+cp env-example .env
 
-'npm start' to lauch the app
+# start the server
+node index.babel.js
+    # or
+nodemon index.babel.js
+```

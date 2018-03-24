@@ -1,25 +1,32 @@
-ROUTES POSTMAN:
+# Be sure to also check both front-end and back-end READMEs
 
-POST http://localhost:1407/auth/login
-  ->get a token
+# ROUTES POSTMAN:
 
-        body: email
-        password
-        
-POST http://localhost:1407/auth/register
-  ->register a new user
+## Below routes don't require AUTH  
 
-        body: email
-        password
+* POST http://localhost:1407/auth/login
+  >get a token  
 
--- Below routes require
+  `
+  body: email, password
+  `  
 
-        header: Authorization: token
+* POST http://localhost:1407/auth/register
+  >register a new user  
 
-GET http://localhost:1407/users
-  ->get the list of all users
+  `
+  body: email, password
+  `  
+
+## Below routes require AUTH  
+
+  `
+  header: Authorization: token
+  `  
+
+* GET http://localhost:1407/users
+  >get the list of all users  
 
 
-GET http://localhost:1407/messages
-  ->get the list of your messages
-
+* GET http://localhost:1407/messages
+  >get the list of your messages  
