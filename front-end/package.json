@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "axios-progress-bar": "^1.1.8",
     "moment": "^2.21.0",
     "vue": "^2.5.2",
     "vue-axios": "^2.0.2",
