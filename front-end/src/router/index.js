@@ -1,11 +1,8 @@
 // ESSENTIALS
 import Vue from 'vue'
 import Router from 'vue-router'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
 
 Vue.use(Router)
-Vue.use(VueAxios, axios)
 
 // COMPONENTS
 import Login from '@/components/auth/Login'
@@ -17,21 +14,6 @@ import Users from '@/components/home/users/Users'
 import SendMessage from '@/components/home/users/SendMessage'
 import Messages from '@/components/home/messages/Messages'
 import MessageDetails from '@/components/home/messages/MessageDetails'
-
-
-// Intercepteur de requetes HTTP, pour chaque requete http on defini un header
-// qui se nomme 'Authorization' et qui contient le token (depuis le localstorage)
-// Le token est donc envoyé pour chacune des requete vers le back-end.
-// Vue.http.interceptors.push(function(request) {
-//   request.headers.set('Authorization', localStorage.getItem('token'));
-// });
-axios.defaults.baseURL = 'http://localhost:1407';
-axios.interceptors.request.use(function (config) {
-  config.headers.Authorization = localStorage.getItem('token');
-  return config;
-}, function (error) {
-  return Promise.reject(error);
-});
 
 // ROUTER VIEW TEMPLATE
 const routerTemplate = {

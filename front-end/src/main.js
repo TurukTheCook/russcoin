@@ -4,6 +4,22 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import { SSL_OP_COOKIE_EXCHANGE } from 'constants';
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+Vue.use(VueAxios, axios)
+
+// Intercepteur de requetes HTTP, pour chaque requete http on defini un header
+// qui se nomme 'Authorization' et qui contient le token (depuis le localstorage)
+// Le token est donc envoyé pour chacune des requete vers le back-end.
+// Vue.http.interceptors.push(function(request) {
+//   request.headers.set('Authorization', localStorage.getItem('token'));
+// });
+axios.defaults.baseURL = 'http://localhost:1407';
+axios.interceptors.request.use((config) => {
+  config.headers.Authorization = localStorage.getItem('token');
+  return config;
+});
 
 // STYLES
 import VueMaterial from 'vue-material'
@@ -11,21 +27,6 @@ import 'vue-material/dist/vue-material.min.css'
 import '@/assets/css/styles.scss'
 
 Vue.use(VueMaterial)
-
-
-// NOT WORKING (i dont know why)
-// import { MdElevation, MdButton, MdContent, MdForms, MdDivider, MdIcon, MdList, MdMenu, MdProgress } from 'vue-material/dist/components'
-// import 'vue-material/dist/vue-material.min.css'
-
-// Vue.use(MdElevation)
-// Vue.use(MdButton)
-// Vue.use(MdContent)
-// Vue.use(MdForms)
-// Vue.use(MdDivider)
-// Vue.use(MdIcon)
-// Vue.use(MdList)
-// Vue.use(MdMenu)
-// Vue.use(MdProgress)
 
 Vue.config.productionTip = false
 
