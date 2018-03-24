@@ -1,7 +1,21 @@
+@import "~vue-material/dist/theme/engine"; // Import the theme engine
+
+@include md-register-theme("default", (
+  primary: #ee4d4b, // The primary color of your brand
+  accent: #35b7ce
+));
 // $main-color: #00B285;
-$main-color: #EF5350;
+$main-color: #ee4d4b;
+$accent-color: #35ce70;
+
+
+@import "~vue-material/dist/theme/all"; // Apply the theme
 
 @import './partials/_utils.scss';
+@import './partials/_flex.scss';
+@import './partials/_margin.scss';
+@import './partials/_padding.scss';
+@import './partials/_animations.scss';
 
 * {
   box-sizing: border-box;
@@ -9,25 +23,26 @@ $main-color: #EF5350;
   margin: 0
 }
 
-html, body, #app {
-  height: 100%
+html, body, #app, #inner {
+  height: 100vh
 }
 
-#main-bg {
+body {
   background: url('../img/propaganda.jpg') no-repeat fixed;
-  background-size: 100% 100%;
+  background-size: cover;
+  font-family: 'Roboto', sans-serif;
 }
 
 #app {
   background: rgba(0,0,0,0.2) fixed;
-  background-size: 100% 100%;
+  background-size: cover;
 }
 
 #inner {
   background: url('../img/russia.png') no-repeat center fixed;
-  background-size: 80% 80%;
+  background-size: contain;
   
-  min-height: 100vh;
+  overflow: auto
 }
   // background: linear-gradient(270deg, rgba(61, 217, 178, 0.7), rgba(169, 84, 195, 0.7), rgba(240, 161, 70, 0.7), rgba(70, 240, 130, 0.7));
   // background-size: 800% 800%;
@@ -61,11 +76,10 @@ html, body, #app {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding-top: 100px;
+  padding: 50px 0;
 
   h1 {
-    padding: 15px;
-    height: 75px;
+    padding: 10px;
     margin-bottom: 0;
     font-family: 'Russo One', sans-serif;
   }
@@ -77,46 +91,44 @@ html, body, #app {
     &:hover {
       cursor: pointer
     }
+
+    &.speaker {
+      height: 50px;
+      width: 50px
+    }
   }
 }
 
-.center {
-  padding: 50px 0;
-}
-
 .log-reg {
-  min-width: 500px;
+  min-width: 450px;
   background-color: #fff;
   word-wrap: break-word
 }
 
 .doors {
-  margin-top: 30px;
+  margin-top: 50px;
   height: 300px;
+  max-height: 300px;
   max-width: 100%;
   z-index: 1000
 }
 
 a {
-  color: $main-color !important;
   text-decoration: none !important
 }
 
 h3 {
   text-align: center;
-  padding: 10px 0;
   background-color: $main-color;
   font-family: 'Russo One', sans-serif;
 }
 
 .user-card {
   padding: 0 !important;
-  width: 45%;
   cursor: pointer
 }
 
 .message-card {
-  width: 100%;
   padding: 0 !important;
   
   &.list:hover {
@@ -152,11 +164,6 @@ h3 {
 
 button {
   font-family: 'Russo One', sans-serif;
-}
-
-.sender input::placeholder,
-.sender textarea::placeholder {
-  color: $main-color !important;
 }
 
 .read {

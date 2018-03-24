@@ -1,0 +1,41 @@
+/* Transition effect */ 
+.door-enter-active {
+  animation: door-in ease-in-out 1.2s;
+}
+.door-leave-active {
+  animation: door-in ease-in-out 1.2s reverse;
+}
+
+@keyframes door-in {
+  0% {
+    min-width: 0px;
+    width: 0px;
+    height: 300px;
+    opacity: 0;
+    overflow: hidden;
+    /* height: 300px; */
+  }
+  30% {
+    min-width: 0px;
+    height: 300px;
+    width: 0px;
+    opacity: 0;
+    overflow: hidden;
+    /* height: 300px; */
+  }
+  55% {
+    opacity: 0
+  }
+  70% {
+    min-width: 450px;
+    width: auto;
+    height: auto;
+    opacity: 1
+  }
+  100% {
+    min-width: 450px;
+    width: auto;
+    height: auto;
+    opacity: 1
+  }
+}

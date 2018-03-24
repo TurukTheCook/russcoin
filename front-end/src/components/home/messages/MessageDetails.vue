@@ -1,15 +1,15 @@
 <template>
-    <div class="log-reg z-depth-2">
+    <div>
         <div class="message-card">
-            <div v-if="msg._id" class="message-card_header padd-10 main-font">
-                <span class="main-color">SENDER: </span>{{msg.senderId}}
+            <div v-if="msg._id" class="message-card_header p-2 main-font main-color-bg">
+                <span class="md-caption">SENDER: </span>{{msg.senderId}}
             </div>
-            <div class="padd-10">
+            <div class="p-1">
                 <div v-if="msg._id">
-                    <span class="small main-color">Title: </span><span>{{msg.title}}</span><br/><hr>
-                    <span class="small main-color">Content: </span><span>{{msg.content}}</span><br/><hr>
-                    <span class="small main-color">Send date: </span><span v-if="msg.read">{{msg.creationDate | moment}} ({{msg.creationDate | momentFromNow}})</span><br/>
-                    <span class="small main-color">Read Date: </span><span v-if="msg.read">{{msg.readDate | moment}} ({{msg.creationDate | momentFromNow}})</span>
+                    <p class="m-1"><span class="md-caption main-color">Title: </span><span>{{msg.title}}</span></p><md-divider/>
+                    <p class="m-1"><span class="md-caption main-color">Content: </span><span>{{msg.content}}</span></p><md-divider/>
+                    <p class="m-1"><span class="md-caption main-color">Send date: </span><span v-if="msg.read">{{msg.creationDate | moment}} ({{msg.creationDate | momentFromNow}})</span><br/>
+                    <span class="md-caption main-color">Read Date: </span><span v-if="msg.read">{{msg.readDate | moment}} ({{msg.creationDate | momentFromNow}})</span></p>
                 </div>
     
                 <div :class="{'alert alert-danger': !success}" v-if="success == false">
@@ -17,8 +17,8 @@
                 </div>
             </div>
         </div>
-        <div class="d-flex cursor-pointer m-2" v-on:click="goBack">
-            <img class="mr-2" src="../../assets/img/chevron_left.png"/>previous
+        <div class="flex cursor-pointer m-2" v-on:click="goBack">
+            <img class="mr-2" src="../../../assets/img/chevron_left.png"/>previous
         </div>
     </div>
 </template>
