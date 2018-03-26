@@ -8,7 +8,6 @@
 
 @keyframes door-in {
   0% {
-    min-width: 0px;
     width: 0px;
     height: 300px;
     opacity: 0;
@@ -16,9 +15,8 @@
     /* height: 300px; */
   }
   30% {
-    min-width: 0px;
-    height: 300px;
     width: 0px;
+    height: 300px;
     opacity: 0;
     overflow: hidden;
     /* height: 300px; */
@@ -27,14 +25,10 @@
     opacity: 0
   }
   70% {
-    min-width: 450px;
-    width: auto;
     height: auto;
     opacity: 1
   }
   100% {
-    min-width: 450px;
-    width: auto;
     height: auto;
     opacity: 1
   }
