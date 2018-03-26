@@ -14,7 +14,7 @@
         <div class="pb-3 mx-auto flex justify-content-center">
           <img class="doors" src="./assets/img/hammer-left.png"/>
           <transition name="door" mode="out-in">
-            <router-view class="container"/>
+            <router-view/>
           </transition>
           <img class="doors" src="./assets/img/hammer-right.png"/>
         </div>

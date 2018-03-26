@@ -1,5 +1,5 @@
 <template>
-    <div class="container log-reg md-elevation-10">
+    <div class="container home-div md-elevation-10">
         <md-tabs class="md-primary" md-alignment="fixed">
             <md-tab id="tab-home" md-label="Home" :to="{name: 'home'}"></md-tab>
             <md-tab id="tab-users" md-label="Users" :to="{name: 'home.users'}"></md-tab>

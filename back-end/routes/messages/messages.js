@@ -71,30 +71,34 @@ messages.post('/', (req, res) => {
 
 //Route pour update un message, on trouve le message avec findById puis on l'edit&save
 messages.put('/:messageID', (req, res) => {
-  if (ObjectId.isValid(req.params.messageID)) {
-    Message.findById(req.params.messageID, function (err, message) {
-      if (!message) {
-        res.status(404).json({ success: false, message: 'Сообщение не найдено.. Message not found..' })
-      } else {
-        if (err) res.status(500).json({ success: false, message: err.message })
-        if (message.receiverId != req.anas._id && message.receiverId != req.anas.username) {
-          res.status(403).json({ success: false, message: 'CYKA BLYAT !' })
+  if (req.body && (req.body.read != null || req.body.read != undefined) && req.body.readDate) {
+    if (ObjectId.isValid(req.params.messageID)) {
+      Message.findById(req.params.messageID, function (err, message) {
+        if (!message) {
+          res.status(404).json({ success: false, message: 'Сообщение не найдено.. Message not found..' })
         } else {
-          if (!message.read) {
-            message.read = true
-            message.readDate = Date.now()
-            message.save(function (err, result) {
-              if (err) res.status(500).json({ success: false, message: err.message, content: message })
-              res.status(200).json({ success: true, message: 'Вот ваше сообщение! Here is your message!', content: message })
-            });
+          if (err) res.status(500).json({ success: false, message: err.message })
+          if (message.receiverId != req.anas._id && message.receiverId != req.anas.username) {
+            res.status(403).json({ success: false, message: 'CYKA BLYAT !' })
           } else {
-            res.status(200).json({ success: true, message: 'Вот ваше сообщение! Here is your message!', content: message })
+            if (!message.read) {
+              message.read = req.body.read
+              message.readDate = req.body.readDate
+              message.save(function (err, result) {
+                if (err) res.status(500).json({ success: false, message: err.message, content: message })
+                res.status(200).json({ success: true, message: 'Вот ваше сообщение! Here is your message!', content: message })
+              });
+            } else {
+              res.status(200).json({ success: true, message: 'Вот ваше сообщение! Here is your message!', content: message })
+            }
           }
         }
-      }
-    })
+      })
+    } else {
+      res.status(404).json({ success: false, message: 'Неверный ID. Invalid ID' })
+    }
   } else {
-    res.status(404).json({ success: false, message: 'Неверный ID. Invalid ID' })
+    res.status(412).json({ success: false, message: 'Отсутствуют данные. Data is missing..' })
   }
 })
 

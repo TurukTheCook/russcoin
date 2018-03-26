@@ -36,14 +36,14 @@ body {
 #app {
   background: rgba(0,0,0,0.2) fixed;
   background-size: cover;
+  word-wrap: break-word;
 }
 
 #inner {
   background: url('../img/russia.png') no-repeat center fixed;
   background-size: contain;
   
-  overflow: auto;
-  overflow-y: overlay
+  overflow-y: scroll;
 }
 
   // background: linear-gradient(270deg, rgba(61, 217, 178, 0.7), rgba(169, 84, 195, 0.7), rgba(240, 161, 70, 0.7), rgba(70, 240, 130, 0.7));
@@ -101,11 +101,20 @@ body {
   }
 }
 
-.log-reg {
-  min-width: 450px;
+.logreg-div {
+  width: 500px;
   background-color: #fff;
-  word-wrap: break-word
 }
+
+.home-div {
+  width: 100%;
+  background-color: #fff;
+}
+
+.md-card.no-box-shadow {
+    overflow: hidden !important;
+    box-shadow: none !important
+  }
 
 .doors {
   margin-top: 50px;

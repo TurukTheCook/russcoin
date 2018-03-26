@@ -1,7 +1,7 @@
 <template>
-<div>
-    <form novalidate class="md-layout log-reg md-elevation-10" @submit.prevent="login">
-        <md-card class="md-layout-item flex flex-column">
+<div class="container logreg-div md-elevation-10">
+    <form novalidate class="md-layout" @submit.prevent="login">
+        <md-card class="md-layout-item flex flex-column no-box-shadow">
             <md-card-header class="main-color-bg">
                 <div class="md-title text-center">LOG IN</div>
             </md-card-header>
