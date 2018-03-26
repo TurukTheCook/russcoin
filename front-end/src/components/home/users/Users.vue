@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import http from '@/helpers/http'
 export default {
   name: 'Users',
   data () {
@@ -33,7 +34,7 @@ export default {
   },
   methods: {
       getUsers() {
-          this.$http.get('/users')
+          http.get('users')
             .then(
                 res => {
                     this.users = res.data.content

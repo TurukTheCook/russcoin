@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import http from '@/helpers/http'
 export default {
   name: 'SendMessage',
   data () {
@@ -61,7 +62,7 @@ export default {
       },
       send() {
           this.sending = true
-          this.$http.post('/messages', this.sendMessage)
+          http.post('messages', this.sendMessage)
                 .then(
                     res => {
                         this.sending = false

@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import http from '@/helpers/http'
 export default {
   name: 'Register',
   data () {
@@ -70,13 +71,10 @@ export default {
     }
   },
   methods: {
-      authSwitchClick() {
-          this.$emit('authSwitchEvent')
-      },
       register() {
         this.sending = true
         if (this.newUser.password == this.newUser.passwordVerif) {
-            this.$http.post('/auth/signup', this.newUser)
+            http.post('auth/signup', this.newUser)
                 .then(
                     res => {
                         this.sending = false

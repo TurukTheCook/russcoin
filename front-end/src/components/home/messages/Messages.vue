@@ -22,6 +22,7 @@
 
 <script>
 import moment from 'moment'
+import http from '@/helpers/http'
 export default {
   name: 'Messages',
   data () {
@@ -33,7 +34,7 @@ export default {
   },
   methods: {
       getMessages() {
-        this.$http.get('/messages')
+        http.get('messages')
             .then(
                 res => {
                     this.messages = res.data.content;

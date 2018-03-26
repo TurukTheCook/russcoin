@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import http from '@/helpers/http'
 export default {
   name: 'Login',
   data () {
@@ -52,24 +53,12 @@ export default {
     }
   },
   methods: {
-      authSwitchClick() {
-          this.$emit('authSwitchEvent')
-      },
-      // la méthode login est appelée avec 'v-on:click="login" ' dans le template plus haut
       login() {
         this.sending = true
-          // e.preventDefault() permet d'empecher le comportement classique du button dans le form
-          // et seulement executer le code qui suit
-        // e.preventDefault();
-
-        // pour les requetes http avec vue-resource on doit mettre this.$http.METHOD( ... )
-        // ici avec l'url et la data
-        this.$http.post('/auth/login', this.logUser)
+        http.post('auth/login', this.logUser)
             .then(
                 res => {
                     this.sending = false
-                    // en cas de success, on recupere le token depuis la reponse
-                    // et on l'assigne au localstorage 'token'
                     localStorage.setItem('token', res.data.content.token)
                     this.success = res.data.success
                     this.message = res.data.message

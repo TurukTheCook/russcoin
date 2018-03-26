@@ -27,12 +27,18 @@ const router = new Router({
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
+      meta: {
+        requireAuth : false
+      }
     },
     {
       path: '/register',
       name: 'register',
-      component: Register
+      component: Register,
+      meta: {
+        requireAuth : false
+      }
     },
     {
       path: '/home',
@@ -97,12 +103,13 @@ const router = new Router({
 // On effectue des actions avant de d'afficher une route
 // Ici on verifie que l'utilisateur dispose d'un token valide
 router.beforeEach((to, from, next) => {
-  if (to.name == 'login' || to.name == 'register') next()
+  if (to.matched.some(record => record.meta.requireAuth == false)) next()
   else {
     if (localStorage.getItem('token')) {
       next()
     } else {
       next({ name: 'login' })
+      // next(false)
     }
   }
 })
