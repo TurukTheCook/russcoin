@@ -25,6 +25,7 @@
 
 <script>
 import moment from 'moment'
+import http from '@/helpers/http'
 export default {
   name: 'MessageDetails',
   data() {
@@ -47,7 +48,7 @@ export default {
           this.$router.go(-1)
       },
       updateMessage() {
-        this.$http.put('/messages/' + this.$route.params.msgId)
+        http.put('messages/' + this.$route.params.msgId)
             .then(
                 res => {
                     this.msg = res.data.content;
