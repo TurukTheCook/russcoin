@@ -43,8 +43,10 @@ body {
   background: url('../img/russia.png') no-repeat center fixed;
   background-size: contain;
   
-  overflow: auto
+  overflow: auto;
+  overflow-y: overlay
 }
+
   // background: linear-gradient(270deg, rgba(61, 217, 178, 0.7), rgba(169, 84, 195, 0.7), rgba(240, 161, 70, 0.7), rgba(70, 240, 130, 0.7));
   // background-size: 800% 800%;
   // -webkit-animation: AnimationName 24s ease infinite;
@@ -67,9 +69,9 @@ body {
 //   100%{background-position:0% 50%}
 // }
 
-::-webkit-scrollbar {
-  display: none;
-}
+// ::-webkit-scrollbar {
+//   display: none;
+// }
 
 /* REST OF CSS */
 
