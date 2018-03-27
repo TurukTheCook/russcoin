@@ -45,29 +45,40 @@ auth.post('/login', (req, res) => {
   }
 })
 
-// Route pour s'enregister
+function check(username) {
+  return { $regex: new RegExp("^" + username + '$', "i") }
+}
+
 auth.post('/signup', (req, res) => {
   if (req.body.username && req.body.password) {
-    // On verifie que l'utilisateur existe avec findOne encore
-    User.findOne({ username: req.body.username}, function (err, result) {
-      if (result === null) {
-        // puis on en créé un si il n'existe pas
-        let newUser = new User(req.body)
-        // on hash son password avec la méthode hashSync de bcrypt
-        newUser.hash_password = bcrypt.hashSync(req.body.password, 10)
-        // et enfin on sauvegarde l'utilisateur dans la base
-        newUser.save(function (err, user) {
-          if (err) {
-            res.status(500).json({success: false, message: err.message})
-          } else {
-            user.hash_password = undefined
-            res.status(200).json({ success: true, message: 'Новый пользователь зарегистрирован! New user registered successfully!', content: user})
-          }
-        })
-      } else {
-        res.status(412).json({ success: false, message: 'Имя пользователя уже используется.. Username already used..'})
-      }
-    })
+    var regexEmail = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/, 'i')
+    if (regexEmail.test(req.body.username)) {
+      // On verifie que l'utilisateur existe avec findOne
+      var usernameToFind = { $regex: new RegExp("^" + req.body.username + '$', "i") }
+      // User.findOne({ username: { $regex: new RegExp("^" + req.body.username + '$', "i") }}, function (err, result) {
+      User.findOne({ username: usernameToFind}, function (err, result) {
+      // User.findOne({ username: req.body.username}, function (err, result) {
+        if (result === null) {
+          // puis on en créé un si il n'existe pas
+          let newUser = new User(req.body)
+          // on hash son password avec la méthode hashSync de bcrypt
+          newUser.hash_password = bcrypt.hashSync(req.body.password, 10)
+          // et enfin on sauvegarde l'utilisateur dans la database
+          newUser.save(function (err, user) {
+            if (err) {
+              res.status(500).json({success: false, message: err.message})
+            } else {
+              user.hash_password = undefined
+              res.status(200).json({ success: true, message: 'Новый пользователь зарегистрирован! New user registered successfully!', content: user})
+            }
+          })
+        } else {
+          res.status(412).json({ success: false, message: 'Имя пользователя уже используется.. Username already used..'})
+        }
+      })
+    } else {
+      res.status(412).json({ success: false, message: 'Требуется электронная почта.. Email required..' })
+    }
   } else {
     res.status(412).json({ success: false, message: 'Имя пользователя и / или пароль отсутствуют. Username and/or password are missing..'})
   }
