@@ -11,24 +11,25 @@ $accent-color: #35ce70;
 
 @import "~vue-material/dist/theme/all"; // Apply the theme
 
-@import './partials/_utils.scss';
-@import './partials/_flex.scss';
-@import './partials/_margin.scss';
-@import './partials/_padding.scss';
-@import './partials/_animations.scss';
-
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0
 }
 
+@import './partials/_utils.scss';
+@import './partials/_flex.scss';
+@import './partials/_margin.scss';
+@import './partials/_padding.scss';
+@import './partials/_animations.scss';
+@import './partials/_tags.scss';
+
 html, body, #app, #inner {
   height: 100vh
 }
 
 body {
-  background: url('../img/propaganda.jpg') no-repeat fixed;
+  background: url('../img/propaganda.jpg') no-repeat center fixed;
   background-size: cover;
   font-family: 'Roboto', sans-serif;
 }
@@ -45,28 +46,6 @@ body {
   
   overflow-y: scroll;
 }
-
-  // background: linear-gradient(270deg, rgba(61, 217, 178, 0.7), rgba(169, 84, 195, 0.7), rgba(240, 161, 70, 0.7), rgba(70, 240, 130, 0.7));
-  // background-size: 800% 800%;
-  // -webkit-animation: AnimationName 24s ease infinite;
-  // -moz-animation: AnimationName 24s ease infinite;
-  // animation: AnimationName 24s ease infinite;
-
-// @-webkit-keyframes AnimationName {
-//   0%{background-position:0% 50%}
-//   50%{background-position:100% 50%}
-//   100%{background-position:0% 50%}
-// }
-// @-moz-keyframes AnimationName {
-//   0%{background-position:0% 50%}
-//   50%{background-position:100% 50%}
-//   100%{background-position:0% 50%}
-// }
-// @keyframes AnimationName { 
-//   0%{background-position:0% 50%}
-//   50%{background-position:100% 50%}
-//   100%{background-position:0% 50%}
-// }
 
 // ::-webkit-scrollbar {
 //   display: none;
@@ -111,9 +90,11 @@ body {
   background-color: #fff;
 }
 
-.md-card.no-box-shadow {
-    overflow: hidden !important;
-    box-shadow: none !important
+.md-card {
+    &.no-box-shadow {
+      overflow: hidden !important;
+      box-shadow: none !important
+    }
   }
 
 .doors {
@@ -124,31 +105,24 @@ body {
   z-index: 1000
 }
 
-a {
-  text-decoration: none !important
-}
-
-h3 {
-  text-align: center;
-  background-color: $main-color;
-  font-family: 'Russo One', sans-serif;
-}
-
 .user-card {
   padding: 0 !important;
   max-width: 200px;
-  min-width: 200px
+  min-width: 200px;
+  &_header {
+    background-color: rgb(34, 34, 34);
+    color: #fff;
+    text-align: center
+  }
 }
 
 .message-card {
   padding: 0 !important;
-}
-
-.user-card_header,
-.message-card_header {
-  background-color: rgb(34, 34, 34);
-  color: #fff;
-  text-align: center
+  &_header {
+    background-color: rgb(34, 34, 34);
+    color: #fff;
+    text-align: center
+  }
 }
 
 .menu {
@@ -168,10 +142,6 @@ h3 {
       outline: 0
     }
   }
-}
-
-button {
-  font-family: 'Russo One', sans-serif;
 }
 
 .read {
@@ -198,5 +168,20 @@ button {
   .min-max-180 {
     min-width: 180px;
     max-width: 180px;
+  }
+}
+
+// #####################
+// ### MEDIA QUERIES ###
+// #####################
+
+@media all and (max-width: 799px) {
+  .logreg-div {
+    width: 100%;
+    min-width: 100%
+  }
+  .home-div {
+    width: 100%;
+    min-width: 100%
   }
 }

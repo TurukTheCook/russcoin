@@ -51,14 +51,6 @@ export default {
           this.$router.push({ name: 'home.users.sendMessage', params: { sendingTo: arg } })
       }
   },
-  filters: {
-      moment: function(date) {
-          return moment(date).format('MM/DD/YYYY [at] HH:mm:ss')
-      },
-      momentFromNow: function(date) {
-          return moment(date).fromNow()
-      }
-  },
   beforeMount(){
     this.getUsers()
   }

@@ -33,3 +33,37 @@
     opacity: 1
   }
 }
+
+// #####################
+// ### MEDIA QUERIES ###
+// #####################
+
+@media all and (max-width: 799px) {
+  @keyframes door-in {
+    0% {
+      min-width: 0px;
+      width: 0px;
+      height: 300px;
+      opacity: 0;
+      overflow: hidden;
+    }
+    30% {
+      min-width: 0px;
+      width: 0px;
+      height: 300px;
+      opacity: 0;
+      overflow: hidden;
+    }
+      55% {
+    opacity: 0
+    }
+    70% {
+      height: auto;
+      opacity: 1
+    }
+    100% {
+      height: auto;
+      opacity: 1
+    }
+  }
+}
