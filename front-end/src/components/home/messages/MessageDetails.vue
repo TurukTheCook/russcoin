@@ -3,7 +3,7 @@
         <md-card class="no-box-shadow">
             <md-card-header v-if="msg._id" class="message-card_header p-2 mb-2 main-font main-color-bg">
                 <div class="md-title">
-                    <span class="md-caption">SENDER:</span> {{msg.senderId}}
+                    <span class="text-dark">SENDER:</span> {{msg.senderId}}
                 </div>
             </md-card-header>
             <md-card-content class="p-1">

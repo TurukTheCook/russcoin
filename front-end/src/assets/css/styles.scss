@@ -136,15 +136,12 @@ h3 {
 
 .user-card {
   padding: 0 !important;
-  cursor: pointer
+  max-width: 200px;
+  min-width: 200px
 }
 
 .message-card {
   padding: 0 !important;
-  
-  &.list:hover {
-    cursor: pointer;
-  }
 }
 
 .user-card_header,
@@ -184,4 +181,22 @@ button {
 .unread {
   font-weight: bold;
   background-color: #fff
+}
+
+.messages-list {
+  p {
+    overflow: hidden;
+    line-height: 1.5em;
+    max-height: 1.5em;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .min-max-100 {
+    min-width: 100px;
+    max-width: 100px;
+  }
+  .min-max-180 {
+    min-width: 180px;
+    max-width: 180px;
+  }
 }
