@@ -1,7 +1,7 @@
 <template>
 <div>
     <div v-if="$route.name == 'home.messages'" class="m-1 flex flex-column flex-wrap">
-        <div class="message-card cursor-pointer mb-1 border-1 md-elevation-3" v-for="msg in messages" v-on:click="viewMessage(msg._id)">
+        <div class="message-card cursor-pointer mb-1 border-1 md-elevation-3" v-for="msg in messagesReverse" v-on:click="viewMessage(msg._id)">
             <div class="p-1 flex messages-list" :class="[{'unread': !msg.read}, 'read']">
                 <p class="min-max-100 main-font">{{msg.senderId}}</p>
                 <p class="min-max-100">{{msg.title}}</p>
@@ -31,6 +31,11 @@ export default {
       message: 'An error has occured..'
     }
   },
+  computed: {
+      messagesReverse() {
+          return this.messages.slice().reverse()
+      }
+  },
   methods: {
       getMessages() {
         http.get('messages')
@@ -56,7 +61,7 @@ export default {
           return moment(date).fromNow()
       }
   },
-  beforeMount(){
+  created(){
     this.getMessages()
   }
 }

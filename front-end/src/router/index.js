@@ -14,6 +14,7 @@ import Users from '@/components/home/users/Users'
 import SendMessage from '@/components/home/users/SendMessage'
 import Messages from '@/components/home/messages/Messages'
 import MessageDetails from '@/components/home/messages/MessageDetails'
+import Profile from '@/components/home/profile/Profile'
 
 // ROUTER VIEW TEMPLATE
 const routerTemplate = {
@@ -72,6 +73,11 @@ const router = new Router({
               component: MessageDetails
             }
           ]
+        },
+        {
+          path: 'profile',
+          name: 'home.profile',
+          component: Profile
         }
       ]
     },

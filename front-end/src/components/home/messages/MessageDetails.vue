@@ -2,7 +2,7 @@
     <div>
         <md-card class="no-box-shadow">
             <md-card-header v-if="msg._id" class="message-card_header p-2 mb-2 main-font main-color-bg">
-                <div class="md-title">
+                <div class="md-title text-center text-white">
                     <span class="text-dark">SENDER:</span> {{msg.senderId}}
                 </div>
             </md-card-header>
@@ -68,7 +68,7 @@ export default {
             )
       }
   },
-  beforeMount(){
+  created(){
     this.updateMessage()
   }
 }

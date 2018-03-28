@@ -109,20 +109,21 @@ body {
   padding: 0 !important;
   max-width: 250px;
   min-width: 250px;
+  transition: all .3s;
+  box-shadow: 0 4px 12px 0 rgba(0,0,0,0.2);
   &_header {
     background-color: rgb(34, 34, 34);
     color: #fff;
     text-align: center
+  }
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 18px -20px rgba(0,0,0,0.2)
   }
 }
 
 .message-card {
   padding: 0 !important;
-  &_header {
-    background-color: rgb(34, 34, 34);
-    color: #fff;
-    text-align: center
-  }
 }
 
 .menu {
@@ -170,6 +171,10 @@ body {
     min-width: 180px;
     max-width: 180px;
   }
+}
+
+.md-app-drawer .md-list .md-list-item:hover {
+  background-color: #ebebeb
 }
 
 #mapid {
