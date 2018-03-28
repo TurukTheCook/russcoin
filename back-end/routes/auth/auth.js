@@ -9,14 +9,11 @@ import User from './../../models/User'
 
 let auth = express.Router()
 
-// La route pour se logger et recevoir un token
+import searchObj from './../../toRename/search';
+
 auth.post('/login', (req, res) => {
-  // On verifie que l'utilisateur a envoyé l'email et le password dans le req.body
   if (req.body.username && req.body.password) {
-    // On appelle le model USER defini dans mongoose et importé plus haut
-    // avec la methode findOne qui cherche un objet avec la propriété 'email' correspondant à notre requete
-    // cette methode renvoi le premier utilisateur trouvé ou rien
-    User.findOne({ username: req.body.username }, function (err, user) {
+    User.findOne({ username: searchObj.caseInsensitive(req.body.username)}, function (err, user) {
       if (err) res.status(500).json({success: false, message: err.message})
       if (!user) {
         res.status(401).json({ success: false, message: 'Пользователь не найден. User not found..' })
@@ -45,29 +42,33 @@ auth.post('/login', (req, res) => {
   }
 })
 
-// Route pour s'enregister
 auth.post('/signup', (req, res) => {
   if (req.body.username && req.body.password) {
-    // On verifie que l'utilisateur existe avec findOne encore
-    User.findOne({ username: req.body.username}, function (err, result) {
-      if (result === null) {
-        // puis on en créé un si il n'existe pas
-        let newUser = new User(req.body)
-        // on hash son password avec la méthode hashSync de bcrypt
-        newUser.hash_password = bcrypt.hashSync(req.body.password, 10)
-        // et enfin on sauvegarde l'utilisateur dans la base
-        newUser.save(function (err, user) {
-          if (err) {
-            res.status(500).json({success: false, message: err.message})
-          } else {
-            user.hash_password = undefined
-            res.status(200).json({ success: true, message: 'Новый пользователь зарегистрирован! New user registered successfully!', content: user})
-          }
-        })
-      } else {
-        res.status(412).json({ success: false, message: 'Имя пользователя уже используется.. Username already used..'})
-      }
-    })
+    var regexEmail = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/, 'i')
+    if (regexEmail.test(req.body.username)) {
+      // On verifie que l'utilisateur existe avec findOne
+      User.findOne({ username: searchObj.caseInsensitive(req.body.username)}, function (err, result) {
+        if (result === null) {
+          // puis on en créé un si il n'existe pas
+          let newUser = new User(req.body)
+          // on hash son password avec la méthode hashSync de bcrypt
+          newUser.hash_password = bcrypt.hashSync(req.body.password, 10)
+          // et enfin on sauvegarde l'utilisateur dans la database
+          newUser.save(function (err, user) {
+            if (err) {
+              res.status(500).json({success: false, message: err.message})
+            } else {
+              user.hash_password = undefined
+              res.status(200).json({ success: true, message: 'Новый пользователь зарегистрирован! New user registered successfully!', content: user})
+            }
+          })
+        } else {
+          res.status(412).json({ success: false, message: 'Имя пользователя уже используется.. Username already used..'})
+        }
+      })
+    } else {
+      res.status(412).json({ success: false, message: 'Требуется электронная почта.. Email required..' })
+    }
   } else {
     res.status(412).json({ success: false, message: 'Имя пользователя и / или пароль отсутствуют. Username and/or password are missing..'})
   }

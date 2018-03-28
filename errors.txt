@@ -17,6 +17,7 @@
 Имя пользователя и / или пароль отсутствуют. Username and/or password are missing..
 Новый пользователь зарегистрирован! New user registered successfully!
 Имя пользователя уже используется.. Username already used..
+Требуется электронная почта.. Email required..
 
 // MESSAGES
 Вот ваши сообщения! Here is your messages!
