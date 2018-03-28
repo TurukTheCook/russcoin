@@ -48,7 +48,7 @@ router.post('/login', (req, res) => {
 router.post('/signup', (req, res) => {
   if (req.body.username && req.body.password) {
     if (searchObj.regexEmail.test(req.body.username)) {
-      controller.saveUser(req.body)
+      controller.saveUser(req.body).then()
     } else {
       res.status(412).json({ success: false, message: 'Требуется электронная почта.. Email required..' })
     }
