@@ -21,12 +21,9 @@ users.get('/', (req, res) => {
   })
 })
 
-// Route pour recuperer le profil d'un utilisateur en particulier
-// on peut utiliser findById avec l'id en parametre
 users.get('/:id', (req, res) => {
-  // on verifie que req.params.id est bien de type ObjectId avant de passer à la recherche
   if (ObjectId.isValid(req.params.id)) {
-    User.findById(req.params.id, function (err, user) {
+    User.findById(req.params.id, (err, user) => {
       if (!user) {
         res.status(404).json({ success: false, message: 'Пользователь не найден. User not found..' })
       } else {
@@ -43,11 +40,8 @@ users.get('/:id', (req, res) => {
   }
 })
 
-// Route pour update un message, on trouve le message avec findById puis on l'edit&save
 users.put('/:id', (req, res) => {
-  let _username = req.body.username;
-  let _password = req.body.password;
-  if (req.body && _email && _password) {
+  if (req.body && req.body.username && req.body.password) {
     if (ObjectId.isValid(req.params.id)) {
       User.findById(req.params.id, function (err, user) {
         if (!user) {
@@ -55,8 +49,8 @@ users.put('/:id', (req, res) => {
         } else {
           if (err) res.status(500).json({success: false, message: err.message})
           else {
-            user.username = _username;
-            user.hash_password = bcrypt.hashSync(_password, 10)
+            user.username = req.body.username;
+            user.hash_password = bcrypt.hashSync(req.body.password, 10)
             user.save(function (err, updatedUser) {
               if (err) {
                 res.status(500).json({success: false, message: err.message})
@@ -75,7 +69,6 @@ users.put('/:id', (req, res) => {
   }
 })
 
-// Route pour delete un message, on utilise la méthode remove() du modele mongoose ezpz
 users.delete('/:id', (req, res) => {
   if (ObjectId.isValid(req.params.id)) {
     User.findById(req.params.id, function (err, user) {

@@ -60,13 +60,18 @@ app.use(bodyParser.json())
 // MONGOOSE MONGODB CONNECT
 // Ne pas faire attention à mongoose.Promise
 // Avec la methode CONNECT on etabli une connection vers la database mongodb grace à Mongoose
-// Très simple d'utilisation pour le coup.
 mongoose.Promise = global.Promise
 mongoose.connect(process.env.MONGOURL, {}, function (err) {
   if (err) { throw err; } else {
     console.log('Connection to the Database etablished (' + process.env.MONGOURL + ')...');
   }
 })
+// mongoose.Promise = global.Promise
+// mongoose.connect(process.env.MONGOURL, {}, function (err) {
+//   if (err) { throw err; } else {
+//     console.log('Connection to the Database etablished (' + process.env.MONGOURL + ')...');
+//   }
+// })
 
 // ROUTER PREFIX API DEFINING (see below)
 let router = express.Router()
