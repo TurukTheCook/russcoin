@@ -44,8 +44,7 @@ auth.post('/login', (req, res) => {
 
 auth.post('/signup', (req, res) => {
   if (req.body.username && req.body.password) {
-    var regexEmail = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/, 'i')
-    if (regexEmail.test(req.body.username)) {
+    if (searchObj.regexEmail.test(req.body.username)) {
       // On verifie que l'utilisateur existe avec findOne
       User.findOne({ username: searchObj.caseInsensitive(req.body.username)}, function (err, result) {
         if (result === null) {
