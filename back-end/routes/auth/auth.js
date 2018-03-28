@@ -7,11 +7,14 @@ import jwt from 'jsonwebtoken'
 // On importe ici les modeles (schemas) mongoose afin de les utiliser
 import User from './../users/model'
 
-let auth = express.Router()
+let router = express.Router()
 
 import searchObj from './../../helpers/search';
 
-auth.post('/login', (req, res) => {
+import controller from './controller'
+
+
+router.post('/login', (req, res) => {
   if (req.body.username && req.body.password) {
     User.findOne({ username: searchObj.caseInsensitive(req.body.username)}, function (err, user) {
       if (err) res.status(500).json({success: false, message: err.message})
@@ -42,29 +45,10 @@ auth.post('/login', (req, res) => {
   }
 })
 
-auth.post('/signup', (req, res) => {
+router.post('/signup', (req, res) => {
   if (req.body.username && req.body.password) {
     if (searchObj.regexEmail.test(req.body.username)) {
-      // On verifie que l'utilisateur existe avec findOne
-      User.findOne({ username: searchObj.caseInsensitive(req.body.username)}, function (err, result) {
-        if (result === null) {
-          // puis on en créé un si il n'existe pas
-          let newUser = new User(req.body)
-          // on hash son password avec la méthode hashSync de bcrypt
-          newUser.hash_password = bcrypt.hashSync(req.body.password, 10)
-          // et enfin on sauvegarde l'utilisateur dans la database
-          newUser.save(function (err, user) {
-            if (err) {
-              res.status(500).json({success: false, message: err.message})
-            } else {
-              user.hash_password = undefined
-              res.status(200).json({ success: true, message: 'Новый пользователь зарегистрирован! New user registered successfully!', content: user})
-            }
-          })
-        } else {
-          res.status(412).json({ success: false, message: 'Имя пользователя уже используется.. Username already used..'})
-        }
-      })
+      controller.saveUser(req.body)
     } else {
       res.status(412).json({ success: false, message: 'Требуется электронная почта.. Email required..' })
     }
@@ -73,4 +57,4 @@ auth.post('/signup', (req, res) => {
   }
 })
 
-export default auth
+export default router
