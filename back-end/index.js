@@ -57,17 +57,6 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json())
 
-// MONGOOSE MONGODB CONNECT
-// Ne pas faire attention à mongoose.Promise
-// Avec la methode CONNECT on etabli une connection vers la database mongodb grace à Mongoose
-// Très simple d'utilisation pour le coup.
-mongoose.Promise = global.Promise
-mongoose.connect(process.env.MONGOURL, {}, function (err) {
-  if (err) { throw err; } else {
-    console.log('Connection to the Database etablished (' + process.env.MONGOURL + ')...');
-  }
-})
-
 // ROUTER PREFIX API DEFINING (see below)
 let router = express.Router()
 
@@ -96,7 +85,19 @@ app.use('/*', (req, res) => {
   res.status(404).json({ success: false, message: 'Этот маршрут не существует.. This route does not exists..'})
 })
 
-// LAUNCHING SERVER TO THE MOON
-// On défini un port depuis le fichier de config .env  sinon si la variable n'existe pas on utilise le port 1407
-let port = process.env.PORT || 1407;
-app.listen(port, () => console.log('App listen on port: ' + port + ' ...'))
+
+// MONGOOSE MONGODB CONNECT
+// Ne pas faire attention à mongoose.Promise
+// Avec la methode CONNECT on etabli une connection vers la database mongodb grace à Mongoose
+// Très simple d'utilisation pour le coup.
+mongoose.Promise = global.Promise
+mongoose.connect(process.env.MONGOURL, {}, function (err) {
+  if (err) { throw err; }
+  else {
+    console.log('Connection to the Database etablished ...')
+    // LAUNCHING SERVER TO THE MOON
+    // On défini un port depuis le fichier de config .env  sinon si la variable n'existe pas on utilise le port 1407
+    let port = process.env.PORT || 1407;
+    app.listen(port, () => console.log('App listen on port: ' + port + ' ...'))
+  }
+})

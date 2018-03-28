@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
-import User from './../models/User'
+import User from './../routes/users/model'
 const ObjectId = mongoose.Types.ObjectId;
 
 // AUTH PROTECTION STARTS HERE...
