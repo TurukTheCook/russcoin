@@ -1,7 +1,7 @@
 <template>
     <div class="mt-2 flex flex-column flex-center flex-wrap">
         <span class="small text-center mb-2 md-size-75 mx-auto">Click above to get started.</span>
-        <div id="mapid"  style="width: 500px; height: 500px"></div>
+        <div id="mapid" style="height: 500px"></div>
         <md-button class="md-raised md-primary" style="align-self: flex-end" v-on:click="logout">Logout</md-button>
     </div>
 </template>
@@ -29,13 +29,13 @@
                 accessToken: 'pk.eyJ1IjoicnVxdWllciIsImEiOiJjamY5bzFlMXczZDl5Mnlwbng2eG93MGJpIn0.92FKS3iPN-MnKXylw-7yvA'
             }).addTo(mymap);
 
+            // TODO: boucle avec les positions des 10 derniers produits à ajouter sur la map
             var marker = L.marker([55.755 , 37.625]).addTo(mymap);
             marker.bindPopup("<b>Вы здесь блять</b><br>You are<br>here blyat.").openPopup();
-           var lc = L.control.locate({
+            var lc = L.control.locate({
                 position: 'topright',
                 strings: {
-                    title: `Покажи мне, где я. 
-Show me where I am`
+                    title: `Покажи мне, где я.Show me where I am`
                 }
             }).addTo(mymap);
         }
