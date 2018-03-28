@@ -5,11 +5,11 @@ import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 // On importe ici les modeles (schemas) mongoose afin de les utiliser
-import User from './../../models/User'
+import User from './../users/model'
 
 let auth = express.Router()
 
-import searchObj from './../../toRename/search';
+import searchObj from './../../helpers/search';
 
 auth.post('/login', (req, res) => {
   if (req.body.username && req.body.password) {

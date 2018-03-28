@@ -1,7 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import Message from './../../models/Message'
-import User from './../../models/User'
+import Message from './model'
+import User from './../users/model'
 const ObjectId = mongoose.Types.ObjectId;
 
 let messages = express.Router();
