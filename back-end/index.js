@@ -87,10 +87,7 @@ app.use('/*', (req, res) => {
 
 
 // MONGOOSE MONGODB CONNECT
-// Ne pas faire attention à mongoose.Promise
-// Avec la methode CONNECT on etabli une connection vers la database mongodb grace à Mongoose
-// Très simple d'utilisation pour le coup.
-mongoose.Promise = global.Promise
+// mongoose.Promise = global.Promise
 mongoose.connect(process.env.MONGOURL, {}, function (err) {
   if (err) { throw err; }
   else {
