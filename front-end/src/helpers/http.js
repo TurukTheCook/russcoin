@@ -14,7 +14,7 @@ import app from './../main'
 // });
 
 let http = axios.create({
-    baseURL: 'http://localhost:1407/'
+    baseURL: 'http://localhost:1407/api/'
 })
 
 http.interceptors.request.use(

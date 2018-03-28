@@ -107,8 +107,8 @@ body {
 
 .user-card {
   padding: 0 !important;
-  max-width: 200px;
-  min-width: 200px;
+  max-width: 250px;
+  min-width: 250px;
   &_header {
     background-color: rgb(34, 34, 34);
     color: #fff;
@@ -157,9 +157,10 @@ body {
   p {
     overflow: hidden;
     line-height: 1.5em;
-    max-height: 1.5em;
     padding-left: 5px;
     padding-right: 5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .min-max-100 {
     min-width: 100px;

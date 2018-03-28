@@ -34,19 +34,20 @@ app.use(morgan('dev'))
 // A partir d'ici, toute les routes utilisent le middleware pour les cross-origin
 // Cela permet d'accepter certaines requetes qui seraient autrement invalides car
 // bloquées par le navigateur ou autre..
-// app.use(function (req, res, next) {
-//   res.header('Access-Control-Allow-Origin', '*');
-//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-//   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');    
-//   // intercept OPTIONS method
-//   if ('OPTIONS' == req.method) {
-//     res.send(200);
-//   }
-//   else {
-//     next();
-//   }
-// })
-app.use(cors())
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+  res.header('Access-Control-Allow-Headers', 'Authorization, Content-Type')
+  res.header('Access-Control-Max-Age', '86400')
+  // intercept OPTIONS method
+  if ('OPTIONS' == req.method) {
+    res.sendStatus(200);
+  }
+  else {
+    next();
+  }
+})
+// app.use(cors())
 
 // BODY PARSER
 // A partir d'ici, toute les routes utilisent le middleware body-parser
@@ -67,22 +68,28 @@ mongoose.connect(process.env.MONGOURL, {}, function (err) {
   }
 })
 
+// ROUTER PREFIX API DEFINING (see below)
+let router = express.Router()
+
 // AUTH ROUTE UNPROTECTED
 // Les routes qui suivent sont libres d'accès
 // Afin de pouvoir s'enregister / se loguer
-app.use('/auth', auth)
+router.use('/auth', auth)
 
 // AUTH PROTECTION STARTS HERE...
 // Use of auth middleware from there
 // A partir d'ici on appelle donc pour toutes les routes qui suivent le middleware verifyToken
 // Il verifiera à chaque fois si le token est valide avant d'authoriser l'acces à la suite sinon l'aventure s'arrête ici.
-app.use(verifyToken)
+router.use(verifyToken)
 
 // Protected routes
 // Voici nos routes qui necessitent un token pour être accessibles.
 // la route /users aura comme prefix /users et renvoi vers la routes du router 'users' importé au début.
-app.use('/users', users)
-app.use('/messages', messages)
+router.use('/users', users)
+router.use('/messages', messages)
+
+// ROUTER PREFIX API USED BY APP
+app.use('/api', router)
 
 // Fin des routes, on renvoi un 404 not found pour tout le reste
 app.use('/*', (req, res) => {
