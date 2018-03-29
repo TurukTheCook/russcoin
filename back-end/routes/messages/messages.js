@@ -38,14 +38,13 @@ router.get('/', (req, res) => {
 // Route pour poster un message
 router.post('/', (req, res) => {
   let _userID = req.anas.username;
-  let _body = req.body;
-  if (_body && _body.userID && _body.title && _body.content) {
+  if (req.body.userID && req.body.title && req.body.content) {
     var sendMessage = function (err) {
       if (err) res.status(500).json({ success: false, message: err.message })
       else {
         let newMessage = new Message(req.body);
         newMessage.senderId = _userID
-        newMessage.receiverId = _body.userID
+        newMessage.receiverId = req.body.userID
         newMessage.save(function (err, newMessage) {
           if (err) {
             res.status(500).json({ success: false, message: err.message })
@@ -55,12 +54,12 @@ router.post('/', (req, res) => {
         })
       }
     }
-    if (ObjectId.isValid(_body.userID)) {
-      User.find({ _id: _body.userID }, function (err, user) {
+    if (ObjectId.isValid(req.body.userID)) {
+      User.find({ _id: req.body.userID }, function (err, user) {
         sendMessage(err)
       })
     } else {
-      User.find({ username: _body.userID }, function (err, user) {
+      User.find({ username: req.body.userID }, function (err, user) {
         sendMessage(err)
       })
     }
