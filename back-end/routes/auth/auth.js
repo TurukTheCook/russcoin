@@ -44,7 +44,7 @@ router.post('/login', (req, res) => {
     res.status(412).json({ success: false, message: 'Имя пользователя и / или пароль отсутствуют. Username and/or password are missing..'})
   }
 })
-
+// Test route with controller, WARNING !!! it's shitty .
 router.post('/signup', (req, res) => {
   if (req.body.username && req.body.password) {
     if (searchObj.regexEmail.test(req.body.username)) {
