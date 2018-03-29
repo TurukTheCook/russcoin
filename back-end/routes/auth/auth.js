@@ -7,11 +7,11 @@ import jwt from 'jsonwebtoken'
 // On importe ici les modeles (schemas) mongoose afin de les utiliser
 import User from './../users/model'
 
-let auth = express.Router()
+let router = express.Router()
 
 import searchObj from './../../helpers/search';
 
-auth.post('/login', (req, res) => {
+router.post('/login', (req, res) => {
   if (req.body.username && req.body.password) {
     User.findOne({ username: searchObj.caseInsensitive(req.body.username)}, function (err, user) {
       if (err) res.status(500).json({success: false, message: err.message})
@@ -42,7 +42,7 @@ auth.post('/login', (req, res) => {
   }
 })
 
-auth.post('/signup', (req, res) => {
+router.post('/signup', (req, res) => {
   if (req.body.username && req.body.password) {
     if (searchObj.regexEmail.test(req.body.username)) {
       // On verifie que l'utilisateur existe avec findOne
@@ -73,4 +73,4 @@ auth.post('/signup', (req, res) => {
   }
 })
 
-export default auth
+export default router

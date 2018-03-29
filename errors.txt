@@ -23,3 +23,6 @@
 Вот ваши сообщения! Here is your messages!
 Сообщение успешно отправлено! Message sent successfuly!
 Сообщение не найдено.. Message not found..
+
+// PROFILE
+Вот ваш профиль! Here is your profile!

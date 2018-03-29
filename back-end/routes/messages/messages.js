@@ -4,11 +4,11 @@ import Message from './model'
 import User from './../users/model'
 const ObjectId = mongoose.Types.ObjectId;
 
-let messages = express.Router();
+let router = express.Router();
 
 // Route pour récuperer tous les messages
 // Utilisation la méthode find() du modèle mongoose 'Message' qui renvoi ici tous les messages
-messages.get('/', (req, res) => {
+router.get('/', (req, res) => {
   let _userID = req.anas._id;
   let _username = req.anas.username;
   // Verif que req.params.id est bien de type ObjectId avant de passer à la recherche
@@ -36,7 +36,7 @@ messages.get('/', (req, res) => {
 })
 
 // Route pour poster un message
-messages.post('/', (req, res) => {
+router.post('/', (req, res) => {
   let _userID = req.anas.username;
   let _body = req.body;
   if (_body && _body.userID && _body.title && _body.content) {
@@ -70,7 +70,7 @@ messages.post('/', (req, res) => {
 })
 
 //Route pour update un message, on trouve le message avec findById puis on l'edit&save
-messages.put('/:messageID', (req, res) => {
+router.put('/:messageID', (req, res) => {
   if (req.body && (req.body.read != null || req.body.read != undefined) && req.body.readDate) {
     if (ObjectId.isValid(req.params.messageID)) {
       Message.findById(req.params.messageID, function (err, message) {
@@ -103,7 +103,7 @@ messages.put('/:messageID', (req, res) => {
 })
 
 // Route pour delete un message, on utilise la méthode remove() du modele mongoose ezpz
-// messages.delete('/:id', (req, res) => {
+// router.delete('/:id', (req, res) => {
 //   if (ObjectId.isValid(req.params.id)) {
 //     Message.findById(req.params.id, function (err, message) {
 //       if (err) {
@@ -125,4 +125,4 @@ messages.put('/:messageID', (req, res) => {
 // })
 
 
-export default messages
+export default router
