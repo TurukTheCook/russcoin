@@ -48,7 +48,15 @@ router.post('/login', (req, res) => {
 router.post('/signup', (req, res) => {
   if (req.body.username && req.body.password) {
     if (searchObj.regexEmail.test(req.body.username)) {
-      controller.saveUser(req.body).then()
+      controller.saveUser(req.body, (response, content) => {
+        if (response == 'err') {
+          res.status(500).json({ success: false, message: content.message })
+        } else if (response == 'save') {
+          res.status(200).json({ success: true, message: 'Новый пользователь зарегистрирован! New user registered successfully!', content: content })
+        } else if (response == 'used') {
+          res.status(412).json({ success: false, message: 'Имя пользователя уже используется.. Username already used..' })
+        }
+      })
     } else {
       res.status(412).json({ success: false, message: 'Требуется электронная почта.. Email required..' })
     }

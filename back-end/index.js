@@ -96,5 +96,6 @@ mongoose.connect(process.env.MONGOURL, {}, function (err) {
     // On défini un port depuis le fichier de config .env  sinon si la variable n'existe pas on utilise le port 1407
     let port = process.env.PORT || 1407;
     app.listen(port, () => console.log('App listen on port: ' + port + ' ...'))
+    console.log('branch beta, mdr')
   }
 })
