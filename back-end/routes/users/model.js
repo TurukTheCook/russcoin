@@ -15,7 +15,9 @@ let UserSchema = new mongoose.Schema({
     latitude: Number
   },
   creationDate: { type: Date, default: Date.now },
-  updatedDate: { type: Date, default:Date.now }
+  updatedDate: { type: Date, default:Date.now },
+  // id pour respecter la spec, fuck la spec :'(
+  id: mongoose.Schema.Types.Mixed
 });
 
 UserSchema.methods.comparePasswords = function(password) {
