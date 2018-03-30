@@ -6,8 +6,6 @@ const ObjectId = mongoose.Types.ObjectId;
 
 let router = express.Router();
 
-// Route pour récuperer tous les messages
-// Utilisation la méthode find() du modèle mongoose 'Message' qui renvoi ici tous les messages
 router.get('/', (req, res) => {
   let _id = res.locals.decode._id;
   let _username = res.locals.decode.username;
@@ -33,6 +31,15 @@ router.get('/', (req, res) => {
   } else {
     res.status(404).json({ success: false, message: 'Неверный ID. Invalid ID' })
   }
+})
+
+router.get('/', (req, res) => {
+  Message.find({ $or: [{ receiverId: res.locals.user._id }, { receiverId: res.locals.user.username}] }, (err, messages) => {
+    if (err) res.status(500).json({success: false, message: err.message})
+    else {
+      res.status(200).json({ success: true, message: 'Вот ваши сообщения! Here is your messages!', content: messages })
+    }
+  })
 })
 
 // Route pour poster un message
