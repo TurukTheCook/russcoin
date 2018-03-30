@@ -1,41 +1,69 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import Products from './model'
-const ObjectId = mongoose.Types.ObjectId;
+import Product from './model'
+import User from './../users/model'
+
 
 let router = express.Router();
-//Route pour afficher tout les produits
-router.get('/', (req, res) => {
-    Products.find({}, (err) => {
-        if (err) res.status(500).json({success: false, message: err.message})
-        else {
-            res.status(200).json({ success: true, message: 'russe/ Here is the list of products!', content: users})
-        }
-    })
+
+router.post('/test', (req, res) => {
+  // res.status(200).json({ success: true, message: user })  
+  // res.status(200).json({ success: true, message: 'citron', content: req })  
+  console.log(res)
+  res.status(200).send({ success: true, message: 'citron', content: res.locals.user })  
 })
-//Route pour afficher un produit en particulier grace à son id
+
+router.get('/', (req, res) => {
+
+})
+
 router.get('/:id', (req, res) =>{
 
 })
-// Route pour crée un nouveau produit
+
 router.post('/', (req, res) => {
-    if (req.body.title && req.body.description && req.body.price) {
-        var createProduct = function (err) {
-            if (err) res.status(500).json({ success: false, message: err.message })
-            else {
-                let newProduct = new Product(req.body);
-                newProduct.save(function(err) {
-                    if (err) {
-                        res.status(500).json({ success: false, message: err.message })
-                    } else {
-                        res.status(200).json({ success: true, message: 'russe/Product created successfuly!'})
-                    }
-                })
-            }
-        }}
-    else {
-        res.status(412).json({ success: false, message: 'Title/Description/Price is missing...'})
-    }
+  let newProduct = new Product(req.body)
+  newProduct.userId = res.locals.user.username
+  if (!req.body.address && res.locals.user.address) {
+      newProduct.address = res.locals.user.address 
+  }
+  newProduct.save(function (err, result) {
+    if (err) {
+      if (err.message == "ptdr") res.status(500).json({ success: false, message: 'russe' + err.message, content: message })
+      if (err.message == "lol") res.status(500).json({ success: false, message: 'russe' + err.message, content: message })
+      else res.status(500).json({ success: false, message: err.message, content: message })
+    } else res.status(200).json({ success: true, message: 'Вот ваше сообщение! Here is your message!', content: message })
+  })
 })
 
-export default products
+// if (err) {
+//     if (err.message == "ma string") res.status(500).json({ success: false, message: "string russe" + err.message })
+//     else {
+//       res.status(200).json({ success: true, message: err.message })
+//       }
+//     }
+
+// DIMITRI
+router.post('/', (req, res) => {
+  if (req.body.title && req.body.description && req.body.price)
+    var createProduct = function (err) {
+      if (err) res.status(500).json({ success: false, message: err.message })
+      else {
+        let newProduct = new Product(req.body);
+        newProduct.save(function (err, Product) {
+          if (err) {
+            res.status(500).json({ success: false, message: err.message })
+          } else {
+            res.status(200).json({ success: true, message: 'russe/Product created successfuly!' })
+          }
+        })
+      }
+    }
+  else {
+    res.status(412).json({ success: false, message: 'Title/Description/Price is missing...' })
+  }
+})
+
+
+
+export default router

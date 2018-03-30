@@ -25,13 +25,14 @@ $accent-color: #35ce70;
 @import './partials/_tags.scss';
 
 html, body, #app, #inner {
-  height: 100vh
+  height: 100vh;
 }
 
 body {
-  background: url('../img/propaganda.jpg') no-repeat center fixed;
+  background: url('../img/propaganda.jpg') no-repeat center;
   background-size: cover;
   font-family: 'Roboto', sans-serif;
+  will-change: transform;
 }
 
 #app {
@@ -41,10 +42,11 @@ body {
 }
 
 #inner {
-  background: url('../img/russia_less_opacity_072.png') no-repeat center fixed;
+  background: url('../img/russia_less_opacity_072.png') no-repeat center;
   background-size: contain;
   
-  overflow-y: scroll;
+  overflow-x: hidden;
+  will-change: transform;
 }
 
 // ::-webkit-scrollbar {
@@ -126,24 +128,24 @@ body {
   padding: 0 !important;
 }
 
-.menu {
-  display: flex;
+// .menu {
+//   display: flex;
 
-  button {
-    width: 50%;
-    outline: 0;
-    border: 0;
-    background-color: $main-color;
-    padding: 10px 0;
-    cursor: pointer;
+//   button {
+//     width: 50%;
+//     outline: 0;
+//     border: 0;
+//     background-color: $main-color;
+//     padding: 10px 0;
+//     cursor: pointer;
 
-    &.active {
-      background-color: #fff;
-      border: 0;
-      outline: 0
-    }
-  }
-}
+//     &.active {
+//       background-color: #fff;
+//       border: 0;
+//       outline: 0
+//     }
+//   }
+// }
 
 .read {
   background-color: #ddd
@@ -179,6 +181,19 @@ body {
 
 #mapid {
   width: 800px
+}
+
+.product-miniature {
+  min-width: 150px;
+  min-height: 150px;
+  background-color: #ebebeb;
+  overflow: hidden;
+  img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 150px;
+  }
 }
 
 // #####################

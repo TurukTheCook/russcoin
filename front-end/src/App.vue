@@ -58,21 +58,21 @@ export default {
   beforeMount() {
     this.initPlayer()
     this.playing = true
-  },
-  created () {
-    //  hook the progress bar to start before we move router-view
-    this.$router.beforeEach((to, from, next) => {
-      //  start the progress bar
-      this.$Progress.start()
-      //  continue to next page
-      next()
-    })
-    //  hook the progress bar to finish after we've finished moving router-view
-    this.$router.afterEach((to, from) => {
-      //  finish the progress bar
-      this.$Progress.finish()
-    })
   }
+  // created () {
+  //   //  hook the progress bar to start before we move router-view
+  //   this.$router.beforeEach((to, from, next) => {
+  //     //  start the progress bar
+  //     this.$Progress.start()
+  //     //  continue to next page
+  //     next()
+  //   })
+  //   //  hook the progress bar to finish after we've finished moving router-view
+  //   this.$router.afterEach((to, from) => {
+  //     //  finish the progress bar
+  //     this.$Progress.finish()
+  //   })
+  // }
 }
 </script>
 

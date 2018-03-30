@@ -2,6 +2,8 @@ import express from 'express'
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
 import User from './model'
+import helper from '../../helpers/helper';
+import controller from './controller';
 const ObjectId = mongoose.Types.ObjectId;
 
 let router = express.Router();
@@ -14,7 +16,7 @@ router.get('/', (req, res) => {
     else {
       for(let i=0; i<users.length; i++) {
         users[i].hash_password = undefined
-        users[i].__v = undefined
+        controller.beforeSend(users[i])
       }
       res.status(200).json({ success: true, message: 'Вот список пользователей! Here is the list of users!', content: users})
     }
@@ -29,8 +31,8 @@ router.get('/:id', (req, res) => {
       } else {
         if (err) res.status(500).json({ success: false, message: err.message })
         else {
-          user.hash_password = undefined
-          user.__v = undefined
+          user.hash_password = undefined          
+          controller.beforeSend(user)
           res.status(200).json({ success: true, message: 'Вот профиль пользователя! Here is the user profile!', content: user })
         }
       }

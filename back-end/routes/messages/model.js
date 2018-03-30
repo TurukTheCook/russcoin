@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-export default mongoose.model('Message', new mongoose.Schema({
+let MessageSchema = new mongoose.Schema({
   title: { type: String, required: true },
   content: { type: String, required: true },
   creationDate: { type: Date, default: Date.now },
@@ -8,4 +8,8 @@ export default mongoose.model('Message', new mongoose.Schema({
   readDate: { type: Date },
   senderId: { type: String, required: true },
   receiverId: { type: String, required: true },
-}))
+  // id pour respecter la spec, fuck la spec :'(
+  id: mongoose.Schema.Types.Mixed
+})
+
+export default mongoose.model('Message', MessageSchema);
