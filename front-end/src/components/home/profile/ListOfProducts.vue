@@ -49,28 +49,28 @@ export default {
         creationDate: "2018-03-28T20:24:46.272Z"
       },
       {
-        id: '5ds454fefj',
+        id: '5ds454fefrej',
+        title: 'BoxMaster',
+        description: 'The description, long or not that is your problem to manage',
+        userId: 'iLuke',
+        price: 100
+      },
+      {
+        id: '5ds454fezzfj',
         title: 'BoxMaster',
         description: 'The description, long or not that is your problem to manage',
         userId: 'iLuke',
         price: 75
       },
       {
-        id: '5ds454fefj',
+        id: '5ds454feaefj',
         title: 'BoxMaster',
         description: 'The description, long or not that is your problem to manage',
         userId: 'iLuke',
-        price: 75
+        price: 500
       },
       {
-        id: '5ds454fefj',
-        title: 'BoxMaster',
-        description: 'The description, long or not that is your problem to manage',
-        userId: 'iLuke',
-        price: 75
-      },
-      {
-        id: '5ds454fefj',
+        id: '5ds45rea4fefj',
         title: 'BoxMaster',
         description: 'The description, long or not that is your problem to manage',
         userId: 'iLuke',
@@ -89,7 +89,7 @@ export default {
         http.get('products')
             .then(
                 res => {
-                    this.messages = res.data.content;
+                    this.products = res.data.content;
                 }
             )
             .catch(
