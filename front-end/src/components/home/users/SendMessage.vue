@@ -2,6 +2,12 @@
 <div>
     <form novalidate class="md-layout" @submit.prevent="send">
         <md-card class="md-layout-item flex flex-column no-box-shadow">
+            <div class="p-1" :class="{'alert alert-danger': !success}" v-if="success == false">
+                {{message}}
+            </div>
+            <div class="p-1" :class="{'alert alert-success': success}" v-if="success == true">
+                {{message}}
+            </div>
             <md-card-header class="main-color-bg">
                 <div class="md-title text-center text-white">SEND A MESSAGE</div>
             </md-card-header>
@@ -30,13 +36,7 @@
             <md-card-actions>
                 <md-button type="submit" class="main-color-bg" :disabled="sending">Send</md-button>
             </md-card-actions>
-            <div class="p-1" :class="{'alert alert-danger': !success}" v-if="success == false">
-                {{message}}
-            </div>
-            <div class="p-1" :class="{'alert alert-success': success}" v-if="success == true">
-                {{message}}
-            </div>
-            <div class="m-2 cursor-pointer" v-on:click="goBack">
+            <div class="m-2 cursor-pointer" style="align-self: flex-end" v-on:click="goBack">
                 <img class="mr-2" src="../../../assets/img/chevron_left.png"/>previous
             </div>
         </md-card>
@@ -88,8 +88,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-  
-</style>

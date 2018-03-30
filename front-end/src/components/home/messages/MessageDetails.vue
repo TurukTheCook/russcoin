@@ -19,7 +19,7 @@
                 </div>
             </md-card-content>
         </md-card>
-        <div class="flex cursor-pointer m-2" v-on:click="goBack">
+        <div class="flex cursor-pointer m-2" style="float: right" v-on:click="goBack">
             <img class="mr-2" src="../../../assets/img/chevron_left.png"/>previous
         </div>
     </div>
