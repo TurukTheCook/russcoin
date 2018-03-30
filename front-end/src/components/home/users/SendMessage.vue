@@ -1,6 +1,6 @@
 <template>
 <div>
-    <form form novalidate class="md-layout" @submit.prevent="send">
+    <form novalidate class="md-layout" @submit.prevent="send">
         <md-card class="md-layout-item flex flex-column no-box-shadow">
             <md-card-header class="main-color-bg">
                 <div class="md-title text-center text-white">SEND A MESSAGE</div>
@@ -51,8 +51,8 @@ export default {
   data () {
     return {
       success: null,
-      sending: false,
       message: 'An error has occured..',
+      sending: false,
       sendMessage: {}
     }
   },
