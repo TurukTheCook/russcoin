@@ -1,4 +1,4 @@
-var searchObj = {
+var helper = {
   caseInsensitive: (word) => {
     return { $regex: new RegExp('^' + word + '$', 'i') }
   },
@@ -13,12 +13,8 @@ var searchObj = {
     data.id = data._id
     // data._id = undefined // Apriori pas possible de toucher à '_id'
     data.__v = undefined
-
-    // if (data.hash_password) {
-    //   data.hash_password = undefined    
-    // }
   },
   
 }
 
-export default searchObj;
+export default helper;

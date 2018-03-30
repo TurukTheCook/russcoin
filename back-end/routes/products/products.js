@@ -22,10 +22,8 @@ router.get('/:id', (req, res) =>{
 })
 
 router.post('/', (req, res) => {
-  // let _id = res.locals.decode._id;
-  // let _username = res.locals.decode.username
   let newProduct = new Product(req.body)
-  newProduct.userId = _username
+  newProduct.userId = res.locals.user.username
   if (!req.body.address && res.locals.user.address) {
       newProduct.address = res.locals.user.address 
   }
@@ -36,7 +34,6 @@ router.post('/', (req, res) => {
       else res.status(500).json({ success: false, message: err.message, content: message })
     } else res.status(200).json({ success: true, message: 'Вот ваше сообщение! Here is your message!', content: message })
   })
-
 })
 
 // if (err) {

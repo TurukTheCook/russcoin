@@ -9,11 +9,11 @@ import User from './../users/model'
 
 let router = express.Router()
 
-import searchObj from './../../helpers/search';
+import helper from './../../helpers/helper';
 
 router.post('/login', (req, res) => {
   if (req.body.username && req.body.password) {
-    User.findOne({ username: searchObj.caseInsensitive(req.body.username)}, function (err, user) {
+    User.findOne({ username: helper.caseInsensitive(req.body.username)}, function (err, user) {
       if (err) res.status(500).json({success: false, message: err.message})
       if (!user) {
         res.status(401).json({ success: false, message: 'Пользователь не найден. User not found..' })
@@ -44,9 +44,9 @@ router.post('/login', (req, res) => {
 
 router.post('/signup', (req, res) => {
   if (req.body.username && req.body.password) {
-    if (searchObj.regexEmail.test(req.body.username)) {
+    if (helper.regexEmail.test(req.body.username)) {
       // On verifie que l'utilisateur existe avec findOne
-      User.findOne({ username: searchObj.caseInsensitive(req.body.username)}, function (err, result) {
+      User.findOne({ username: helper.caseInsensitive(req.body.username)}, function (err, result) {
         if (result === null) {
           // puis on en créé un si il n'existe pas
           let newUser = new User(req.body)
