@@ -15,7 +15,6 @@ router.get('/', (req, res) => {
     if (err) res.status(500).json({success: false, message: err.message})
     else {
       for(let i=0; i<users.length; i++) {
-        users[i].hash_password = undefined
         controller.beforeSend(users[i])
       }
       res.status(200).json({ success: true, message: 'Вот список пользователей! Here is the list of users!', content: users})
@@ -30,8 +29,7 @@ router.get('/:id', (req, res) => {
         res.status(404).json({ success: false, message: 'Пользователь не найден. User not found..' })
       } else {
         if (err) res.status(500).json({ success: false, message: err.message })
-        else {
-          user.hash_password = undefined          
+        else {      
           controller.beforeSend(user)
           res.status(200).json({ success: true, message: 'Вот профиль пользователя! Here is the user profile!', content: user })
         }
