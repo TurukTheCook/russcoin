@@ -1,8 +1,8 @@
-import express from "express";
-import mongoose from "mongoose";
-import jwt from "jsonwebtoken";
+import express from "express"
+import mongoose from "mongoose"
+import jwt from "jsonwebtoken"
 import User from './../routes/users/model'
-const ObjectId = mongoose.Types.ObjectId;
+const ObjectId = mongoose.Types.ObjectId
 
 // AUTH PROTECTION STARTS HERE...
 // auth middleware definition
@@ -12,32 +12,27 @@ const ObjectId = mongoose.Types.ObjectId;
 // On utilise JWT.VERIFY(TOKEN, SECRETKEY, CALLBACK(err, result){...})
 // JWT va donc verifier le token avec le secretkey et renvoyer via le callback une erreur ou un resultat
 // Ce dernier correspond au token décodé, on retrouve le payload (ex: email utilisateur, id etc..)
-// on appelle next(); pour dire que tout s'est bien passé et qu'on peut passer à la suite (circulez svp!)
+// on appelle next() pour dire que tout s'est bien passé et qu'on peut passer à la suite (circulez svp!)
 let verifyToken = (req, res, next) => {
   if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === process.env.AUTHBEARER) {
     jwt.verify(req.headers.authorization.split(' ')[1], process.env.SECRETKEY, function (err, decode) {
       if (err) res.status(500).json({ success: false, message: err.message })
       else {
-        // le req.anas est un rajout pour avoir acces au token décodé sur d'autres routes
-        // une fois qu'on a passé cette étape de verification
-        req.anas = decode;
-        if (ObjectId.isValid(req.anas._id)) {
-          User.findById(req.anas._id, function (err, user) {
-            if (!user) {
-              res.status(403).json({ success: false, message: 'CYKA BLYAT !' })
-            } else {
-              if (err) res.status(500).json({ success: false, message: err.message })
+        // res.locals permet de stocker des datas utilisable dans la requête en cours
+        res.locals.decode = decode
+        if (ObjectId.isValid(decode._id)) {
+          User.findById(decode._id, function (err, user) {
+            if (err) res.status(500).json({ success: false, message: err.message })
+            if (!user) res.status(403).json({ success: false, message: '1CYKA BLYAT !' })
+            else {
+              res.locals.user = user
               next()
             }
           })
-        } else {
-          res.status(403).json({ success: false, message: 'CYKA BLYAT !' })
-        }
+        } else res.status(403).json({ success: false, message: '2CYKA BLYAT !' })
       }
-    });
-  } else {
-    res.status(403).json({ success: false, message: 'CYKA BLYAT !' })
-  }
-};
+    })
+  } else res.status(403).json({ success: false, message: '3CYKA BLYAT !' })
+}
 
-export default verifyToken;
+export default verifyToken

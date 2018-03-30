@@ -20,6 +20,8 @@ dotEnv.config()
 import auth from './routes/auth/auth'
 import users from './routes/users/users'
 import messages from './routes/messages/messages'
+import products from './routes/products/products'
+import profile from './routes/profile/profile'
 // Middleware Imports
 import verifyToken from './middlewares/verifyToken'
 
@@ -76,6 +78,8 @@ router.use(verifyToken)
 // la route /users aura comme prefix /users et renvoi vers la routes du router 'users' importé au début.
 router.use('/users', users)
 router.use('/messages', messages)
+router.use('/products', products)
+router.use('/profile', profile)
 
 // ROUTER PREFIX API USED BY APP
 app.use('/api', router)
