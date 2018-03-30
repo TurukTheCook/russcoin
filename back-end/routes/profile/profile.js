@@ -7,8 +7,8 @@ const ObjectId = mongoose.Types.ObjectId;
 let router = express.Router();
 
 router.get('/', (req, res) => {
-  let _userID = req.anas._id;
-  let _username = req.anas.username;
+  let _userID = res.locals.decode._id;
+  let _username = res.locals.decode.username;
   if (ObjectId.isValid(_userID)) {
     User.findById(_userID, function (err, user) {
       if (!user) {
@@ -32,8 +32,8 @@ router.get('/products', (req, res) => {
 })
 
 router.put('/', (req, res) => {
-  let _userID = req.anas._id;
-  let _username = req.anas.username;
+  let _userID = res.locals.decode._id;
+  let _username = res.locals.decode.username;
   if (ObjectId.isValid(_userID)) {
     User.findById(_userID, function (err, user) {
       if (!user) {
