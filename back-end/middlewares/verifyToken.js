@@ -23,16 +23,16 @@ let verifyToken = (req, res, next) => {
         if (ObjectId.isValid(decode._id)) {
           User.findById(decode._id, function (err, user) {
             if (err) res.status(500).json({ success: false, message: err.message })
-            if (!user) res.status(403).json({ success: false, message: '1CYKA BLYAT !' })
+            if (!user) res.status(403).json({ success: false, message: '1 CYKA BLYAT !' })
             else {
               res.locals.user = user
               next()
             }
           })
-        } else res.status(403).json({ success: false, message: '2CYKA BLYAT !' })
+        } else res.status(404).json({ success: false, message: 'Неверный ID. Invalid ID' })
       }
     })
-  } else res.status(403).json({ success: false, message: '3CYKA BLYAT !' })
+  } else res.status(403).json({ success: false, message: '3 CYKA BLYAT !' })
 }
 
 export default verifyToken
