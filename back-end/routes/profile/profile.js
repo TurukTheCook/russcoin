@@ -2,52 +2,33 @@ import express from 'express'
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
 import User from './../users/model'
+import controller from './controller';
+import helper from '../../helpers/helper';
 const ObjectId = mongoose.Types.ObjectId;
 
 let router = express.Router();
 
 router.get('/', (req, res) => {
-  let _userID = res.locals.decode._id;
-  let _username = res.locals.decode.username;
-  if (ObjectId.isValid(_userID)) {
-    User.findById(_userID, function (err, user) {
-      if (!user) {
-        res.status(404).json({ success: false, message: 'Пользователь не найден. User not found..' })
-      } else {
-        if (err) res.status(500).json({ success: false, message: err.message })
-        else {
-          user.hash_password = undefined
-          user.__v = undefined
-          res.status(200).json({ success: true, message: 'Вот ваш профиль! Here is your profile!', content: user })
-        }
-      }
-    })
-  } else {
-    res.status(404).json({ success: false, message: 'Неверный ID. Invalid ID' })
-  }
+  helper.beforeSendUser(res.locals.user)
+  res.status(200).json({ success: true, message: 'Ваш профиль. Your profile.', content: res.locals.user })
 })
 
 router.get('/products', (req, res) => {
-  
+  Product.find({ userId : res.locals.user._id },  (err, products) => {
+    if (err) res.status(500).json({ success: false, message: err.message })
+    else {
+      helper.beforeSend(products)
+      res.status(200).json({ success: true, message: 'Список ваших продуктов. List of your products.', content: products })
+    }
+  })
 })
 
 router.put('/', (req, res) => {
-  let _userID = res.locals.decode._id;
-  let _username = res.locals.decode.username;
-  if (ObjectId.isValid(_userID)) {
-    User.findById(_userID, function (err, user) {
-      if (!user) {
-        res.status(404).json({ success: false, message: 'Пользователь не найден. User not found..' })
-      } else {
-        if (err) res.status(500).json({ success: false, message: err.message })
-        else {
-          
-        }
-      }
-    })
-  } else {
-    res.status(404).json({ success: false, message: 'Неверный ID. Invalid ID' })
-  }
+  res.locals.user.update(req.body, {runValidators : true}, (err, result) => {
+    // a test de renvoyer "result" dans le front
+    if (err) res.status(500).json({ success: false, message: err.message })
+    else res.status(200).json({ success: true, message: 'Профиль обновлен! Profile updated!', content: result })
+  })
 })
 
 export default router

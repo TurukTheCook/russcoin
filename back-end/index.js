@@ -4,8 +4,6 @@ import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import jwt from 'jsonwebtoken'
-// Morgan permet de log les actions utilisateurs dans la console du serveur
-// exemple access get sur /users, morgan affiche: "GET /users 200 2.874 ms - 1197"
 import morgan from 'morgan'
 // DotEnv permet d'utiliser un fichier de config .env (à la racine)
 // on déclare des variables dedans puis on les utilise avec process.env.NOMDELAVARIABLE
@@ -18,6 +16,7 @@ dotEnv.config()
 
 //  Routes Imports
 import auth from './routes/auth/auth'
+import fish from './routes/fish/fish'
 import users from './routes/users/users'
 import messages from './routes/messages/messages'
 import products from './routes/products/products'
@@ -52,8 +51,6 @@ app.use(function (req, res, next) {
 // app.use(cors())
 
 // BODY PARSER
-// A partir d'ici, toute les routes utilisent le middleware body-parser
-// Qui permet de recuperer les données envoyés depuis le body d'une requete, req.body
 app.use(bodyParser.urlencoded({
   extended: true
 }))
@@ -66,16 +63,13 @@ let router = express.Router()
 // Les routes qui suivent sont libres d'accès
 // Afin de pouvoir s'enregister / se loguer
 router.use('/auth', auth)
+router.use('/fish', fish)
 
 // AUTH PROTECTION STARTS HERE...
-// Use of auth middleware from there
-// A partir d'ici on appelle donc pour toutes les routes qui suivent le middleware verifyToken
 // Il verifiera à chaque fois si le token est valide avant d'authoriser l'acces à la suite sinon l'aventure s'arrête ici.
 router.use(verifyToken)
 
 // Protected routes
-// Voici nos routes qui necessitent un token pour être accessibles.
-// la route /users aura comme prefix /users et renvoi vers la routes du router 'users' importé au début.
 router.use('/users', users)
 router.use('/messages', messages)
 router.use('/products', products)
@@ -91,7 +85,7 @@ app.use('/*', (req, res) => {
 
 
 // MONGOOSE MONGODB CONNECT
-// mongoose.Promise = global.Promise
+mongoose.Promise = global.Promise
 mongoose.connect(process.env.MONGOURL, {}, function (err) {
   if (err) { throw err; }
   else {

@@ -2,20 +2,17 @@ import express from 'express'
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
 import User from './model'
-import helper from '../../helpers/helper';
 import controller from './controller';
 const ObjectId = mongoose.Types.ObjectId;
 
 let router = express.Router();
 
-// Route pour récuperer tous les utilisateurs
-// On utilise la méthode find() du modèle mongoose 'User' qui renvoi ici tous les users
 router.get('/', (req, res) => {
   User.find({}, (err, users) => {
     if (err) res.status(500).json({success: false, message: err.message})
     else {
       for(let i=0; i<users.length; i++) {
-        controller.beforeSend(users[i])
+        helper.beforeSendUser(users[i])
       }
       res.status(200).json({ success: true, message: 'Вот список пользователей! Here is the list of users!', content: users})
     }
@@ -25,19 +22,14 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   if (ObjectId.isValid(req.params.id)) {
     User.findById(req.params.id, (err, user) => {
-      if (!user) {
-        res.status(404).json({ success: false, message: 'Пользователь не найден. User not found..' })
-      } else {
-        if (err) res.status(500).json({ success: false, message: err.message })
-        else {      
-          controller.beforeSend(user)
-          res.status(200).json({ success: true, message: 'Вот профиль пользователя! Here is the user profile!', content: user })
-        }
+      if (err) res.status(500).json({ success: false, message: err.message })
+      if (!user) res.status(404).json({ success: false, message: 'Пользователь не найден. User not found.' })
+      else {
+        helper.beforeSendUser(user)
+        res.status(200).json({ success: true, message: 'Вот профиль пользователя! Here is the user profile!', content: user })
       }
     })
-  } else {
-    res.status(404).json({ success: false, message: 'Неверный ID. Invalid ID' })
-  }
+  } else res.status(404).json({ success: false, message: 'Неверный ID. Invalid ID' })
 })
 
 // router.put('/:id', (req, res) => {
@@ -69,26 +61,26 @@ router.get('/:id', (req, res) => {
 //   }
 // })
 
-router.delete('/:id', (req, res) => {
-  if (ObjectId.isValid(req.params.id)) {
-    User.findById(req.params.id, function (err, user) {
-      if (err) {
-        res.status(500).json({success: false, message: err.message})
-      } else if (!user) {
-        res.status(404).json({ success: false, message: 'Пользователь не найден. User not found..'})
-      } else {
-        User.remove({ _id: req.params.id }, function (err) {
-          if (err) res.status(500).json({success: false, message: err.message})
-          else {
-            res.status(200).json({ success: true, message: 'Пользователь удален! User deleted!'})
-          }
-        })
-      }
-    })
-  } else {
-    res.status(404).json({ success: false, message: 'Неверный ID. Invalid ID' })
-  }
-})
+// router.delete('/:id', (req, res) => {
+//   if (ObjectId.isValid(req.params.id)) {
+//     User.findById(req.params.id, function (err, user) {
+//       if (err) {
+//         res.status(500).json({success: false, message: err.message})
+//       } else if (!user) {
+//         res.status(404).json({ success: false, message: 'Пользователь не найден. User not found..'})
+//       } else {
+//         User.remove({ _id: req.params.id }, function (err) {
+//           if (err) res.status(500).json({success: false, message: err.message})
+//           else {
+//             res.status(200).json({ success: true, message: 'Пользователь удален! User deleted!'})
+//           }
+//         })
+//       }
+//     })
+//   } else {
+//     res.status(404).json({ success: false, message: 'Неверный ID. Invalid ID' })
+//   }
+// })
 
 export default router
 

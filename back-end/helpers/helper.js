@@ -11,8 +11,12 @@ var helper = {
   
   beforeSend: (data) => {
     data.id = data._id
-    // data._id = undefined // Apriori pas possible de toucher à '_id'
     data.__v = undefined
+  },
+
+  beforeSendUser: (data) => {
+    helper.beforeSend(data)
+    data.hash_password = undefined
   },
   
 }
