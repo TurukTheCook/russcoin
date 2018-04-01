@@ -51,7 +51,7 @@ router.post('/', (req, res) => {
     if (err) {
       // err.message.match(RegExp)
       // foutre une RegExp genre : ^'Product validation failed' + anything
-      if (err.message == "Product validation failed") {
+      if (err.message.match(/^Product validation failed.+/)) {
         res.status(500).json({ success: false, message: 'russe' + err.message })
       }
       // if (err.message == "lol") res.status(500).json({ success: false, message: 'russe' + err.message })
