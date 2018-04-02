@@ -2,7 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
 import User from './../users/model'
-import controller from './controller';
+import controller from './controller'; // actuellement non utilisé
 import helper from '../../helpers/helper';
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -25,7 +25,7 @@ router.get('/products', (req, res) => {
 
 router.put('/', (req, res) => {
   res.locals.user.update(req.body, {runValidators : true}, (err, result) => {
-    // a test de renvoyer "result" dans le front
+    // veux t'on renvoyer "result" dans le front ?
     if (err) res.status(500).json({ success: false, message: err.message })
     else res.status(200).json({ success: true, message: 'Профиль обновлен! Profile updated!', content: result })
   })

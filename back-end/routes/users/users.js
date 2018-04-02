@@ -2,7 +2,8 @@ import express from 'express'
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
 import User from './model'
-import controller from './controller';
+import controller from './controller'; // actuellement non utilisé
+import helper from '../../helpers/helper';
 const ObjectId = mongoose.Types.ObjectId;
 
 let router = express.Router();
@@ -29,7 +30,7 @@ router.get('/:id', (req, res) => {
         res.status(200).json({ success: true, message: 'Вот профиль пользователя! Here is the user profile!', content: user })
       }
     })
-  } else res.status(404).json({ success: false, message: 'Неверный ID. Invalid ID' })
+  } else res.status(400).json({ success: false, message: 'Неверный ID. Invalid ID' })
 })
 
 // router.put('/:id', (req, res) => {
@@ -54,7 +55,7 @@ router.get('/:id', (req, res) => {
 //         }
 //       })
 //     } else {
-//       res.status(404).json({ success: false, message: 'Неверный ID. Invalid ID' })
+//       res.status(400).json({ success: false, message: 'Неверный ID. Invalid ID' })
 //     }
 //   } else {
 //     res.status(400).json({ success: false, message: 'Отсутствуют данные. Data is missing..'})
@@ -78,7 +79,7 @@ router.get('/:id', (req, res) => {
 //       }
 //     })
 //   } else {
-//     res.status(404).json({ success: false, message: 'Неверный ID. Invalid ID' })
+//     res.status(400).json({ success: false, message: 'Неверный ID. Invalid ID' })
 //   }
 // })
 
