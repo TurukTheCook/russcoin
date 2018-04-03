@@ -10,7 +10,7 @@
                 <div class="p-1 flex messages-list" :class="[{'unread': !msg.read}, 'read']">
                     <p class="min-max-100 main-font">{{msg.senderId}}</p>
                     <p class="min-max-100">{{msg.title}}</p>
-                    <p class="md-caption flex-grow">{{msg.content}}</p>
+                    <p class="flex-grow" style="color: grey">{{msg.content}}</p>
                     <p class="min-max-180 text-center">{{moment(msg.creationDate)}} ({{momentFromNow(msg.creationDate)}})</p>
                     <!-- <p class="px-1" style="min-width: 100px; max-width: 100px; height: 1.5em; overflow: hidden" v-if="msg.read">{{msg.readDate | moment}} ({{msg.readDate | momentFromNow}})</p> -->
                 </div>

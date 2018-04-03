@@ -2,15 +2,15 @@
 <div>
     <form novalidate class="md-layout" @submit.prevent="send">
         <md-card class="md-layout-item flex flex-column no-box-shadow">
+            <md-card-header class="main-color-bg">
+                <div class="md-title text-center text-white">SEND A MESSAGE</div>
+            </md-card-header>
             <div class="p-1" :class="{'alert alert-danger': !success}" v-if="success == false">
                 {{message}}
             </div>
             <div class="p-1" :class="{'alert alert-success': success}" v-if="success == true">
                 {{message}}
             </div>
-            <md-card-header class="main-color-bg">
-                <div class="md-title text-center text-white">SEND A MESSAGE</div>
-            </md-card-header>
             <md-card-content class="flex-grow">
                 <div class="md-layout flex-column md-gutter">
                     <div class="md-layout-item">

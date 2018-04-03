@@ -5,21 +5,21 @@
             <md-card-header class="main-color-bg">
                 <div class="md-title text-center">LOG IN</div>
             </md-card-header>
+            <div class="p-1" :class="{'alert alert-danger': !success}" v-if="success == false">
+                {{message}}
+            </div>
+            <div class="p-1" :class="{'alert alert-success': success}" v-if="success == true">
+                {{message}}
+            </div>
             <md-card-content class="flex-grow">
-                <div class="md-layout flex-column md-gutter">
-                    <div class="md-layout-item">
-                        <md-field>
-                            <label for="username">Username</label>
-                            <md-input name="username" id="username" v-model="logUser.username"></md-input>
-                        </md-field>
-                    </div>
-                    <div class="md-layout-item">
-                        <md-field>
-                            <label for="password">Password</label>
-                            <md-input name="password" id="password" v-model="logUser.password" type="password"></md-input>
-                        </md-field>
-                    </div>
-                </div>
+                <md-field>
+                    <label for="username">Username</label>
+                    <md-input name="username" id="username" v-model="logUser.username"></md-input>
+                </md-field>
+                <md-field>
+                    <label for="password">Password</label>
+                    <md-input name="password" id="password" v-model="logUser.password" type="password"></md-input>
+                </md-field>
             </md-card-content>
             <md-card-actions>
                 <md-button type="submit" class="main-color-bg" :disabled="sending">Sign In</md-button>
@@ -28,12 +28,6 @@
                 <p class="text-center">Don't have an account ? 
                 <router-link :to="{ name: 'register' }">Sign up</router-link>
                 </p>
-            </div>
-            <div class="p-1" :class="{'alert alert-danger': !success}" v-if="success == false">
-                {{message}}
-            </div>
-            <div class="p-1" :class="{'alert alert-success': success}" v-if="success == true">
-                {{message}}
             </div>
         </md-card>
     </form>
@@ -46,7 +40,10 @@ export default {
   name: 'Login',
   data () {
     return {
-      logUser: {},
+      logUser: {
+          username: 'test@test.test',
+          password: 'test'
+      },
       sending: false,
       success: null,
       message: 'An error has occured..'

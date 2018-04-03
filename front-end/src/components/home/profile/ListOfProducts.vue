@@ -12,11 +12,12 @@
           <div class="md-title" style="white-space: nowrap; text-overflow: ellipsis; max-width: 150px; overflow: hidden">{{product.title}}</div>
           <div class="md-subhead" style="white-space: nowrap; text-overflow: ellipsis; max-width: 150px; overflow: hidden">{{product.userId}}</div>
           <md-divider class="my-1"></md-divider>
-          <div class="mb-1" style="max-width: 150px">{{descriptionTruncated(product.description)}}</div>
-          <div style="max-width: 150px">{{moment(product.creationDate)}} ({{momentFromNow(product.creationDate)}})</div>
+          <div style="max-width: 150px">{{descriptionTruncated(product.description)}}</div>
+          <div class="mt-1" style="max-width: 150px">{{moment(product.creationDate)}} ({{momentFromNow(product.creationDate)}})</div>
+          <div class="mt-1" style="max-width: 150px" v-if="product.address">{{product.address.country}}</div>
         </md-card-header-text>
         <md-card-media class="product-miniature flex flex-center" style="position: relative">
-          <img src="http://via.placeholder.com/300x400/ee4d4b/fff" alt="People">
+          <img src="http://via.placeholder.com/300x400/ff2c29/fff" alt="People">
           <div class="main-font text-white p-1" style="background-color: rgba(0,0,0, 0.4); position: absolute; bottom: 10px; right: 10px" v-if="product.price">{{'$ ' + product.price}}</div>
         </md-card-media>
       </md-card-header>

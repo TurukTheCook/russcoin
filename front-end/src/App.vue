@@ -2,13 +2,13 @@
   <div id="app">
       <div id="inner">
         <div class="blyat-chat flex flex-center">
-          <img class="speaker" v-if="!playing" @click="togglePlayback" src="./assets/img/volume_off.png"/>
-          <img class="speaker" v-if="playing" @click="togglePlayback" src="./assets/img/volume_up.png"/>
+          <h1><md-icon class="speaker" v-if="!playing" @click="togglePlayback">volume_off</md-icon></h1>
+          <h1><md-icon class="speaker" v-if="playing" @click="togglePlayback">volume_up</md-icon></h1>
           <router-link :to="{ name: 'login' }">
             <img src="./assets/img/blyat.png"/>
           </router-link>
           <router-link class="flex flex-center" :to="{ name: 'login' }">
-            <h1 class="text-center" style="color: #EF5350">BLYAT-MAILER</h1>
+            <h1 class="text-center" style="color: #ff2c29">BLYAT-MAILER</h1>
           </router-link>
         </div>
         <div class="pb-3 mx-auto flex justify-content-center">

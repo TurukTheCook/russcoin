@@ -6,16 +6,15 @@
                     <span class="text-dark">SENDER:</span> {{msg.senderId}}
                 </div>
             </md-card-header>
+            <div :class="{'alert alert-danger': !success}" v-if="success == false">
+                {{message}}
+            </div>
             <md-card-content class="p-1">
                 <div v-if="msg._id" class="p-1" style="position: relative">
                     <p class="md-caption main-color" style="position: absolute; left: 5px;">Title: </p><p style="padding-left: 100px">{{msg.title}}</p><md-divider class="my-2"/>
                     <p class="md-caption main-color" style="position: absolute; left: 5px;">Content: </p><p style="padding-left: 100px">{{msg.content}}</p><md-divider class="my-2"/>
                     <p class=""><span class="md-caption main-color" style="position: absolute; left: 5px;">Send date: </span><span style="padding-left: 100px" v-if="msg.read">{{moment(msg.creationDate)}} ({{momentFromNow(msg.creationDate)}})</span><br/>
                     <span class="md-caption main-color" style="position: absolute; left: 5px;">Read Date: </span><span style="padding-left: 100px" v-if="msg.read">{{moment(msg.readDate)}} ({{momentFromNow(msg.readDate)}})</span></p>
-                </div>
-    
-                <div :class="{'alert alert-danger': !success}" v-if="success == false">
-                    {{message}}
                 </div>
             </md-card-content>
         </md-card>

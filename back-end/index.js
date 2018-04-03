@@ -16,7 +16,6 @@ dotEnv.config()
 
 //  Routes Imports
 import auth from './routes/auth/auth'
-import fish from './routes/fish/fish'
 import users from './routes/users/users'
 import messages from './routes/messages/messages'
 import products from './routes/products/products'
@@ -63,7 +62,6 @@ let router = express.Router()
 // Les routes qui suivent sont libres d'accès
 // Afin de pouvoir s'enregister / se loguer
 router.use('/auth', auth)
-router.use('/fish', fish)
 
 // AUTH PROTECTION STARTS HERE...
 // Il verifiera à chaque fois si le token est valide avant d'authoriser l'acces à la suite sinon l'aventure s'arrête ici.
@@ -93,6 +91,6 @@ mongoose.connect(process.env.MONGOURL, {}, function (err) {
     // LAUNCHING SERVER TO THE MOON
     // On défini un port depuis le fichier de config .env  sinon si la variable n'existe pas on utilise le port 1407
     let port = process.env.PORT || 1407;
-    app.listen(port, () => console.log('App listen on port: ' + port + ' ...'))
+    app.listen(port, () => console.log('App listening on port: ' + port + ' ...'))
   }
 })

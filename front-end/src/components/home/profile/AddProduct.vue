@@ -9,20 +9,40 @@
                 {{message}}
             </div>
             <md-card-content class="flex-grow">
+            <md-subheader class="main-color">Basics</md-subheader>
               <div class="w-75 mx-auto">
                     <md-field>
-                        <label for="productTitle">Title</label>
-                        <md-input name="productTitle" id="productTitle" v-model="sendProduct.title"></md-input>
+                        <label>Title</label>
+                        <md-input v-model="sendProduct.title" required></md-input>
                     </md-field>
                     <md-field>
-                        <label for="productDescription">Description</label>
-                        <md-textarea name="productDescription" id="productDescription" v-model="sendProduct.description"></md-textarea>
+                        <label>Description</label>
+                        <md-textarea v-model="sendProduct.description" required></md-textarea>
                     </md-field>
                     <md-field>
-                        <label for="productPrice">Price</label>
-                        <md-input name="productPrice" id="productPrice" v-model="sendProduct.price"></md-input>
+                        <label>Price</label>
+                        <md-input v-model="sendProduct.price" required></md-input>
                     </md-field>
                 </div>
+            <md-subheader class="main-color">Address</md-subheader>
+            <div class="w-75 mx-auto">
+                <md-field>
+                    <label>Country</label>
+                    <md-input v-model="sendProduct.address.country"></md-input>
+                </md-field>
+                <md-field>
+                    <label>Region</label>
+                    <md-input v-model="sendProduct.address.region"></md-input>
+                </md-field>
+                <md-field>
+                    <label>City</label>
+                    <md-input v-model="sendProduct.address.city"></md-input>
+                </md-field>
+                <md-field>
+                    <label>Street</label>
+                    <md-input v-model="sendProduct.address.street"></md-input>
+                </md-field>
+            </div>
             </md-card-content>
             <md-card-actions>
                 <md-button type="submit" class="main-color-bg" :disabled="sending">Send</md-button>
@@ -41,7 +61,9 @@ export default {
       success: null,
       message: 'An error has occured..',
       sending: false,
-      sendProduct: {}
+      sendProduct: {
+          address: {}
+      }
     }
   },
   methods: {
@@ -66,7 +88,24 @@ export default {
                         this.message = err.response.data.message;
                     }
                 )
+      },
+        getProfile() {
+          http.get('profile')
+            .then(
+                res => {
+                    this.sendProduct.address = res.data.content.address
+                }
+            )
+            .catch(
+                err => {
+                    this.success = err.response.data.success
+                    this.message = err.response.data.message
+                }
+            )
       }
+  },
+  created() {
+      this.getProfile()
   }
 }
 </script>

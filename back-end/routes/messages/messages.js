@@ -6,32 +6,32 @@ const ObjectId = mongoose.Types.ObjectId;
 
 let router = express.Router();
 
-router.get('/', (req, res) => {
-  let _id = res.locals.decode._id;
-  let _username = res.locals.decode.username;
-  // Verif que req.params.id est bien de type ObjectId avant de passer à la recherche
-  if (ObjectId.isValid(_id)) {
-    // Verif que l'utilisateur existe
-    User.findById(_id, function (err, user) {
-      if (!user) {
-        res.status(404).json({ success: false, message: 'Пользователь не найден. User not found..' })
-      } else {
-        if (err) res.status(500).json({success: false, message: err.message})
-        else {
-          // Trouver tout ses messages
-          Message.find({ $or: [{ receiverId: _id }, { receiverId: _username}] }, (err, messages) => {
-            if (err) res.status(500).json({success: false, message: err.message})
-            else {
-              res.status(200).json({ success: true, message: 'Вот ваши сообщения! Here is your messages!', content: messages })
-            }
-          })
-        }
-      }
-    })
-  } else {
-    res.status(404).json({ success: false, message: 'Неверный ID. Invalid ID' })
-  }
-})
+// router.get('/', (req, res) => {
+//   let _id = res.locals.decode._id;
+//   let _username = res.locals.decode.username;
+//   // Verif que req.params.id est bien de type ObjectId avant de passer à la recherche
+//   if (ObjectId.isValid(_id)) {
+//     // Verif que l'utilisateur existe
+//     User.findById(_id, function (err, user) {
+//       if (!user) {
+//         res.status(404).json({ success: false, message: 'Пользователь не найден. User not found..' })
+//       } else {
+//         if (err) res.status(500).json({success: false, message: err.message})
+//         else {
+//           // Trouver tout ses messages
+//           Message.find({ $or: [{ receiverId: _id }, { receiverId: _username}] }, (err, messages) => {
+//             if (err) res.status(500).json({success: false, message: err.message})
+//             else {
+//               res.status(200).json({ success: true, message: 'Вот ваши сообщения! Here is your messages!', content: messages })
+//             }
+//           })
+//         }
+//       }
+//     })
+//   } else {
+//     res.status(404).json({ success: false, message: 'Неверный ID. Invalid ID' })
+//   }
+// })
 
 router.get('/', (req, res) => {
   Message.find({ $or: [{ receiverId: res.locals.user._id }, { receiverId: res.locals.user.username}] }, (err, messages) => {

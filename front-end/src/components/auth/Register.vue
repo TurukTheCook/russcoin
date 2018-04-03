@@ -5,38 +5,54 @@
             <md-card-header class="main-color-bg">
                 <div class="md-title text-center">REGISTER</div>
             </md-card-header>
+            <div class="p-1" :class="{'alert alert-danger': !success}" v-if="success == false">
+                {{message}}
+            </div>
+            <div class="p-1" :class="{'alert alert-success': success}" v-if="success == true">
+                {{message}}
+            </div>
             <md-card-content class="flex-grow">
-                <div class="md-layout flex-column md-gutter">
-                    <div class="md-layout-item">
-                        <md-field>
-                            <label >Username</label>
-                            <md-input v-model="newUser.username"></md-input>
-                        </md-field>
-                    </div>
-                    <div class="md-layout-item">
-                        <md-field>
-                            <label >First Name</label>
-                            <md-input v-model="newUser.firstName"></md-input>
-                        </md-field>
-                    </div>
-                    <div class="md-layout-item">
-                        <md-field>
-                            <label >Last Name</label>
-                            <md-input v-model="newUser.lastName"></md-input>
-                        </md-field>
-                    </div>
-                    <div class="md-layout-item">
-                        <md-field>
-                            <label>Password</label>
-                            <md-input v-model="newUser.password" type="password"></md-input>
-                        </md-field>
-                    </div>
-                    <div class="md-layout-item">
-                        <md-field>
-                            <label>Confirm Password</label>
-                            <md-input v-model="newUser.passwordVerif" type="password"></md-input>
-                        </md-field>
-                    </div>
+                <md-subheader class="main-color">Basics</md-subheader>
+                <div class="w-75 mx-auto">
+                    <md-field>
+                        <label>Username</label>
+                        <md-input v-model="newUser.username" required></md-input>
+                    </md-field>
+                    <md-field>
+                        <label>First Name</label>
+                        <md-input v-model="newUser.firstName"></md-input>
+                    </md-field>
+                    <md-field>
+                        <label>Last Name</label>
+                        <md-input v-model="newUser.lastName"></md-input>
+                    </md-field>
+                    <md-field>
+                        <label>Password</label>
+                        <md-input v-model="newUser.password" type="password" required></md-input>
+                    </md-field>
+                    <md-field>
+                        <label>Confirm Password</label>
+                        <md-input v-model="newUser.passwordVerif" type="password" required></md-input>
+                    </md-field>
+                </div>
+                <md-subheader class="main-color">Address</md-subheader>
+                <div class="w-75 mx-auto">
+                    <md-field>
+                        <label>Country</label>
+                        <md-input v-model="newUser.address.country"></md-input>
+                    </md-field>
+                    <md-field>
+                        <label>Region</label>
+                        <md-input v-model="newUser.address.region"></md-input>
+                    </md-field>
+                    <md-field>
+                        <label>City</label>
+                        <md-input v-model="newUser.address.city"></md-input>
+                    </md-field>
+                    <md-field>
+                        <label>Street</label>
+                        <md-input v-model="newUser.address.street"></md-input>
+                    </md-field>
                 </div>
             </md-card-content>
             <md-card-actions>
@@ -46,12 +62,6 @@
                 <p class="text-center">Already have an account ? 
                 <router-link :to="{ name: 'login' }">Sign in</router-link>
                 </p>
-            </div>
-            <div class="p-1" :class="{'alert alert-danger': !success}" v-if="success == false">
-                {{message}}
-            </div>
-            <div class="p-1" :class="{'alert alert-success': success}" v-if="success == true">
-                {{message}}
             </div>
         </md-card>
     </form>
@@ -64,7 +74,9 @@ export default {
   name: 'Register',
   data () {
     return {
-      newUser: {},
+      newUser: {
+          address: {}
+      },
       sending: false,
       success: null,
       message: 'An error has occured..'
