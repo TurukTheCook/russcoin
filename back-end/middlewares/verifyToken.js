@@ -1,16 +1,12 @@
+// MEMO luke : questionnement sur la sécurité du token, demander a Yoann.
 import express from "express"
 import mongoose from "mongoose"
 import jwt from "jsonwebtoken"
 import User from './../routes/users/model'
 const ObjectId = mongoose.Types.ObjectId
 
-// AUTH PROTECTION STARTS HERE...
-// auth middleware definition
-// Ici on défini le middleware qui va servir a vérifier que le token est valide
-// On regarde donc si le header AUTHORIZATION existe, puis on separe en deux sa valeur
 // la premiere partie est égale à un mot defini dans la config, et la seconde est égale au token.
-// On utilise JWT.VERIFY(TOKEN, SECRETKEY, CALLBACK(err, result){...})
-// JWT va donc verifier le token avec le secretkey et renvoyer via le callback une erreur ou un resultat
+// jwy.verify(TOKEN, SECRETKEY, CALLBACK(err, result){...})
 // Ce dernier correspond au token décodé, on retrouve le payload (ex: email utilisateur, id etc..)
 // on appelle next() pour dire que tout s'est bien passé et qu'on peut passer à la suite (circulez svp!)
 let verifyToken = (req, res, next) => {
@@ -29,7 +25,7 @@ let verifyToken = (req, res, next) => {
               next()
             }
           })
-        } else res.status(404).json({ success: false, message: 'Неверный ID. Invalid ID' })
+        } else res.status(400).json({ success: false, message: 'Неверный ID. Invalid ID' })
       }
     })
   } else res.status(403).json({ success: false, message: '3 CYKA BLYAT !' })

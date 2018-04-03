@@ -59,11 +59,9 @@ app.use(bodyParser.json())
 let router = express.Router()
 
 // AUTH ROUTE UNPROTECTED
-// Les routes qui suivent sont libres d'accès
-// Afin de pouvoir s'enregister / se loguer
 router.use('/auth', auth)
 
-// AUTH PROTECTION STARTS HERE...
+// AUTH PROTECTION STARTS HERE
 // Il verifiera à chaque fois si le token est valide avant d'authoriser l'acces à la suite sinon l'aventure s'arrête ici.
 router.use(verifyToken)
 
@@ -78,7 +76,7 @@ app.use('/api', router)
 
 // Fin des routes, on renvoi un 404 not found pour tout le reste
 app.use('/*', (req, res) => {
-  res.status(404).json({ success: false, message: 'Этот маршрут не существует.. This route does not exists..'})
+  res.status(404).json({ success: false, message: 'Этот маршрут не существует. This route does not exists.'})
 })
 
 
@@ -87,10 +85,10 @@ mongoose.Promise = global.Promise
 mongoose.connect(process.env.MONGOURL, {}, function (err) {
   if (err) { throw err; }
   else {
-    console.log('Connection to the Database etablished ...')
+    console.log('Connection to the Database etablished...')
     // LAUNCHING SERVER TO THE MOON
-    // On défini un port depuis le fichier de config .env  sinon si la variable n'existe pas on utilise le port 1407
+    // On défini un port depuis le fichier de config .env, si la variable n'existe pas on utilise le port 1407
     let port = process.env.PORT || 1407;
-    app.listen(port, () => console.log('App listening on port: ' + port + ' ...'))
+    app.listen(port, () => console.log('App listen on port: ' + port))
   }
 })
