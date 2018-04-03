@@ -23,9 +23,10 @@ router.get('/products', (req, res) => {
   })
 })
 
+// {runValidators : true}
+// exploiter le contenue de "result" pour faire des réponses differentes
 router.put('/', (req, res) => {
-  res.locals.user.update(req.body, {runValidators : true}, (err, result) => {
-    // veux t'on renvoyer "result" dans le front ?
+  res.locals.user.update(req.body, (err, result) => {
     if (err) res.status(500).json({ success: false, message: err.message })
     else res.status(200).json({ success: true, message: 'Профиль обновлен! Profile updated!', content: result })
   })

@@ -20,9 +20,11 @@ router.post('/', (req, res) => {
   newMessage.senderId = res.locals.user.username
   newMessage.receiverId = req.body.userID
   newMessage.save(function (err, newMessage) {
-    
+    if (err) res.status(500).json({ success: false, message: err.message })
+    else res.status(201).json({ success: true, message: 'Сообщение успешно отправлено! Message sent successfuly!' })    
   })
 })
+
 
 router.post('/OLD', (req, res) => {
   if (req.body.userID && req.body.title && req.body.content) {
@@ -38,6 +40,7 @@ router.post('/OLD', (req, res) => {
         })
       }
     }
+    // trouver un autre moyen que ce if/else
     if (ObjectId.isValid(req.body.userID)) {
       User.find({ _id: req.body.userID }, function (err, user) {
         sendMessage(err)
@@ -56,6 +59,7 @@ router.post('/OLD', (req, res) => {
 //     // 
 //   } else res.status(412).json({ success: false, message: 'Отсутствуют данные. Data is missing.' })
 // })
+
 
 router.put('/:messageID', (req, res) => {
   if (ObjectId.isValid(req.params.messageID)) {
