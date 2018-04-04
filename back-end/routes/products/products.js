@@ -45,7 +45,7 @@ router.post('/', (req, res) => {
   if (!req.body.address && res.locals.user.address) {
     newProduct.address = res.locals.user.address
   }
-  newProduct.save(function (err, product) {
+  newProduct.save( (err, product) => {
     if (err) {
       // Russian personalised err.message
       if (err.message.match(/^Product validation failed.+/)) {

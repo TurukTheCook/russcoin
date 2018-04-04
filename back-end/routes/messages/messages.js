@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
   let newMessage = new Message(req.body)
   newMessage.senderId = res.locals.user.username
   newMessage.receiverId = req.body.userID
-  newMessage.save(function (err, newMessage) {
+  newMessage.save( (err, newMessage) => {
     if (err) res.status(500).json({ success: false, message: err.message })
     else res.status(201).json({ success: true, message: 'Сообщение успешно отправлено! Message sent successfuly!' })    
   })
@@ -28,13 +28,13 @@ router.post('/', (req, res) => {
 
 router.post('/OLD', (req, res) => {
   if (req.body.userID && req.body.title && req.body.content) {
-    var sendMessage = function (err) {
+    var sendMessage = (err) => {
       if (err) res.status(500).json({ success: false, message: err.message })
       else {
         let newMessage = new Message(req.body)
         newMessage.senderId = res.locals.user.username
         newMessage.receiverId = req.body.userID
-        newMessage.save(function (err, newMessage) {
+        newMessage.save( (err, newMessage) => {
           if (err) res.status(500).json({ success: false, message: err.message })
           else res.status(201).json({ success: true, message: 'Сообщение успешно отправлено! Message sent successfuly!' })
         })
@@ -42,11 +42,11 @@ router.post('/OLD', (req, res) => {
     }
     // trouver un autre moyen que ce if/else
     if (ObjectId.isValid(req.body.userID)) {
-      User.find({ _id: req.body.userID }, function (err, user) {
+      User.find({ _id: req.body.userID }, (err, user) => {
         sendMessage(err)
       })
     } else {
-      User.find({ username: req.body.userID }, function (err, user) {
+      User.find({ username: req.body.userID }, (err, user) => {
         sendMessage(err)
       })
     }
@@ -63,7 +63,7 @@ router.post('/OLD', (req, res) => {
 
 router.put('/:messageID', (req, res) => {
   if (ObjectId.isValid(req.params.messageID)) {
-    Message.findById(req.params.messageID, function (err, message) {
+    Message.findById(req.params.messageID,  (err, message) => {
       if (err) res.status(500).json({ success: false, message: err.message })      
       if (!message) res.status(404).json({ success: false, message: 'Сообщение не найдено. Message not found.' })
       else {
@@ -74,7 +74,7 @@ router.put('/:messageID', (req, res) => {
             // le req.body.read est chelou, il sert pas a grand chose actuellement (il pourrait servir si on peux UNREAD les messages)
             message.read = req.body.read
             message.readDate = req.body.readDate || Date.now()
-            message.save(function (err, messageUpdated) {
+            message.save( (err, messageUpdated) => {
               // if (err) message tout de même renvoyer
               if (err) res.status(500).json({ success: false, message: err.message, content: messageUpdated })
               else res.status(200).json({ success: true, message: 'Вот ваше сообщение! Here is your message!', content: messageUpdated })
