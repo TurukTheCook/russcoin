@@ -1,4 +1,3 @@
-// MEMO luke : questionnement sur la sécurité du token, demander a Yoann.
 import express from "express"
 import mongoose from "mongoose"
 import jwt from "jsonwebtoken"

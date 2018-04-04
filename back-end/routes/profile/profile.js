@@ -32,4 +32,6 @@ router.put('/', (req, res) => {
   })
 })
 
+// pour router.put : if (req.body.password || req.body.hash_password) functionQuiGereLeBail()
+
 export default router
