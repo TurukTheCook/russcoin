@@ -12,17 +12,14 @@ export default {
     if (req.body.username && req.body.password) {
       User.findOne({ username: helper.caseInsensitive(req.body.username)}, (err, user) => {
         if (err) res.status(500).json({success: false, message: err.message})
-        if (!user) res.status(401).json({ success: false, message: 'Пользователь не найден. User not found.' })
+        else if (!user) res.status(404).json({ success: false, message: 'Пользователь не найден. User not found.' })
+        else if (!user.comparePasswords(req.body.password)) res.status(401).json({ success: false, message: 'Неверный пароль. Wrong password.' })
         else {
-          if (!user.comparePasswords(req.body.password)) {
-            res.status(401).json({ success: false, message: 'Неверный пароль. Wrong password.' })
-          } else {
-            // JWT.SIGN(PAYLOAD, SECRETKEY, CALLBACK(err, result){...})
-            jwt.sign({ username: user.username, _id: user._id }, process.env.SECRETKEY, (err, result) => {
-              if (err) res.status(500).json({success: false, message: err.message})
-              else res.status(200).json({ success: true, message: 'Добро пожаловать! Welcome camarade!', content: {token: process.env.AUTHBEARER + ' ' + result}})
-            })
-          }
+          // JWT.SIGN(PAYLOAD, SECRETKEY, CALLBACK(err, result){...})
+          jwt.sign({ username: user.username, _id: user._id }, process.env.SECRETKEY, (err, result) => {
+            if (err) res.status(500).json({success: false, message: err.message})
+            else res.status(200).json({ success: true, message: 'Добро пожаловать! Welcome camarade!', content: {token: process.env.AUTHBEARER + ' ' + result}})
+          })
         }
       })
     } else res.status(412).json({ success: false, message: 'Имя пользователя и / или пароль отсутствуют. Username and/or password are missing.'})

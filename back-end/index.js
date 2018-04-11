@@ -20,6 +20,7 @@ import users from './routes/users'
 import messages from './routes/messages'
 import products from './routes/products'
 import profile from './routes/profile'
+
 // Middleware Imports
 import verifyToken from './middlewares/verifyToken'
 
@@ -50,9 +51,7 @@ app.use( (req, res, next) => {
 // app.use(cors())
 
 // BODY PARSER
-app.use(bodyParser.urlencoded({
-  extended: true
-}))
+app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 // ROUTER PREFIX API DEFINING (see below)

@@ -26,7 +26,7 @@ export default {
     if (ObjectId.isValid(req.params.id)) {
       User.findById(req.params.id, (err, user) => {
         if (err) res.status(500).json({ success: false, message: err.message })
-        if (!user) res.status(404).json({ success: false, message: 'Пользователь не найден. User not found.' })
+        else if (!user) res.status(404).json({ success: false, message: 'Пользователь не найден. User not found.' })
         else {
           helper.beforeSendUser(user)
           res.status(200).json({ success: true, message: 'Вот профиль пользователя! Here is the user profile!', content: user })

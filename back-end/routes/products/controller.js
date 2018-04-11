@@ -32,7 +32,7 @@ export default {
     if (ObjectId.isValid(req.params.id)) {
       Product.findById(req.params.id, (err, product) => {
         if (err) res.status(500).json({ success: false, message: err.message })
-        if (!product) res.status(404).json({ success: false, message: 'продукт не найден. product not found.' })
+        else if (!product) res.status(404).json({ success: false, message: 'продукт не найден. product not found.' })
         else {
           helper.beforeSend(product)
           res.status(200).json({ success: true, message: 'Вот продукт! Here is the product!', content: product })
@@ -47,17 +47,14 @@ export default {
   create(req, res) {
     let newProduct = new Product(req.body)
     newProduct.userId = res.locals.user.username
-    if (!req.body.address && res.locals.user.address) {
-      newProduct.address = res.locals.user.address
-    }
-    newProduct.save( (err, product) => {
+    if (!req.body.address && res.locals.user.address) newProduct.address = res.locals.user.address
+    newProduct.save((err, product) => {
       if (err) {
         // Russian personalised err.message
         if (err.message.match(/^Product validation failed.+/)) {
           res.status(400).json({ success: false, message: 'Не удалось выполнить проверку продукта / ' + err.message })
         } else res.status(500).json({ success: false, message: err.message })
       } else {
-        // veux t'on renvoyer "product" dans le front ?
         helper.beforeSend(product)
         res.status(201).json({ success: true, message: 'Вот ваш новый продукт! Here is your new product!', content: product })
       }
