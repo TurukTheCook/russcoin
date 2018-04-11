@@ -15,11 +15,11 @@ import dotEnv from 'dotenv'
 dotEnv.config()
 
 //  Routes Imports
-import auth from './routes/auth/auth'
-import users from './routes/users/users'
-import messages from './routes/messages/messages'
-import products from './routes/products/products'
-import profile from './routes/profile/profile'
+import auth from './routes/auth'
+import users from './routes/users'
+import messages from './routes/messages'
+import products from './routes/products'
+import profile from './routes/profile'
 // Middleware Imports
 import verifyToken from './middlewares/verifyToken'
 

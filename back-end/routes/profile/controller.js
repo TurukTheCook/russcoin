@@ -4,11 +4,17 @@ import helper from '../../helpers/helper'
 const ObjectId = mongoose.Types.ObjectId
 
 export default {
+  /*
+  *   READ
+  */
   read(req, res) {
     helper.beforeSendUser(res.locals.user)
     res.status(200).json({ success: true, message: 'Ваш профиль. Your profile.', content: res.locals.user })
   },
 
+  /*
+  *   READ PRODUCTS ALL
+  */
   readProductsAll(req, res) {
     Product.find({ userId : res.locals.user._id },  (err, products) => {
       if (err) res.status(500).json({ success: false, message: err.message })
@@ -19,6 +25,9 @@ export default {
     })
   },
 
+  /*
+  *   UPDATE
+  */
   update(req, res) {
     res.locals.user.update(req.body, (err, result) => {
       if (err) res.status(500).json({ success: false, message: err.message })

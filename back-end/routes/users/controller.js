@@ -4,6 +4,9 @@ import helper from '../../helpers/helper'
 const ObjectId = mongoose.Types.ObjectId
 
 export default {
+  /*
+  *   READ ALL
+  */
   readAll(req, res) {
     User.find({}, (err, users) => {
       if (err) res.status(500).json({success: false, message: err.message})
@@ -16,6 +19,9 @@ export default {
     })
   },
 
+  /*
+  *   READ
+  */
   read(req, res) {
     if (ObjectId.isValid(req.params.id)) {
       User.findById(req.params.id, (err, user) => {
