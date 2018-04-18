@@ -45,7 +45,16 @@ export default {
   *   CREATE
   */
   create(req, res) {
-    let newProduct = new Product(req.body)
+    // let test = JSON.parse(req.body.sendProduct)
+    // console.log('### file: ', test)
+    // res.status(200).json({ success: true, message: 'whateve'})
+    let newProduct = new Product(JSON.parse(req.body.sendProduct))
+    if (req.files[0]) {
+      // for(let i=0; i < req.files.length; i++){
+      //   newProduct.picture.push(req.files[i].path)
+      // }
+      newProduct.picture.push(req.files[0].path)
+    }
     newProduct.userId = res.locals.user.username
     if (!req.body.address && res.locals.user.address) newProduct.address = res.locals.user.address
     newProduct.save((err, product) => {

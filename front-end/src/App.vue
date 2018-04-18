@@ -2,8 +2,8 @@
   <div id="app">
       <div id="inner">
         <div class="blyat-chat flex flex-center">
-          <h1><md-icon class="speaker" v-if="!playing" @click="togglePlayback">volume_off</md-icon></h1>
-          <h1><md-icon class="speaker" v-if="playing" @click="togglePlayback">volume_up</md-icon></h1>
+          <h1 v-if="!playing" @click="togglePlayback"><md-icon class="speaker cursor-pointer">volume_off</md-icon></h1>
+          <h1 v-if="playing" @click="togglePlayback"><md-icon class="speaker cursor-pointer">volume_up</md-icon></h1>
           <router-link :to="{ name: 'login' }">
             <img src="./assets/img/blyat.png"/>
           </router-link>

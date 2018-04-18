@@ -63,7 +63,7 @@ router.use('/auth', auth)
 // AUTH PROTECTION STARTS HERE
 // Il verifiera à chaque fois si le token est valide avant d'authoriser l'acces à la suite sinon l'aventure s'arrête ici.
 router.use(verifyToken)
-
+router.use('/uploads', express.static('uploads'))
 // Protected routes
 router.use('/users', users)
 router.use('/messages', messages)
