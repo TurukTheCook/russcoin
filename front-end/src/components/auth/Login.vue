@@ -41,8 +41,8 @@ export default {
   data () {
     return {
       logUser: {
-				username: 'test@test.test',
-				password: 'test'
+				username: '',
+				password: ''
       },
       sending: false,
       success: null,

@@ -8,7 +8,7 @@
             <img src="./assets/img/blyat.png"/>
           </router-link>
           <router-link class="flex flex-center" :to="{ name: 'login' }">
-            <h1 class="text-center" style="color: #ff2c29">BLYAT-MAILER</h1>
+            <h1 class="text-center" style="color: #ff2c29">BLYATCOIN</h1>
           </router-link>
         </div>
         <div class="pb-3 mx-auto flex justify-content-center">

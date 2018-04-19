@@ -93,7 +93,7 @@ export default {
 						this.message = res.data.message;
 						// this.$emit('increment');
 						setTimeout(()=>{
-							this.$router.push({ name: 'home.profile' })
+							this.$router.push({ name: 'home.profile.listOfProducts' })
 						},500);
 					})
 					.catch(err => {

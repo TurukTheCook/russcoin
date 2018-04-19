@@ -5,10 +5,11 @@
   "author": "Yoann, Luke, Dimitri",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
+    "start": "npm install && npm run dev",
+    "prod": "npm run build && npm run prod-browser",
+    "dev": "webpack-dev-server --open --inline --progress --config build/webpack.dev.conf.js",
     "build": "node build/build.js",
-    "prod": "browser-sync start --server 'dist'"
+    "prod-browser": "browser-sync start --server 'dist'"
   },
   "dependencies": {
     "axios": "^0.18.0",

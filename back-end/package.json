@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.babel.js"
+    "start": "npm install && nodemon index.babel.js",
+    "newbie": "npm install && node index.babel.js"
   },
   "author": "Yoann, Luke, Dimitri",
   "license": "ISC",
