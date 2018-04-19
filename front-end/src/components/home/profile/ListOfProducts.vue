@@ -46,32 +46,28 @@ export default {
     }
   },
   methods: {
-      descriptionTruncated(arg) {
-          if (arg && arg.length > 50) {
-              let truncated = arg.substr(0, 50) + '...'
-              return truncated
-          } else return arg
-      },
-      getProducts() {
-        http.get('products')
-            .then(
-                res => {
-                    this.products = res.data.content;
-                }
-            )
-            .catch(
-                err => {
-                    this.success = err.response.data.success;
-                    this.message = err.response.data.message;
-                }
-            )
-      },
-      moment: function(date) {
-          return moment(date).format('Do MMMM')
-      },
-      momentFromNow: function(date) {
-          return moment(date).fromNow()
-      }
+    descriptionTruncated(arg) {
+      if (arg && arg.length > 50) {
+        let truncated = arg.substr(0, 50) + '...'
+        return truncated
+      } else return arg
+    },
+    getProducts() {
+      http.get('products')
+        .then(res => {
+          this.products = res.data.content;
+        })
+        .catch(err => {
+          this.success = err.response.data.success;
+          this.message = err.response.data.message;
+        })
+    },
+    moment: function(date) {
+      return moment(date).format('Do MMMM')
+    },
+    momentFromNow: function(date) {
+      return moment(date).fromNow()
+    }
   },
   created() {
     this.getProducts()

@@ -87,20 +87,20 @@ export default {
 			}
 			if (this.sendProduct.title && this.sendProduct.description && this.sendProduct.price) {
 				http.post('products', this.formData)
-						.then(res => {
-							this.sending = false
-							this.success = res.data.success;
-							this.message = res.data.message;
-							// this.$emit('increment');
-							setTimeout(()=>{
-								this.$router.push({ name: 'home.profile' })
-							},500);
-						})
-						.catch(err => {
-							this.sending = false
-							this.success = err.response.data.success;
-							this.message = err.response.data.message;
-						})
+					.then(res => {
+						this.sending = false
+						this.success = res.data.success;
+						this.message = res.data.message;
+						// this.$emit('increment');
+						setTimeout(()=>{
+							this.$router.push({ name: 'home.profile' })
+						},500);
+					})
+					.catch(err => {
+						this.sending = false
+						this.success = err.response.data.success;
+						this.message = err.response.data.message;
+					})
 			} else {
 				this.sending = false
 				this.success = false;
@@ -109,14 +109,12 @@ export default {
 		},
 		getProfile() {
 			http.get('profile')
-				.then(
-					res => {
-						this.sendProduct.address = res.data.content.address
+				.then(res => {
+					this.sendProduct.address = res.data.content.address
 				})
-				.catch(
-					err => {
-						this.success = err.response.data.success
-						this.message = err.response.data.message
+				.catch(err => {
+					this.success = err.response.data.success
+					this.message = err.response.data.message
 				})
 		},
 		filesChange(fieldName, fileList) {

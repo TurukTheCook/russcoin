@@ -60,30 +60,26 @@
 				this.$router.push({ name: 'login' })
 			},
 			descriptionTruncated(arg) {
-          if (arg && arg.length > 50) {
-              let truncated = arg.substr(0, 50) + '...'
-              return truncated
-          } else return arg
+				if (arg && arg.length > 50) {
+					let truncated = arg.substr(0, 50) + '...'
+					return truncated
+				} else return arg
       },
 			getProducts() {
         http.get('products/10')
-            .then(
-                res => {
-                    this.products = res.data.content;
-                }
-            )
-            .catch(
-                err => {
-                    this.success = err.response.data.success;
-                    this.message = err.response.data.message;
-                }
-            )
+					.then(res => {
+						this.products = res.data.content;
+					})
+					.catch(err => {
+						this.success = err.response.data.success;
+						this.message = err.response.data.message;
+					})
       },
       moment: function(date) {
-          return moment(date).format('Do MMMM')
+				return moment(date).format('Do MMMM')
       },
       momentFromNow: function(date) {
-          return moment(date).fromNow()
+				return moment(date).fromNow()
       }
 		},
 		mounted() {
@@ -102,7 +98,7 @@
 			var lc = L.control.locate({
 				position: 'topright',
 				strings: {
-						title: `Покажи мне, где я.Show me where I am`
+					title: `Покажи мне, где я.Show me where I am`
 				}
 			}).addTo(mymap);
 		},
