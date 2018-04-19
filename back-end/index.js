@@ -63,7 +63,6 @@ router.use('/auth', auth)
 // AUTH PROTECTION STARTS HERE
 // Il verifiera à chaque fois si le token est valide avant d'authoriser l'acces à la suite sinon l'aventure s'arrête ici.
 router.use(verifyToken)
-router.use('/uploads', express.static('uploads'))
 // Protected routes
 router.use('/users', users)
 router.use('/messages', messages)
@@ -73,6 +72,7 @@ router.use('/profile', profile)
 // ROUTER PREFIX API USED BY APP
 app.use('/api', router)
 
+app.use('/uploads', express.static('uploads'))
 // Fin des routes, on renvoi un 404 not found pour tout le reste
 app.use('/*', (req, res) => {
   res.status(404).json({ success: false, message: 'Этот маршрут не существует. This route does not exists.'})

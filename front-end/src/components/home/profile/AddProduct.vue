@@ -80,22 +80,32 @@ export default {
   methods: {
 		send() {
 			this.sending = true
-			this.formData.append('sendProduct', JSON.stringify(this.sendProduct))
-			http.post('products', this.formData)
-					.then(res => {
-						this.sending = false
-						this.success = res.data.success;
-						this.message = res.data.message;
-						// this.$emit('increment');
-						setTimeout(()=>{
-							this.$router.push({ name: 'home.profile' })
-						},500);
-					})
-					.catch(err => {
-						this.sending = false
-						this.success = err.response.data.success;
-						this.message = err.response.data.message;
-					})
+			if (!this.formData.get('sendProduct')) {
+				this.formData.append('sendProduct', JSON.stringify(this.sendProduct))
+			} else {
+				this.formData.set('sendProduct', JSON.stringify(this.sendProduct))
+			}
+			if (this.sendProduct.title && this.sendProduct.description && this.sendProduct.price) {
+				http.post('products', this.formData)
+						.then(res => {
+							this.sending = false
+							this.success = res.data.success;
+							this.message = res.data.message;
+							// this.$emit('increment');
+							setTimeout(()=>{
+								this.$router.push({ name: 'home.profile' })
+							},500);
+						})
+						.catch(err => {
+							this.sending = false
+							this.success = err.response.data.success;
+							this.message = err.response.data.message;
+						})
+			} else {
+				this.sending = false
+				this.success = false;
+				this.message = 'Please provide a title, a content and a price..';
+			}
 		},
 		getProfile() {
 			http.get('profile')
