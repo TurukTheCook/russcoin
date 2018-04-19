@@ -6,7 +6,7 @@
         {{message}}
     </div>
     <md-content class="flex flex-wrap justify-content-around">
-    <md-card v-for="product in products" :key="product.id" class="mb-1" style="width: 400px">
+    <md-card v-for="product in products" :key="product.id" class="mb-1 border-1 product-card" style="width: 400px">
       <md-card-header>
         <md-card-header-text>
           <div class="md-title" style="white-space: nowrap; text-overflow: ellipsis; max-width: 150px; overflow: hidden">{{product.title}}</div>
@@ -42,42 +42,7 @@ export default {
     return {
       success: true,
       message: 'An error has occured..',
-      products: [{
-        id: '5ds454fefj',
-        title: 'BoxMaster',
-        description: 'The description, long or not that is your problem to manage',
-        userId: 'iLuke',
-        price: 75,
-        creationDate: "2018-03-28T20:24:46.272Z"
-      },
-      {
-        id: '5ds454fefrej',
-        title: 'BoxMaster',
-        description: 'The description, long or not that is your problem to manage',
-        userId: 'iLuke',
-        price: 100
-      },
-      {
-        id: '5ds454fezzfj',
-        title: 'BoxMaster',
-        description: 'The description, long or not that is your problem to manage',
-        userId: 'iLuke',
-        price: 75
-      },
-      {
-        id: '5ds454feaefj',
-        title: 'BoxMaster',
-        description: 'The description, long or not that is your problem to manage',
-        userId: 'iLuke',
-        price: 500
-      },
-      {
-        id: '5ds45rea4fefj',
-        title: 'BoxMaster',
-        description: 'The description, long or not that is your problem to manage',
-        userId: 'iLuke',
-        price: 75
-      }]
+      products: []
     }
   },
   methods: {

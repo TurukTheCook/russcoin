@@ -1,7 +1,7 @@
 <template>
 <div>
-	<form novalidate class="md-layout" @submit.prevent="send" enctype="multipart/form-data">
-		<md-card class="md-layout-item flex flex-column no-box-shadow">
+	<form novalidate @submit.prevent="send" enctype="multipart/form-data">
+		<md-card class="flex flex-column no-box-shadow">
 			<div class="p-1" :class="{'alert alert-danger': !success}" v-if="success == false">
 				{{message}}
 			</div>
@@ -104,7 +104,7 @@ export default {
 			} else {
 				this.sending = false
 				this.success = false;
-				this.message = 'Please provide a title, a content and a price..';
+				this.message = 'Отсутствуют данные. Data is missing.';
 			}
 		},
 		getProfile() {

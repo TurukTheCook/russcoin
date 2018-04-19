@@ -125,6 +125,15 @@ body {
   }
 }
 
+.product-card {
+  transition: all .3s;
+  box-shadow: 0 4px 12px 0 rgba(0,0,0,0.2);
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 18px -20px rgba(0,0,0,0.2)
+  }
+}
+
 .message-card {
   padding: 0 !important;
 }

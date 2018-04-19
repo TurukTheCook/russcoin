@@ -26,6 +26,21 @@ export default {
   },
 
   /*
+  *   READ ALL MINE ONLY
+  */
+ readAllMine(req, res, next) {
+  Product.find({ $or: [{userId: res.locals.user.username}, {userId: res.locals.user._id}] }, (err, products) => {
+    if (err) res.status(500).json({ success: false, message: err.message })
+    else {
+      for (let i = 0; i < products.length; i++) {
+        helper.beforeSend(products[i])
+      }
+      res.status(200).json({ success: true, message: 'Вот список пользователей! Here is the list of products!', content: products })
+    }
+  })
+},
+
+  /*
   *   READ
   */
   read(req, res) {
